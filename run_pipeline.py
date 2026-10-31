@@ -96,7 +96,7 @@ def main():
         patents = [json.loads(l) for l in open(a.paragraphs, encoding="utf-8")]
     else:
         import requests
-        s = requests.Session(); s.headers["User-Agent"] = "patent-citation-function (academic; see README)"
+        s = requests.Session(); s.headers["User-Agent"] = "science-in-invention (academic; see README)"
         patents = list(fetch_paragraphs(a.patents, s))
         with open(out / "paragraphs.jsonl", "w", encoding="utf-8") as f:
             for p in patents: f.write(json.dumps(p, ensure_ascii=False) + "\n")

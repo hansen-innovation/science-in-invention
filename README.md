@@ -1,4 +1,6 @@
-# patent-citation-function — how is science used in invention?
+# Science in Invention
+
+**How is science used in invention?**
 
 When a patent cites a scientific paper in its description, what is the paper doing there: supplying the
 mechanism the invention rests on, a method the inventors adopted, a prior approach they distinguish,
