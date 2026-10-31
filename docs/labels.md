@@ -1,18 +1,18 @@
 # Why these labels
 
 The function label answers one question about each in-text citation: *what is the cited work doing for this
-invention?* Eight values, where each comes from, and why it is there.
+invention?* Eight values, where each comes from, and why it is there. The figures and the proposal use the plain names in the first column; the data files keep the short labels in parentheses.
 
-| Label | The cited work is... | Where it comes from |
+| Name in figures (label in the data) | The cited work is... | Where it comes from |
 | --- | --- | --- |
-| foundation | the finding, mechanism, structure or clinical result the invention rests on | "conceptual" use (Moravcsik and Murugesan 1975); *Motivation* and *Extends* (Jurgens et al. 2018); research findings that suggest a project (Cohen, Nelson and Walsh 2002); the "could not have been developed without" criterion (Mansfield 1991) |
-| method or tool | a technique, protocol, algorithm, reagent or software the inventors use or adapt | "operational" use (Moravcsik and Murugesan); *Uses* (Jurgens et al.); instruments and techniques (Cohen, Nelson and Walsh) |
-| prior art distinguished | an earlier approach the invention improves on, differs from or works around | "negational" use (Moravcsik and Murugesan); *Compares or Contrasts* and *weakness* (Teufel et al. 2006; Jurgens et al.); patent law: the applicant must argue novelty over the prior art |
-| data or materials source | where materials, cell lines, datasets or components came from | the enablement requirement makes patents name sources; a source is not a method |
-| background | context that frames the problem without being relied on or distinguished: disease burden, standard of care, history of a technique, overviews | "perfunctory" use (Moravcsik and Murugesan); *Background* (Jurgens et al.) |
-| definitional boilerplate | a standard definition copied across patents (antibody fragments via Ward 1989, Bird 1988, Huston 1988) | patent drafting, not science use; without it, repeated definitions inflate biotech's apparent reliance on science |
-| incorporated reference list | a bulk list incorporated by reference without a stated role | legal incorporation by reference |
-| own-family continuation | the applicant's own parent or related application | not a use of science |
+| Basis of the invention (`foundation`) | the finding, mechanism, structure or clinical result the invention rests on | "conceptual" use (Moravcsik and Murugesan 1975); *Motivation* and *Extends* (Jurgens et al. 2018); research findings that suggest a project (Cohen, Nelson and Walsh 2002); the "could not have been developed without" criterion (Mansfield 1991) |
+| Method used (`method_or_tool`) | a technique, protocol, algorithm, reagent or software the inventors use or adapt | "operational" use (Moravcsik and Murugesan); *Uses* (Jurgens et al.); instruments and techniques (Cohen, Nelson and Walsh) |
+| Prior approach improved on (`prior_art_distinguished`) | an earlier approach the invention improves on, differs from or works around | "negational" use (Moravcsik and Murugesan); *Compares or Contrasts* and *weakness* (Teufel et al. 2006; Jurgens et al.); patent law: the applicant must argue novelty over the prior art |
+| Source of materials or data (`data_or_materials_source`) | where materials, cell lines, datasets or components came from | the enablement requirement makes patents name sources; a source is not a method |
+| Context only (`background_context`) | context that frames the problem without being relied on or distinguished: disease burden, standard of care, history of a technique, overviews | "perfunctory" use (Moravcsik and Murugesan); *Background* (Jurgens et al.) |
+| Copied definition (`definitional_boilerplate`) | a standard definition copied across patents (antibody fragments via Ward 1989, Bird 1988, Huston 1988) | patent drafting, not science use; without it, repeated definitions inflate biotech's apparent reliance on science |
+| Bulk incorporation (`incorporated_reference_list`) | a bulk list incorporated by reference without a stated role | legal incorporation by reference |
+| Own earlier patent (`own_family_continuation`) | the applicant's own parent or related application | not a use of science |
 
 Three design choices.
 

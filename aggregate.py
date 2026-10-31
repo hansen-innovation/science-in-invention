@@ -15,6 +15,11 @@ import argparse, collections, csv, json, pathlib, sys
 
 FUNCS = ["foundation", "method_or_tool", "prior_art_distinguished", "data_or_materials_source",
          "background_context", "definitional_boilerplate", "incorporated_reference_list", "own_family_continuation"]
+# plain-language names used in figures and tables (the data keep the machine labels)
+DISPLAY = {"foundation": "Basis of the invention", "method_or_tool": "Method used",
+           "prior_art_distinguished": "Prior approach improved on", "data_or_materials_source": "Source of materials or data",
+           "background_context": "Context only", "definitional_boilerplate": "Copied definition",
+           "incorporated_reference_list": "Bulk incorporation", "own_family_continuation": "Own earlier patent"}
 SCIENCE_TYPES = {"paper", "mixed", "standards_doc", "book"}
 SUBSTANTIVE = {"foundation", "method_or_tool", "prior_art_distinguished", "data_or_materials_source"}
 

@@ -1,13 +1,20 @@
-"""Labels for the decade sample: 195 citation windows from 72 patents of nine firms in three sectors
+"""Labels for the decade sample: 261 citation windows from 94 patents of nine firms in three sectors
 (pharma: Pfizer, Eli Lilly, Bristol-Myers; chemicals: Dow Chemical, Du Pont, Air Products;
-electrical/electronics: IBM, General Electric, Texas Instruments), two patents per firm per decade
-(priority and grant in the 1980s, 1990s, 2000s, 2010s), up to three windows per patent.
+electrical/electronics: IBM, General Electric, Texas Instruments), up to three windows per patent, patents with
+priority and grant in the same decade (1980s, 1990s, 2000s, 2010s).
 
-Fetched on Oct 31, 2026 with ../../fetch_patents.py (Google Patents; the first two granted US patents per
-firm and decade in Google's ranking that contain "et al"). Labels were produced the same day by
-claude-fable-5-1 in an interactive session with ../../prompts/label_citation_function.md; each entry is
-window_id -> (cited_doc_type, function, confidence, note). Run `python labels_decades.py` to write
-citation_windows_labeled.jsonl and summary.md. No second coder has labeled this set.
+Two draws, both from Google Patents with ../../fetch_patents.py on Oct 31, 2026 (the `draw` field of each row):
+  "et al" (D001-D195): the first two granted US patents per firm and decade in Google's ranking that contain
+    "et al". For the electronics firms this draw cited almost only patents (the 1990s cell had no paper
+    citation at all), so electronics was topped up with
+  "ieee" (D196-D261, electronics only): walking Google's ranking for the query "IEEE", the first two patents
+    per firm and decade with at least one window that looks like a paper citation
+    (--query IEEE --cue-ieee --require-paper-cue; "IEEE" added as a cue in the window finder). The electronics
+    cells therefore pool both draws. US7570182B2 (TI, 2000s) was already in the first draw and was not added again.
+Labels were produced the same day by claude-fable-5-1 in an interactive session with
+../../prompts/label_citation_function.md; each entry is window_id -> (cited_doc_type, function, confidence,
+note). Run `python labels_decades.py` to write citation_windows_labeled.jsonl and summary.md. No second coder
+has labeled this set.
 """
 import collections, json, pathlib, re, sys
 
@@ -247,6 +254,85 @@ L = {
  "D193": ("standards_doc", "background_context", "medium", "HEVC working drafts (Wiegand WD3, Bross WD4) cited as the standard the invention operates within"),
  "D194": ("standards_doc", "background_context", "medium", "Duplicate of D193 (sibling patent US9584802B2)"),
  "D195": ("standards_doc", "own_family_continuation", "medium", "Inventors' own JCT-VC contributions (Sze and Budagavi) presenting aspects of this disclosure"),
+ # ---- "IEEE" draw, electronics only (D196-D261): see module docstring ----
+ # electronics 1980s: IBM US4455649A (split-band speech coder), US4441075A (LSSD package test)
+ "D196": ("paper", "method_or_tool", "medium", "Split-band coding of Crochiere 1976 and Tribolet 1979 is the encoding scheme the apparatus implements"),
+ "D197": ("paper", "background_context", "medium", "Esteban et al. cited for alternative split-band encoder arrangements; FIG. 1A is a generic representation"),
+ "D198": ("paper", "method_or_tool", "high", "Johnson 1980 quadrature-mirror filter family is a suitable implementation of the sub-band filters"),
+ "D199": ("patent", "own_family_continuation", "high", "Commonly assigned application Ser. No. 066,130 listed as related"),
+ "D200": ("mixed", "method_or_tool", "medium", "LSSD design discipline of Eichelberger and Williams 1977 and the cited Eichelberger patents, incorporated by reference, is the structure the test method builds on"),
+ "D201": ("paper", "method_or_tool", "high", "Bottorff 1977 partitioning technique is the automatic test-generation method employed"),
+ # electronics 1980s: GE US4417385A (MOS process), US4622680A (hybrid subband coder)
+ "D202": ("paper", "method_or_tool", "high", "Gibbons 1968/1972 ion implantation processes are the fabrication step employed"),
+ "D203": ("paper", "method_or_tool", "high", "Hui 1981 selective oxidation technique is the process step used on the gate sidewalls"),
+ "D204": ("paper", "method_or_tool", "high", "Hui 1981 again: the ways of forming the nitride oxidation mask used in the process"),
+ "D205": ("patent", "own_family_continuation", "high", "Concurrently filed related application of the applicant (Szczutkowski et al.)"),
+ "D206": ("patent", "own_family_continuation", "high", "Concurrently filed related application of the applicant (Szczutkowski et al.)"),
+ "D207": ("paper", "background_context", "medium", "Inventor's own ICC 1984 paper cited as the survey of subband coder design art, followed by a reproduced reference list"),
+ # electronics 1980s: TI US4811210A (optical crossbar interconnect), US4662746A (deformable mirror device)
+ "D208": ("paper", "background_context", "medium", "McAulay 1983/1985, Haynes 1982 and Allen 1985 support the problem statement that parallelism is needed"),
+ "D209": ("paper", "background_context", "medium", "McAulay 1983 cited for the documented difficulty of achieving parallelism, the problem the interconnection addresses"),
+ "D210": ("paper", "prior_art_distinguished", "high", "Kung 1982 systolic architectures described and then limited by their fixed interconnections, which the invention avoids"),
+ "D211": ("paper", "background_context", "high", "Hornbeck 1983 and its references cited for the range of SLM applications"),
+ "D212": ("paper", "prior_art_distinguished", "medium", "Baumann 1953 Eidophor described as a known SLM in the background survey of prior devices"),
+ "D213": ("mixed", "prior_art_distinguished", "medium", "Sprague 1981/1982 and US 4,380,373 describe prior SLM types in the background survey"),
+ # electronics 1990s: IBM US5530963A (mobile Token Ring workstation), US5247597A (fiber-to-waveguide attachment)
+ "D214": ("standards_doc", "background_context", "high", "IEEE 802.5 cited to define the Token Ring environment the invention operates in; 'well known in the art'"),
+ "D215": ("standards_doc", "method_or_tool", "high", "The device driver presents a Token Ring appearance per IEEE 802.5: the protocol is implemented"),
+ "D216": ("standards_doc", "method_or_tool", "medium", "Six-byte address field defined by IEEE 802.5 used in the invention's registration primitive"),
+ "D217": ("paper", "incorporated_reference_list", "medium", "Entry in the description's reference list (Murphy 1985, fiber-to-waveguide attachment); role not stated in the window"),
+ "D218": ("paper", "incorporated_reference_list", "medium", "Entry in the description's reference list (Kaufmann 1986, fiber attachment to GaAs waveguides)"),
+ "D219": ("paper", "incorporated_reference_list", "medium", "Entry in the description's reference list (Armiento 1991, passive coupling on silicon waferboard)"),
+ # electronics 1990s: GE US5127053A (speech coder), US5148167A (sigma-delta converter)
+ "D220": ("paper", "background_context", "medium", "Markel and Gray 1974 cited to describe the standard LPC-10 vocoder in the problem framing"),
+ "D221": ("paper", "prior_art_distinguished", "medium", "Schroeder and Atal 1984/1985 CELP coder described as the prior technique whose complexity the invention addresses"),
+ "D222": ("paper", "prior_art_distinguished", "medium", "Atal and Remde 1982 multi-pulse coding described as the prior technique the hybrid coder builds on and improves"),
+ "D223": ("paper", "incorporated_reference_list", "medium", "Entry in the description's numbered reference list (Candy 1974, sigma-delta modulation)"),
+ "D224": ("paper", "incorporated_reference_list", "medium", "Entry in the description's numbered reference list (Candy 1976, interpolation from a sigma-delta modulator)"),
+ "D225": ("paper", "incorporated_reference_list", "medium", "Entry in the description's numbered reference list (Candy 1985, double integration in sigma-delta modulation)"),
+ # electronics 1990s: TI US5305317A (network adapter), US5828824A (test port)
+ "D226": ("standards_doc", "method_or_tool", "high", "IEEE 802.5 token formats are the protocol the adapter transmits"),
+ "D227": ("standards_doc", "method_or_tool", "medium", "IEEE 802.3 frame format is the protocol the embodiment handles"),
+ "D228": ("standards_doc", "method_or_tool", "medium", "CRC algorithm common to the IEEE 802 MAC layers used for the frame check sequence"),
+ "D229": ("standards_doc", "prior_art_distinguished", "high", "IEEE 1149.1 boundary scan described as a prior solution with pin-count and overhead drawbacks"),
+ "D230": ("mixed", "prior_art_distinguished", "high", "The invention is stated to be an improvement on the IEEE 1149.1-1990 structure; own US 5,329,471 incorporated"),
+ "D231": ("standards_doc", "method_or_tool", "medium", "IEEE 1149.1 interface reused by the invention's production test modes"),
+ # electronics 2000s: IBM US7529388B2 (people counting), US7336095B2 (eFUSE)
+ "D232": ("paper", "prior_art_distinguished", "high", "Hashimoto 1997 thermal-image counting described and its errors noted"),
+ "D233": ("paper", "prior_art_distinguished", "medium", "Terada 1999 stereo-camera counting described as a prior method in the survey"),
+ "D234": ("paper", "prior_art_distinguished", "high", "Kettnaker 1999 multi-camera counting described; its floor-topology assumption is the limitation"),
+ "D235": ("standards_doc", "background_context", "medium", "IEEE 1149 JTAG cited as an example of well-known test interfaces in the background"),
+ "D236": ("paper", "method_or_tool", "high", "Kothandaraman and Iyer 2002 eFUSE structure is the component implementation used"),
+ # electronics 2000s: GE US7631564B1 (torque sensing), US6906630B2 (transformer monitoring)
+ "D237": ("paper", "foundation", "medium", "Garshelis and Ivan 1974 detail the magnetoelastic effects on which the sensing systems, including the invention's, rest"),
+ "D238": ("standards_doc", "method_or_tool", "high", "IEEE C57.91-1995 loading guide supplies the transformer models the system computes with"),
+ "D239": ("standards_doc", "method_or_tool", "high", "Hot-spot computation based on IEEE C57.91-1995 and IEC 354"),
+ "D240": ("standards_doc", "method_or_tool", "high", "Insulation aging computation based on IEEE C57.91-1995"),
+ # electronics 2000s: TI US7467340B2 (dual-mode TAP)
+ "D241": ("standards_doc", "method_or_tool", "high", "IEEE 1149.1 TAP architecture is the structure the dual-mode interface is built within"),
+ "D242": ("standards_doc", "method_or_tool", "high", "Only the IEEE 1149.1 standard pins are needed for the TAP/STP interface: the standard port is used"),
+ "D243": ("standards_doc", "background_context", "medium", "IEEE 1149.x family cited to describe what TAPs access; context for the interface"),
+ # electronics 2010s: IBM US9300592B2 (link aggregation), US9794084B2 (VLAN)
+ "D244": ("standards_doc", "background_context", "medium", "IEEE 802.3ad/802.1ax named as the standards defining link aggregation; context"),
+ "D245": ("standards_doc", "prior_art_distinguished", "high", "The IEEE LAG architecture's no-sharing restriction is the limitation the invention works around"),
+ "D246": ("standards_doc", "prior_art_distinguished", "medium", "Standard IEEE 802.3ad LAG configuration shown as the prior arrangement without port sharing"),
+ "D247": ("standards_doc", "prior_art_distinguished", "high", "IEEE 802.1Q VLAN implementations described as conventional and facing the challenges the invention addresses"),
+ "D248": ("standards_doc", "background_context", "medium", "IEEE 802.1Q named as the existing standard the invention stays compatible with"),
+ "D249": ("standards_doc", "method_or_tool", "medium", "The IEEE 802.1Q tag format is the frame structure the method operates on"),
+ # electronics 2010s: GE US9513630B2 (rail vehicle communication), US10511403B2 (time-sensitive networking scheduler)
+ "D250": ("standards_doc", "method_or_tool", "medium", "IEEE 802.11 among the protocols the wireless network device uses"),
+ "D251": ("standards_doc", "method_or_tool", "high", "IEEE 802.11-2012 is the protocol used for communication between vehicles; incorporated by reference"),
+ "D252": ("standards_doc", "background_context", "medium", "IEEE 802.11 bands mentioned as the reference point for alternative frequencies"),
+ "D253": ("standards_doc", "background_context", "medium", "IEEE 802.1 TSN standards introduced as the setting of the invention"),
+ "D254": ("standards_doc", "method_or_tool", "high", "IEEE 802.1AS (gPTP) used by the scheduler to synchronize clocks"),
+ "D255": ("standards_doc", "method_or_tool", "high", "IEEE 802.1AS used to detect clock instability and drift"),
+ # electronics 2010s: TI US9854516B2 (TSCH networks), US9258829B1 (MIMO power-line communication)
+ "D256": ("standards_doc", "method_or_tool", "medium", "IEEE 802.15.4e TSCH is the MAC protocol within which the invention operates"),
+ "D257": ("standards_doc", "background_context", "medium", "IEEE 802.15.4 device classes (FFD, RFD) described as context"),
+ "D258": ("standards_doc", "method_or_tool", "medium", "Duplicate of D256 within the same patent (the 802.15.4e paragraph is repeated)"),
+ "D259": ("standards_doc", "method_or_tool", "high", "IEEE 1901.2 legacy preamble and frame format kept and extended by the MIMO frame"),
+ "D260": ("standards_doc", "method_or_tool", "medium", "Legacy IEEE 1901.2 PHY frame structure is the format the MIMO frame extends"),
+ "D261": ("patent", "own_family_continuation", "medium", "Commonly assigned US 8,265,197 incorporated for the power distribution system component"),
 }
 
 SCIENCE_TYPES = {"paper", "mixed", "standards_doc", "book", "software_or_database"}
@@ -269,7 +355,7 @@ def main():
     for r in raw:
         dt, fn, conf, note = L[r["window_id"]]
         assert fn in FUNCTIONS, fn
-        r2 = dict(r); r2["text"] = fix_text(r["text"])
+        r2 = dict(r); r2["text"] = r["text"] if r.get("draw") == "ieee" else fix_text(r["text"])  # the first draw was mis-decoded
         r2.update({"cited_doc_type": dt, "function": fn, "confidence": conf, "note": note,
                    "cited_work_string": first_citation(r2["text"]),
                    "is_family_duplicate": bool(r.get("is_family_duplicate")) or "Duplicate of" in note})

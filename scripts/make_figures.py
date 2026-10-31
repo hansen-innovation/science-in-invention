@@ -17,18 +17,18 @@ import matplotlib.pyplot as plt  # noqa: E402
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT))
-from aggregate import SCIENCE_TYPES, load_sector_map  # noqa: E402
+from aggregate import SCIENCE_TYPES, DISPLAY, load_sector_map  # noqa: E402
 OUT = ROOT / "figures"; OUT.mkdir(exist_ok=True)
 PILOT = ROOT / "pilot" / "citation_windows_labeled.jsonl"
 DECADES = ROOT / "pilot" / "decades" / "citation_windows_labeled.jsonl"
 
-# fixed category order and colors (categorical palette validated for adjacent stacked segments)
-CATS = [("share_foundation", "Foundation", "#2a78d6"),
-        ("share_method_or_tool", "Method or tool", "#eb6834"),
-        ("share_prior_art_distinguished", "Prior art distinguished", "#1baf7a"),
-        ("share_background_context", "Background", "#eda100"),
-        ("share_definitional_boilerplate", "Boilerplate", "#e87ba4"),
-        ("other", "Other", "#c3c2b7")]
+# fixed category order and colors (categorical palette validated for adjacent stacked segments); names from aggregate.DISPLAY
+CATS = [("share_foundation", DISPLAY["foundation"], "#2a78d6"),
+        ("share_method_or_tool", DISPLAY["method_or_tool"], "#eb6834"),
+        ("share_prior_art_distinguished", DISPLAY["prior_art_distinguished"], "#1baf7a"),
+        ("share_background_context", DISPLAY["background_context"], "#eda100"),
+        ("share_definitional_boilerplate", DISPLAY["definitional_boilerplate"], "#e87ba4"),
+        ("other", "Other (materials, bulk lists, own patents)", "#c3c2b7")]
 DOC_CATS = [("science", "Paper, book or standards document", "#2a78d6"),
             ("patent", "Patent", "#eb6834"),
             ("other", "Other", "#c3c2b7")]
@@ -141,8 +141,8 @@ def figure_sector():
     fig.text(0.02, 0.965, "What the cited science does in the patent, by sector", color=INK, fontsize=11, va="top")
     fig.text(0.02, 0.905, "Share of in-text citations to papers, books and standards documents. 291-window pilot, priority 2017 or later, family duplicates removed.",
              color=INK2, fontsize=8, va="top")
-    ax.legend(loc="upper left", bbox_to_anchor=(0, 1.09), ncol=6, frameon=False, fontsize=8, handlelength=1.0, columnspacing=1.0)
-    fig.tight_layout(rect=(0, 0, 0.97, 0.86))
+    ax.legend(loc="upper left", bbox_to_anchor=(0, 1.17), ncol=3, frameon=False, fontsize=8, handlelength=1.0, columnspacing=1.2)
+    fig.tight_layout(rect=(0, 0, 0.97, 0.82))
     fig.savefig(OUT / "function_by_sector.png", dpi=200); plt.close(fig)
 
 
@@ -162,12 +162,13 @@ def figure_decade():
         ax.set_xticks(range(4)); ax.set_xticklabels([f"{d}\nn = {int(c['n_windows']) if c else 0}" for d, c in zip(decades, cells)], color=INK)
         pct_axis(ax, horizontal=False)
         ax.set_title(s, loc="left", color=INK, fontsize=10)
-    fig.text(0.02, 0.975, "The same shares by decade: nine firms, two patents per firm per decade", color=INK, fontsize=11, va="top")
-    fig.text(0.02, 0.915, "Pfizer, Eli Lilly, Bristol-Myers  |  Dow Chemical, Du Pont, Air Products  |  IBM, General Electric, Texas Instruments.\n"
-             "Patents with priority and grant in the decade; n = science-citing windows, family duplicates removed.", color=INK2, fontsize=8, va="top", linespacing=1.4)
+    fig.text(0.02, 0.975, "The same shares by decade: nine firms, 1980s to 2010s", color=INK, fontsize=11, va="top")
+    fig.text(0.02, 0.92, "Pfizer, Eli Lilly, Bristol-Myers  |  Dow Chemical, Du Pont, Air Products  |  IBM, General Electric, Texas Instruments.\n"
+             "Two patents per firm and decade with priority and grant in the decade; electronics adds two more per firm and decade from an \"IEEE\" draw.\n"
+             "n = science-citing windows, family duplicates removed.", color=INK2, fontsize=8, va="top", linespacing=1.4)
     handles, labels = axes[0].get_legend_handles_labels()
     fig.legend(handles, labels, loc="lower center", ncol=6, frameon=False, fontsize=8, handlelength=1.0, columnspacing=1.0, bbox_to_anchor=(0.5, 0.0))
-    fig.tight_layout(rect=(0, 0.07, 1, 0.84))
+    fig.tight_layout(rect=(0, 0.07, 1, 0.81))
     fig.savefig(OUT / "function_by_decade.png", dpi=200); plt.close(fig)
 
 
@@ -184,10 +185,9 @@ def figure_firm():
     fig, ax = plt.subplots(figsize=(8.2, 5.0))
     grouped_rows(ax, groups, CATS)
     fig.text(0.02, 0.97, "The same shares by firm, 1980s to 2010s pooled", color=INK, fontsize=11, va="top")
-    fig.text(0.02, 0.92, "Decade sample: two patents per firm per decade; n = science-citing windows, family duplicates removed. "
-             "General Electric omitted (one window).", color=INK2, fontsize=8, va="top")
-    ax.legend(loc="upper left", bbox_to_anchor=(0, 1.08), ncol=6, frameon=False, fontsize=8, handlelength=1.0, columnspacing=1.0)
-    fig.tight_layout(rect=(0, 0, 0.97, 0.88))
+    fig.text(0.02, 0.92, "Decade sample pooled over decades; n = science-citing windows, family duplicates removed.", color=INK2, fontsize=8, va="top")
+    ax.legend(loc="upper left", bbox_to_anchor=(0, 1.12), ncol=3, frameon=False, fontsize=8, handlelength=1.0, columnspacing=1.2)
+    fig.tight_layout(rect=(0, 0, 0.97, 0.86))
     fig.savefig(OUT / "function_by_firm.png", dpi=200); plt.close(fig)
 
 
