@@ -1,0 +1,5 @@
+decade,n_patents,n_windows,substantive_share,share_foundation,share_method_or_tool,share_prior_art_distinguished,share_data_or_materials_source,share_background_context,share_definitional_boilerplate,share_incorporated_reference_list,share_own_family_continuation
+1980s,12,33,0.727,0.091,0.273,0.333,0.03,0.212,0.0,0.061,0.0
+1990s,11,29,0.655,0.069,0.241,0.345,0.0,0.345,0.0,0.0,0.0
+2000s,13,38,0.553,0.184,0.158,0.184,0.026,0.395,0.053,0.0,0.0
+2010s,16,39,0.615,0.231,0.103,0.256,0.026,0.103,0.256,0.0,0.026

@@ -1,11 +1,18 @@
 #!/usr/bin/env bash
-# Regenerate the pilot's labeled files and summary, then validate against the schema(s).
+# Regenerate the pilots' labeled files, summaries, profiles and README figures, then validate against the schema.
 set -euo pipefail
 cd "$(dirname "$0")/.."
-(cd pilot && python3 labels_pilot.py)
-python3 depth_measures.py pilot/citation_windows_labeled.jsonl > /dev/null
-for by in assignee sector year; do python3 aggregate.py pilot/citation_windows_labeled.jsonl --by $by > /dev/null; done
+# python3 on Windows may be the Store stub; fall back to python
+PY=python3; "$PY" -c "" 2>/dev/null || PY=python
+(cd pilot && "$PY" labels_pilot.py)
+for by in assignee sector year; do "$PY" aggregate.py pilot/citation_windows_labeled.jsonl --by $by > /dev/null; done
+# decade sample (nine firms, three sectors, 1980s-2010s)
+(cd pilot/decades && "$PY" labels_decades.py > /dev/null)
+for by in sector_decade sector decade; do "$PY" aggregate.py pilot/decades/citation_windows_labeled.jsonl --by $by > /dev/null; done
+# README figures from the profiles
+"$PY" scripts/make_figures.py
 # worked example (offline stages on saved paragraphs + saved labels)
-python3 run_pipeline.py --paragraphs examples/demo/paragraphs.jsonl --out examples/demo --labels examples/demo/labels_interactive.jsonl > /dev/null
-python3 common/validate.py schema_check --schema schema.json --input examples/demo/labeled.jsonl
-python3 common/validate.py schema_check --schema schema.json --input pilot/citation_windows_labeled.jsonl
+"$PY" run_pipeline.py --paragraphs examples/demo/paragraphs.jsonl --out examples/demo --labels examples/demo/labels_interactive.jsonl > /dev/null
+"$PY" common/validate.py schema_check --schema schema.json --input examples/demo/labeled.jsonl
+"$PY" common/validate.py schema_check --schema schema.json --input pilot/citation_windows_labeled.jsonl
+"$PY" common/validate.py schema_check --schema schema.json --input pilot/decades/citation_windows_labeled.jsonl

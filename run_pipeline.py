@@ -1,4 +1,4 @@
-"""End-to-end pipeline on a list of patents: fetch -> window -> depth -> label -> aggregate.
+"""End-to-end pipeline on a list of patents: fetch -> window -> label -> aggregate.
 
     # live: fetch descriptions from Google Patents (samples) and label with a model
     python run_pipeline.py --patents US11524023B2 US12620170B2 --out examples/demo --provider openai \
@@ -9,7 +9,7 @@
 
 Outputs in --out:
     paragraphs.jsonl   one row per patent: metadata + description paragraphs (the fetch stage)
-    windows.jsonl      one row per citation window, with depth measures (structure, position, n_cues)
+    windows.jsonl      one row per citation window (text, paragraph index, family-duplicate flag)
     labeled.jsonl      windows + document type, function, confidence, cited_work_string, note (label stage)
     profiles_*.csv     shares by assignee / year
     report.md          a readable summary: per patent, every window with its label and rationale
@@ -19,7 +19,6 @@ import argparse, collections, csv, json, pathlib, re, sys, time
 HERE = pathlib.Path(__file__).parent
 sys.path.insert(0, str(HERE))
 from fetch_patents import windows, _Desc  # noqa: E402
-from depth_measures import measures  # noqa: E402
 from aggregate import aggregate, FUNCS  # noqa: E402
 
 FAMILY_RX = re.compile(r"\s+")
@@ -30,8 +29,9 @@ def fetch_paragraphs(pns, session):
         r = session.get(f"https://patents.google.com/patent/{pn}/en", timeout=60)
         if r.status_code != 200:
             print(f"{pn}: HTTP {r.status_code}", file=sys.stderr); continue
-        p = _Desc(); p.feed(r.text)
-        m = re.search(r'itemprop="assigneeCurrent"[^>]*>([^<]+)<', r.text) or re.search(r'itemprop="assigneeOriginal"[^>]*>([^<]+)<', r.text)
+        html = r.content.decode("utf-8", errors="replace")  # pages are UTF-8; requests may guess Latin-1
+        p = _Desc(); p.feed(html)
+        m = re.search(r'itemprop="assigneeOriginal"[^>]*>([^<]+)<', html) or re.search(r'itemprop="assigneeCurrent"[^>]*>([^<]+)<', html)
         yield {"pn": pn, "title": " ".join(p.meta.get("title", "").split()), "assignee": (m.group(1).strip() if m else ""),
                "priority_date": p.meta.get("priorityDate", ""), "grant_date": p.meta.get("publicationDate", ""), "paras": p.paras}
         time.sleep(1.0)
@@ -47,7 +47,6 @@ def make_windows(patents):
             key = FAMILY_RX.sub(" ", w).strip().lower()
             row["is_family_duplicate"] = key in seen and seen[key] != pat["pn"]
             seen.setdefault(key, pat["pn"])
-            row.update(measures(row))
             yield row
 
 
@@ -78,7 +77,7 @@ def report(patents, labeled, out):
             L.append("Function of science citations: " + ", ".join(f"{k} {v}" for k, v in c.most_common()) + ".")
             L.append("")
         for r in rows:
-            L += [f"**{r['window_id']}** · para {r['para_idx']}/{r['n_desc_paras']} ({r['position']}) · {r['structure']} · cited: {r.get('cited_doc_type','?')} · **{r.get('function','?')}** ({r.get('confidence','?')})",
+            L += [f"**{r['window_id']}** · para {r['para_idx']}/{r['n_desc_paras']} · cited: {r.get('cited_doc_type','?')} · **{r.get('function','?')}** ({r.get('confidence','?')})",
                   "", f"> {r['text']}", "", f"*{r.get('note','')}*", ""]
     (pathlib.Path(out) / "report.md").write_text("\n".join(L), encoding="utf-8")
 
@@ -87,7 +86,7 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--patents", nargs="*", default=[]); ap.add_argument("--paragraphs", help="saved paragraphs.jsonl (skip fetch)")
     ap.add_argument("--out", required=True)
-    ap.add_argument("--no-label", action="store_true", help="stop after windows + depth (no model call)")
+    ap.add_argument("--no-label", action="store_true", help="stop after windows (no model call)")
     ap.add_argument("--labels", help="use an existing labeled.jsonl (e.g. interactive labels) instead of calling a model")
     ap.add_argument("--provider", default="anthropic"); ap.add_argument("--model", default="claude-fable-5-1"); ap.add_argument("--base-url")
     a = ap.parse_args()

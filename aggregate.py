@@ -4,6 +4,7 @@ sector or grant year. This is the step that turns labeled windows into the relea
     python aggregate.py pilot/citation_windows_labeled.jsonl --by assignee   # -> pilot/profiles_assignee.csv
     python aggregate.py pilot/citation_windows_labeled.jsonl --by sector
     python aggregate.py pilot/citation_windows_labeled.jsonl --by year
+    python aggregate.py pilot/decades/citation_windows_labeled.jsonl --by sector_decade   # the decade sample
 
 Rules (same as the proposal): drop family/sibling duplicates; keep windows whose cited document is a
 paper, book, standards document or mixed (the document-type filter); report counts next to shares so
@@ -32,9 +33,13 @@ def key_of(row, by, sector_map):
     if by == "assignee":
         return row["assignee"]
     if by == "sector":
-        return sector_map.get(row["assignee"], "other")
+        return row.get("sector") or sector_map.get(row["assignee"], "other")
     if by == "year":
         return (row.get("grant_date") or "")[:4]
+    if by == "decade":
+        return row.get("decade") or (row.get("priority_date") or "")[:3] + "0s"
+    if by == "sector_decade":
+        return key_of(row, "sector", sector_map) + " " + key_of(row, "decade", sector_map)
     raise ValueError(by)
 
 
@@ -48,7 +53,8 @@ def aggregate(rows, by, sector_map):
         groups[k][r["function"]] += 1
         patents[k].add(r["pn"])
     out = []
-    for k, c in sorted(groups.items(), key=lambda kv: -sum(kv[1].values())):
+    order = (lambda kv: kv[0]) if by in ("decade", "sector_decade", "year") else (lambda kv: -sum(kv[1].values()))
+    for k, c in sorted(groups.items(), key=order):
         n = sum(c.values())
         row = {by: k, "n_patents": len(patents[k]), "n_windows": n,
                "substantive_share": round(sum(c[f] for f in SUBSTANTIVE) / n, 3)}
@@ -61,7 +67,7 @@ def aggregate(rows, by, sector_map):
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("labeled", nargs="?", default="pilot/citation_windows_labeled.jsonl")
-    ap.add_argument("--by", default="assignee", choices=["assignee", "sector", "year"])
+    ap.add_argument("--by", default="assignee", choices=["assignee", "sector", "year", "decade", "sector_decade"])
     ap.add_argument("--min-windows", type=int, default=1)
     a = ap.parse_args()
     rows = [json.loads(l) for l in open(a.labeled, encoding="utf-8")]

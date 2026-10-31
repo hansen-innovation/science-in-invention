@@ -2,116 +2,165 @@
 
 **How is science used in invention?**
 
-When a patent cites a scientific paper in its description, what is the paper doing there: supplying the
-mechanism the invention rests on, a method the inventors adopted, a prior approach they distinguish,
-materials they sourced, or background? [Reliance on Science](https://zenodo.org/communities/relianceonscience)
-(Marx and Fuegi) tells us *which* papers a patent cites. This project reads the text around each in-text
-citation and labels *how* the paper is used, adds structural "depth" measures that need no language model,
-links patents to firms, and aggregates to industry-year and firm-year **science-use profiles** so that the
-purpose of citing science in invention can be compared across industries and types of inventors and
-followed over time.
+When a patent cites a scientific paper in its description, what is the paper doing there? It may supply the
+mechanism the invention rests on, a method the inventors adopted, a prior approach they distinguish, materials
+they sourced, or just background. [Reliance on Science](https://zenodo.org/communities/relianceonscience)
+(Marx and Fuegi) tells us *which* papers a patent cites. This project reads the sentence around each in-text
+citation and labels *what the paper is used for*, then aggregates to firms, industries and decades so that the
+purpose of citing science can be compared across industries and followed over time.
 
-Pilot stage, October 2026 (109 patents, 68 assignees, 291 citation windows, all labeled). Built as the
-working repository behind an NBER i3 Open Data Fellows 2027 proposal.
+Pilot stage, October 2026. Everything here is real output of the pipeline: 109 patents from 68 firms across eight
+sectors, plus a decade sample of nine firms from the 1980s to the 2010s, every citation window labeled with a
+written rationale. Built as the working repository behind an NBER i3 Open Data Fellows 2027 proposal.
 
-## What the dataset will contain
+## What the pilots show
 
-| Layer | Content | Keys |
-| --- | --- | --- |
-| Citation window | window text; cited-document type (paper, patent, standards doc, book, software, mixed); **function** (foundation, method or tool, prior art distinguished, data or materials source, background context, definitional boilerplate, incorporated reference list, own-family continuation); confidence; one-line rationale; family-duplicate flag | USPTO patent number + paragraph index; Reliance on Science citation record where it resolves; OpenAlex work id; verbatim citation string |
-| Depth (no LLM) | how often the patent invokes the same work; standalone vs. flanked citation; position in the description | same |
-| Profiles | shares by function and depth for assignee-year, firm-year (gvkey / permno) and industry-year, with window and patent counts | PatentsView assignee id → DISCERN, KPSS, the 1900–1980 Golden Age firm panel (`docs/firm_linkage.md`) |
-| Benchmark | 2,000 windows double-coded with codebook and adjudication; precision/recall by sector, citation format and decade; model comparison (`benchmark/`) | window id |
+![Function of science citations by sector](figures/function_by_sector.png)
 
-## Worked example
+- **Industries use science for different things.** Pharma cites papers for the biology the invention rests on
+  (foundation, 35%) and for disease context (background, 34%). Software/AI and chemicals cite papers for methods
+  they adopt (50% each). Semiconductors cite papers mostly as prior art they improve on (38%). A citation count
+  treats all of these alike.
+- **The label set holds up on real text.** Every one of the 291 windows received exactly one primary function;
+  the hard cases (one paper serving as materials source, mechanism and distinguished prior art in consecutive
+  paragraphs of a Boston Scientific patent) are informative rather than ambiguous. Each label carries a
+  one-sentence rationale, so every call can be checked.
 
-`examples/demo/` runs four patents (Purdue/Corteva soybean genetics, Moderna lipid nanoparticles, NVIDIA 3D scene completion, Boston Scientific devices) through every stage, with all intermediate files and a readable `report.md` showing each of the 34 citation windows with its label and rationale. One command reproduces it: `python run_pipeline.py --patents US11466287B2 US11524023B2 US12620170B2 US12109412B2 --out examples/demo_rerun --provider openai --base-url <endpoint> --model <open-weight model>`. See `examples/README.md`.
+![Function of science citations by decade for nine firms](figures/function_by_decade.png)
 
-## Pipeline
+- **Pharma's use of science changed over four decades.** In the 1980s, Pfizer, Lilly and Bristol-Myers cited
+  papers mainly for methods: synthetic procedures, assays, cloning protocols (57% of science citations). By the
+  2010s they cited papers for the target biology the drug rests on (foundation, 44%) and, in parallel, for
+  standard antibody definitions copied across patents (boilerplate, 44%); methods fell to zero.
+- **Chemicals stayed put.** Dow, Du Pont and Air Products cite papers mostly as prior art they distinguish
+  (33% to 46% in every decade) and for methods (8% to 29%).
+- **Electronics patents rarely cite papers in the text.** For IBM, General Electric and Texas Instruments,
+  about 70% of the citation windows point to other patents; the 1990s cell has no paper citation at all. The
+  document-type label makes this visible instead of counting it as science use.
 
-`run_pipeline.py` chains the stages below for a list of patents (fetch → window → depth → label → aggregate → report); each stage is also a standalone script.
+Read these as a demonstration, not as estimates: the decade cells hold 5 to 18 science-citing windows from
+2 to 6 patents, every label comes from one model run interactively, and no second coder has labeled anything yet
+(see *Provenance and limits*).
 
-1. `fetch_patents.py` — description paragraphs and citation windows (regex cue finder tuned for recall: author-year, "et al.", journal-volume-year, DOI, arXiv id, standards document numbers). In the full build the windows start from the in-text citations in Reliance on Science so every row inherits the patent–paper match and confidence score.
-2. `depth_measures.py` — standalone / paired / string, position in the description, cue count; invocation count per cited work in the full build. Computed for every window; the first validation axis for the function label.
-3. `common/llm.py --prompt prompts/label_citation_function.md --schema schema.json` — document type and function from a fixed prompt, JSON-constrained, cached by (model, prompt, schema, text). Works with the Anthropic API or any OpenAI-compatible endpoint (vLLM, Together, DeepInfra) so open-weight models can run the production pass.
-4. Family de-duplication (identical windows across continuations and divisionals), then `aggregate.py --by assignee|sector|year` — shares by function with counts.
-5. `common/validate.py agreement` — accuracy, Cohen's kappa, per-label precision/recall and disagreement lists between any two label files (model vs. human benchmark, model vs. model).
+## Four windows, four labels
 
-## Pilot results (October 26–30, 2026)
+| Sector, decade | What the patent says (abridged) | Label | Why |
+| --- | --- | --- | --- |
+| pharma, 1980s (Eli Lilly, US4775624A) | "...can be conventionally synthesized by the modified phosphotriester method ... in substantial accordance with the procedure of Itakura et al., 1977, Science 198: 1056" | method or tool | the cited procedure is the one used |
+| pharma, 2010s (Bristol-Myers Squibb, US10273236B2) | "...propagated via the feedback activation of Factors V, VIII and XI by catalytic amounts of thrombin (Gailani et al., 2007). ... Therefore, factor XIa plays a key role ... and is thus an attractive target" | foundation | the cited mechanism is why the target is chosen |
+| chemicals, 1980s (Dow, US4798081A) | "...while size exclusion chromatography provides insight into long chain branching (Lecacheux et al., 1982, 1984), size exclusion chromatography leaves much to be desired where short chain branching information is required" | prior art distinguished | the cited technique's limitation motivates the invention |
+| pharma, 2010s (Pfizer, US10138298B2) | "(v) a dAb portion (Ward et al., (1989) Nature 341:544-546), which consists of a VH domain" | definitional boilerplate | a standard definition copied across antibody patents |
 
-- 109 granted US patents (priority 2017+) from 68 corporate assignees in pharma, biotech tools, software/AI, semiconductors, chemicals/materials, medical devices, energy and automotive/aerospace; 291 windows, 273 after family and sibling de-duplication; every window labeled with the released prompt and a written rationale (`pilot/citation_windows_labeled.jsonl`, `pilot/summary.md`).
-- Among the 163 paper citations: method or tool 29%, background context 25%, foundation 24%, prior art distinguished 18%, definitional boilerplate 3%, data or materials 1%.
-- Sector signatures (`pilot/profiles_sector.csv`): pharma cites science as foundation (35%) and background (34%) and is the least substantive sector (50%); software/AI and chemicals cite methods (50% each); semiconductors cite prior art distinguished (38%); medical devices and automotive/aerospace are the most substantive (92%, 94%; small n).
-- Depth measures (`pilot/depth_by_function.md`): whether a citation stands alone or sits in a string does not separate substantive from background use (67–69% substantive in every group), but standalone citations are disproportionately methods adopted (39% vs. 23%); position does separate them — 59% of citations in the first fifth of the description are substantive against 86% in the last 40%.
-- Three design changes came out of the pilot: a document-type filter (85 of 273 de-duplicated windows cite patents, standards documents, books or software rather than papers), family de-duplication (Genentech, Google, Illumina, Bayer, Abbott and Monsanto continuations reuse identical text), and a boilerplate category (antibody-fragment definitions and BLAST citations recur across firms and would otherwise inflate "reliance on science" in biotech).
+All 486 labeled windows, with their rationales, are in `pilot/citation_windows_labeled.jsonl` and
+`pilot/decades/citation_windows_labeled.jsonl`; `examples/demo/report.md` shows 34 of them top to bottom.
+
+## The pipeline
+
+```mermaid
+flowchart LR
+    A[Patent full text<br/>PatentsView / Google Patents] --> B[Citation windows<br/>text around each in-text citation]
+    B --> C[Family de-duplication]
+    C --> D[Label: cited-document type + function<br/>fixed prompt, JSON schema, rationale]
+    D --> E[Validate<br/>double-coded benchmark, agreement]
+    D --> F[Aggregate<br/>assignee, sector, decade profiles]
+```
+
+1. `fetch_patents.py`: description paragraphs and citation windows. For samples it reads Google Patents pages
+   (`--assignee "Eli Lilly~Lilly" --after-priority 19800101 --before-publication 19891231`); for the full build it
+   runs over PatentsView's bulk description text starting from the in-text citations in Reliance on Science, so every
+   row inherits the patent-paper match and its confidence score. The cue finder is tuned for recall: it also catches
+   "et al." in patent citations, which the next stage sorts out.
+2. `common/llm.py --prompt prompts/label_citation_function.md --schema schema.json`: for each window, the cited-document
+   type (paper, patent, standards document, book, software, mixed) and the function (foundation, method or tool, prior
+   art distinguished, data or materials source, background, definitional boilerplate, incorporated reference list,
+   own-family continuation), with a confidence and a one-sentence rationale. Works with the Anthropic API or any
+   OpenAI-compatible endpoint (vLLM, Together, DeepInfra), so an open-weight model can run the production pass; results
+   are cached by (model, prompt, schema, text).
+3. `aggregate.py --by assignee|sector|year|decade|sector_decade`: shares by function with counts, after dropping family
+   duplicates and windows that cite only patents.
+4. `common/validate.py`: schema checks, and accuracy, Cohen's kappa and per-label precision/recall between any two label
+   files (model vs. human benchmark, model vs. model).
+
+`run_pipeline.py` chains the stages for a list of patents and writes a readable report; `examples/demo/` is one such
+run on four patents (Purdue/Corteva, Moderna, NVIDIA, Boston Scientific) with every intermediate file kept.
+
+## Data in this repository
+
+| Sample | Patents | Firms | Windows | Science-citing, de-duplicated | Files |
+| --- | --- | --- | --- | --- | --- |
+| Pilot, eight sectors, priority 2017+ | 109 | 68 | 291 | 211 | `pilot/` |
+| Decade sample, three sectors, 1980s to 2010s | 71 | 9 | 195 | 139 | `pilot/decades/` |
+| Worked example | 4 | 4 | 34 | 32 | `examples/demo/` |
+
+Each labeled row: patent, assignee, dates, window text, document type, function, confidence, verbatim citation
+string, rationale, family-duplicate flag. Profiles (`profiles_*.csv`) give shares with window and patent counts.
+`pilot/summary.md` and `pilot/decades/summary.md` hold the tables behind the figures.
+
+## Reproduce
+
+```text
+pip install -r requirements.txt
+bash scripts/rebuild_pilot.sh      # labeled files, summaries, profiles, figures, schema checks; no API needed
+
+# a new sample from Google Patents, then labels from a model
+python fetch_patents.py --source google --assignee "Genentech" --after-priority 20170101 --max-windows 3 --output new.jsonl
+python common/llm.py --prompt prompts/label_citation_function.md --schema schema.json --input new.jsonl --output new_labeled.jsonl
+
+# agreement between two label files (e.g. an open-weight model vs. the pilot labels)
+bash benchmark/run_benchmark.sh https://api.together.xyz/v1 Qwen/Qwen3.6-32B-Instruct
+python common/validate.py agreement --a pilot/citation_windows_labeled.jsonl --b benchmark/labels_qwen.jsonl --id window_id --field function
+```
+
+## Provenance and limits
+
+- **Labels.** All labels in this repository were produced by one closed model (claude-fable-5-1) in an interactive
+  session with the prompt in `prompts/`; `pilot/labels_pilot.py` and `pilot/decades/labels_decades.py` hold every label
+  with its rationale and regenerate the labeled files. No second coder and no second model has labeled anything yet.
+  Double coding and the open-weight comparison (`benchmark/`) are the first tasks of the fellowship year.
+- **Sampling.** Pilot patents are the first granted patents per assignee query in Google's ranking that contain
+  "et al." (priority 2017+, up to three windows each); the decade sample takes the first two per firm and decade with
+  priority and grant in the decade. Google's assignee search is fuzzy; the decade sample filters on the printed
+  assignee, the first pilot kept corporate fuzzy matches under the printed name (`pilot/README_pilot_method.md`).
+- **Windows.** The regex cue finder accepts noise by design; in the full build the window finder starts from the
+  Reliance on Science in-text citations, and a lightweight classifier replaces the regex.
+- **Cell sizes.** Sector and decade cells are small (counts are printed next to every share); the figures show that
+  the measure separates industries and moves over time, not how much.
 
 ## Repository layout
 
+```text
+README.md                   this file
+figures/                    function_by_sector.png, function_by_decade.png (from scripts/make_figures.py)
+schema.json                 JSON schema for one labeled window
+prompts/                    the labeling prompt
+fetch_patents.py            collection stage (Google Patents samples; PatentsView bulk text)
+run_pipeline.py             end-to-end: fetch -> window -> label -> aggregate -> report
+aggregate.py                science-use profiles by assignee, sector, year, decade
+common/llm.py               schema-constrained labeling, provider-agnostic, cached
+common/validate.py          agreement metrics and schema checks
+benchmark/                  model comparison: run_benchmark.sh, results.md (empty until run)
+examples/demo/              worked example: four patents, every intermediate file, report.md
+pilot/                      291-window pilot: raw and labeled windows, labels_pilot.py, profiles, summary.md
+pilot/decades/              decade sample: raw and labeled windows, labels_decades.py, profiles, summary.md
+scripts/rebuild_pilot.sh    regenerates every derived file and figure, runs the schema checks
+scripts/make_figures.py     the two README figures from the profiles
+docs/firm_linkage.md        joins to PatentsView, DISCERN, KPSS and the 1900-1980 Golden Age firm panel
 ```
-README.md               this file
-docs/firm_linkage.md        joins to PatentsView, DISCERN, KPSS and the Golden Age firm panel; pre-1976 coverage
-schema.json             JSON schema for one labeled window (the prompt returns exactly these fields)
-prompts/                the labeling prompt
-run_pipeline.py         end-to-end: fetch -> window -> depth -> label -> aggregate -> report
-fetch_patents.py        collection stage
-depth_measures.py       structural measures with no LLM
-aggregate.py            science-use profiles by assignee, sector or year
-common/llm.py           schema-constrained labeling, provider-agnostic, cached
-common/validate.py      agreement metrics and schema checks
-benchmark/              model comparison: run_benchmark.sh, results.md (empty until run)
-examples/demo/          worked example: four patents, every intermediate file, report.md
-pilot/                  raw windows, labeled rows, labels_pilot.py (labels + rationales), depth and profile tables, summary.md
-scripts/rebuild_pilot.sh    regenerates every derived pilot file and runs the schema checks
-```
-
-Contract: **fetch → window → depth → label (prompt + JSON schema) → validate against a double-coded benchmark → release with codebook.** Labeled rows carry the model, prompt hash, confidence and a one-sentence rationale.
-
-## Reproducing the pilot
-
-```
-pip install -r requirements.txt
-bash scripts/rebuild_pilot.sh            # labeled JSONL, summary, depth tables, profiles, schema checks (no API needed)
-
-# re-label the pilot windows with a model and measure agreement with the pilot labels
-export ANTHROPIC_API_KEY=...
-python common/llm.py --prompt prompts/label_citation_function.md --schema schema.json \
-    --input pilot/citation_windows_raw.jsonl --output pilot/relabeled.jsonl
-python common/validate.py agreement --a pilot/citation_windows_labeled.jsonl --b pilot/relabeled.jsonl --id window_id --field function
-
-# open-weight models on an OpenAI-compatible endpoint, with the agreement report written to benchmark/results.md
-export OPENAI_API_KEY=...
-bash benchmark/run_benchmark.sh https://api.together.xyz/v1 Qwen/Qwen3.6-32B-Instruct
-```
-
-## How the pilot data were collected, and by whom labeled
-
-The pilot machine's shell could not reach patents.google.com, so the fetch stage ran as JavaScript inside a
-browser session on the author's computer, on the data provider's own origin, and the JSON was saved into
-`pilot/`; `fetch_patents.py` implements the same requests for a normal network environment. Details, including
-the assignee queries and the fuzzy matches that were kept or dropped, are in `pilot/README_pilot_method.md`.
-
-The pilot labels were produced by one closed model (claude-fable-5-1) in an interactive session with the
-prompt in `prompts/`; `pilot/labels_pilot.py` holds every label with its rationale and regenerates the labeled
-file. No second coder and no second model has labeled the pilot yet. Double coding, the open-weight model
-comparison (`benchmark/`) and the 2,000-window benchmark are the first tasks of the fellowship year; the
-production model will be chosen on that evidence and will be an open-weight model so the pipeline can be re-run
-by anyone.
-
-## Sources and terms
-
-USPTO full text via PatentsView (public domain); Google Patents (terms of use; samples only); Reliance on
-Science (Marx and Fuegi; cite it when using the patent–paper links); OpenAlex (CC0); DISCERN and KPSS under
-their own licenses for the firm crosswalks. Code: MIT (`LICENSE`). Released data: CC BY 4.0. Citation:
-`CITATION.cff`.
 
 ## Roadmap
 
-- [x] Pilot: 109 patents, 291 windows labeled with rationales; depth measures; sector profiles (Oct 26–30, 2026)
-- [ ] Double-code the pilot; open-weight model comparison (`benchmark/`)
-- [ ] v0.1 (Q1 2027): depth measures for every Reliance on Science in-text citation in US patents 1976–2024, keyed to RoS
-- [ ] 2,000-window benchmark (sector × citation format × decade), two coders, adjudication, codebook
-- [ ] Full document-type and function passes over PatentsView description text, 1976–2024
-- [ ] Firm linkage (DISCERN, KPSS, Golden Age panel) and industry-year / firm-year profiles; pre-1976 extension where in-text citations exist
+- [x] Pilot: 109 patents, 291 windows labeled with rationales; sector profiles (Oct 26-30, 2026)
+- [x] Decade sample: nine firms, three sectors, 1980s-2010s; sector-by-decade profiles (Oct 31, 2026)
+- [ ] Double-code the pilots; open-weight model comparison (`benchmark/`)
+- [ ] 2,000-window benchmark stratified by sector, citation format and decade; two coders, adjudication, codebook
+- [ ] Document-type and function passes over every Reliance on Science in-text citation in US patents, 1976-2024
+- [ ] Firm linkage (DISCERN, KPSS, Golden Age panel); industry-year and firm-year science-use profiles
 - [ ] v1.0 release (code on GitHub, data on Zenodo and the i3 Index) with codebook, December 2027
+
+## Sources and terms
+
+USPTO full text via PatentsView (public domain); Google Patents (terms of use; samples only); Reliance on Science
+(Marx and Fuegi; cite it when using the patent-paper links); OpenAlex (CC0); DISCERN and KPSS under their own
+licenses for the firm crosswalks. Code: MIT (`LICENSE`). Released data: CC BY 4.0. Citation: `CITATION.cff`.
 
 Contact: Hansen Zhang, Duke University (Fuqua), hansen.zhang@duke.edu.

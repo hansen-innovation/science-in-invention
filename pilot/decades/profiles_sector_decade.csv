@@ -1,0 +1,12 @@
+sector_decade,n_patents,n_windows,substantive_share,share_foundation,share_method_or_tool,share_prior_art_distinguished,share_data_or_materials_source,share_background_context,share_definitional_boilerplate,share_incorporated_reference_list,share_own_family_continuation
+chemicals 1980s,4,12,0.583,0.083,0.083,0.333,0.083,0.417,0.0,0.0,0.0
+chemicals 1990s,5,13,0.692,0.0,0.231,0.462,0.0,0.308,0.0,0.0,0.0
+chemicals 2000s,5,14,0.571,0.071,0.286,0.214,0.0,0.286,0.143,0.0,0.0
+chemicals 2010s,6,16,0.812,0.062,0.25,0.438,0.062,0.062,0.125,0.0,0.0
+electrical/electronics 1980s,3,7,0.571,0.143,0.0,0.429,0.0,0.143,0.0,0.286,0.0
+electrical/electronics 2000s,2,6,0.5,0.167,0.0,0.333,0.0,0.5,0.0,0.0,0.0
+electrical/electronics 2010s,4,5,0.6,0.0,0.0,0.6,0.0,0.2,0.0,0.0,0.2
+pharma 1980s,5,14,0.929,0.071,0.571,0.286,0.0,0.071,0.0,0.0,0.0
+pharma 1990s,6,16,0.625,0.125,0.25,0.25,0.0,0.375,0.0,0.0,0.0
+pharma 2000s,6,18,0.556,0.278,0.111,0.111,0.056,0.444,0.0,0.0,0.0
+pharma 2010s,6,18,0.444,0.444,0.0,0.0,0.0,0.111,0.444,0.0,0.0
