@@ -10,8 +10,8 @@ invention?* Eight values, where each comes from, and why it is there. The figure
 | Prior approach improved on (`prior_art_distinguished`) | an earlier approach the invention improves on, differs from or works around | "negational" use (Moravcsik and Murugesan); *Compares or Contrasts* and *weakness* (Teufel et al. 2006; Jurgens et al.); patent law: the applicant must argue novelty over the prior art |
 | Source of materials or data (`data_or_materials_source`) | where materials, cell lines, datasets or components came from | the enablement requirement makes patents name sources; a source is not a method |
 | Context only (`background_context`) | context that frames the problem without being relied on or distinguished: disease burden, standard of care, history of a technique, overviews | "perfunctory" use (Moravcsik and Murugesan); *Background* (Jurgens et al.) |
-| Copied definition (`definitional_boilerplate`) | a standard definition copied across patents (antibody fragments via Ward 1989, Bird 1988, Huston 1988) | patent drafting, not science use; without it, repeated definitions inflate biotech's apparent reliance on science |
-| Bulk incorporation (`incorporated_reference_list`) | a bulk list incorporated by reference without a stated role | legal incorporation by reference |
+| Definition only (`definitional_boilerplate`) | a standard definition copied across patents (antibody fragments via Ward 1989, Bird 1988, Huston 1988) | patent drafting, not science use; without it, repeated definitions inflate biotech's apparent reliance on science |
+| Reference list entry (`incorporated_reference_list`) | a bulk list incorporated by reference without a stated role | legal incorporation by reference |
 | Own earlier patent (`own_family_continuation`) | the applicant's own parent or related application | not a use of science |
 
 Three design choices.
@@ -28,6 +28,26 @@ Three design choices.
    because of novelty arguments, claim drafting and incorporation by reference, and they are common enough
    (boilerplate alone is 44% of pharma's science citations in the 2010s decade cell) that folding them into
    "background" would distort the profiles.
+
+## Decision rules (draft codebook)
+
+Apply in this order; the first rule that fits wins.
+
+1. Is the cited work a patent, or the applicant's own application? Not science use: *own earlier patent*, or a patent citation that the document-type label removes.
+2. Is the citation one entry in a bulk list with no stated role? *Reference list entry*.
+3. Is the citation attached to a definition ("as used herein", "the term X refers to", a definitions section)? *Definition only*.
+4. Does the sentence state a shortcoming of, or a difference from, the cited approach ("however", "conventional", "limitations", a drawback right after the citation)? *Prior approach improved on*.
+5. Does the patent carry out a procedure, algorithm or reagent from the paper ("according to the procedure of", "as described in")? *Method used*.
+6. Does a material, cell line, dataset or parameter value come from the paper ("obtained from", "values taken from")? *Source of materials or data*.
+7. Does the patent act on the paper's finding (chooses a target, relies on a mechanism, structure or clinical result)? *Basis of the invention*.
+8. Otherwise: *Context only*.
+
+Three boundaries need the rules most. Basis versus context: does the patent act on the finding, or merely mention
+it? Method versus materials: a procedure versus a thing. Improved on versus context: is a shortcoming stated? In
+every case the labeler writes down the words that justify the call (the `note` field), so each label can be audited.
+
+These rules spell out the definitions in `prompts/label_citation_function.md`; the prompt itself is unchanged since
+the pilots were labeled, and the rules go into the prompt and the codebook for the benchmark round.
 
 ## How well tested is the set?
 

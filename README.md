@@ -35,24 +35,24 @@ flowchart TD
     F -->|"an earlier approach it improves on"| C["Prior approach improved on"]
     F -->|"materials, cell lines or numbers"| D["Source of materials or data"]
     F -->|"nothing: the paper frames the problem"| E["Context only"]
-    F -->|"a standard definition pasted across patents"| G["Copied definition"]
+    F -->|"only the definition of a term"| G["Definition only"]
 ```
 
-| Name in figures | Meaning | Example from the data |
+| Name in figures | The test | Example from the data |
 | --- | --- | --- |
-| Basis of the invention | the paper's finding, mechanism or clinical result is what the invention rests on | "...propagated via the feedback activation of Factors V, VIII and XI by catalytic amounts of thrombin (Gailani et al., 2007). ... factor XIa ... is thus an attractive target" (Bristol-Myers, 2010s) |
-| Method used | the inventors use a technique, protocol, algorithm or reagent from the paper | "...synthesized by the modified phosphotriester method ... in substantial accordance with the procedure of Itakura et al., 1977" (Eli Lilly, 1980s) |
-| Prior approach improved on | the paper describes an earlier approach the invention improves on or differs from | "...size exclusion chromatography provides insight into long chain branching (Lecacheux et al., 1982, 1984), [but] leaves much to be desired where short chain branching information is required" (Dow, 1980s) |
-| Source of materials or data | the paper is where materials, cell lines or numbers came from | "Rate constants of elementary reaction rates as determined by Goto et al" (Dow, 2010s) |
-| Context only | the paper frames the problem and is neither relied on nor improved on: disease burden, history, overviews | "...500,000 cases of pneumococcal pneumonia annually in the United States. See Centers for Disease Control and Prevention, MMWR 1997" (Merck, 2017+) |
-| Copied definition | a standard definition pasted across many patents | "(v) a dAb portion (Ward et al., (1989) Nature 341:544-546), which consists of a VH domain" (Pfizer, 2010s) |
-| Other | a bulk reference list incorporated without a stated role; the applicant's own earlier patent | "2. Article: 'Evaluating Pictographic Symbols: An Automotive Application' Paul Green et al, Human Factors, 1978" (IBM, 1980s) |
+| Basis of the invention | The invention rests on the paper's finding: a mechanism, structure or clinical result that explains why the invention is designed as it is. Signals: "plays a key role", "is therefore a target", "by utilizing this effect". | "...propagated via the feedback activation of Factors V, VIII and XI by catalytic amounts of thrombin (Gailani et al., 2007). ... factor XIa ... is thus an attractive target" (Bristol-Myers, 2010s) |
+| Method used | The inventors carry out a technique, protocol, algorithm or reagent from the paper. Signals: "according to the procedure of", "as described in", "may be implemented as in". | "...synthesized by the modified phosphotriester method ... in substantial accordance with the procedure of Itakura et al., 1977" (Eli Lilly, 1980s) |
+| Prior approach improved on | The paper describes an earlier approach the invention improves on, differs from or works around. Signals: "however", "conventional", "suffers from", a drawback stated right after the citation. | "...size exclusion chromatography provides insight into long chain branching (Lecacheux et al., 1982, 1984), [but] leaves much to be desired where short chain branching information is required" (Dow, 1980s) |
+| Source of materials or data | A material, cell line, dataset or parameter value in the patent comes from the paper. Signals: "obtained from", "values taken from", a table source. | "Rate constants of elementary reaction rates as determined by Goto et al" (Dow, 2010s) |
+| Context only | The paper frames the problem and the invention neither relies on it nor improves on it: disease burden, history of a field, literature overviews, "for more information see". | "...500,000 cases of pneumococcal pneumonia annually in the United States. See Centers for Disease Control and Prevention, MMWR 1997" (Merck, 2017+) |
+| Definition only | The paper is cited to define a term, as patents routinely do; the same citation recurs across many patents of a field. Signals: "as used herein", "the term X refers to", a definitions section. | "(v) a dAb portion (Ward et al., (1989) Nature 341:544-546), which consists of a VH domain" (Pfizer, 2010s) |
+| Other | An entry in a bulk reference list with no stated role, or the applicant's own earlier patent. | "2. Article: 'Evaluating Pictographic Symbols: An Automotive Application' Paul Green et al, Human Factors, 1978" (IBM, 1980s) |
 
 The first four are substantive uses of science; context is weak use; the rest are drafting artifacts. The set
 adapts the citation-function schemes of information science (Moravcsik and Murugesan 1975; Jurgens et al. 2018)
-to patents, with the findings-versus-techniques split of Cohen, Nelson and Walsh (2002) at its center. Why these
-and what has not been tested yet: [docs/labels.md](docs/labels.md). The data files keep short machine labels
-(`foundation`, `method_or_tool`, `prior_art_distinguished`, ...); the prompt that defines them is
+to patents, with the findings-versus-techniques split of Cohen, Nelson and Walsh (2002) at its center. Why these,
+the decision rules, and what has not been tested yet: [docs/labels.md](docs/labels.md). The data files keep short
+machine labels (`foundation`, `method_or_tool`, `prior_art_distinguished`, ...); the prompt that defines them is
 [prompts/label_citation_function.md](prompts/label_citation_function.md).
 
 ## What the pilots show
