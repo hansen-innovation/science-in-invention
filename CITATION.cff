@@ -1,0 +1,13 @@
+cff-version: 1.2.0
+message: "If you use this code or data, please cite it as below and cite Reliance on Science (Marx and Fuegi) for the patent–paper links."
+title: "patent-citation-function: how inventors use science, from the text around in-text citations in US patents"
+authors:
+  - family-names: Zhang
+    given-names: Hansen
+    affiliation: Duke University, Fuqua School of Business
+    email: hansen.zhang@duke.edu
+version: 0.1-pilot
+date-released: 2026-10-31
+license: MIT
+repository-code: https://github.com/hansenzhang/patent-citation-function
+keywords: [reliance on science, patent citations, citation function, LLM annotation, economics of innovation]

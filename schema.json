@@ -1,0 +1,15 @@
+{
+  "title": "Patent in-text citation function",
+  "description": "One row per candidate citation window in a patent description. Produced by prompts/label_citation_function.md.",
+  "type": "object",
+  "properties": {
+    "cited_doc_type": {"type": "string", "enum": ["paper", "patent", "standards_doc", "book", "software_or_database", "mixed", "none"],
+      "description": "What kind of document the window cites. 'mixed' when papers and patents are cited together; 'none' when the regex cue is not a citation."},
+    "function": {"type": "string", "enum": ["foundation", "method_or_tool", "prior_art_distinguished", "data_or_materials_source", "background_context", "definitional_boilerplate", "incorporated_reference_list", "own_family_continuation"],
+      "description": "Primary role the cited work plays for the invention (see prompt for definitions)."},
+    "confidence": {"type": "string", "enum": ["high", "medium", "low"]},
+    "cited_work_string": {"type": "string", "description": "The citation as written, verbatim (first one if several)."},
+    "note": {"type": "string", "description": "One sentence giving the reason for the label."}
+  },
+  "required": ["cited_doc_type", "function", "confidence", "cited_work_string", "note"]
+}

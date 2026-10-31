@@ -1,0 +1,5 @@
+requests>=2.31
+anthropic>=0.40
+openai>=1.40      # for open-weight models on OpenAI-compatible endpoints (vLLM, Together, DeepInfra)
+trafilatura>=1.8   # optional; HTML text extraction
+pandas>=2.0

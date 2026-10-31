@@ -1,0 +1,7 @@
+.llm_cache/
+__pycache__/
+*.pyc
+.env
+*.tsv
+*.zip
+benchmark/labels_*.jsonl
