@@ -12,7 +12,7 @@ purpose of citing science in invention can be compared across industries and typ
 followed over time.
 
 Pilot stage, October 2026 (109 patents, 68 assignees, 291 citation windows, all labeled). Built as the
-working repository behind an NBER i3 Open Data Fellows 2027 proposal (`docs/proposal_i3_2027.md`).
+working repository behind an NBER i3 Open Data Fellows 2027 proposal.
 
 ## What the dataset will contain
 
@@ -49,7 +49,6 @@ working repository behind an NBER i3 Open Data Fellows 2027 proposal (`docs/prop
 
 ```
 README.md               this file
-docs/proposal_i3_2027.md    the fellowship proposal
 docs/firm_linkage.md        joins to PatentsView, DISCERN, KPSS and the Golden Age firm panel; pre-1976 coverage
 schema.json             JSON schema for one labeled window (the prompt returns exactly these fields)
 prompts/                the labeling prompt
