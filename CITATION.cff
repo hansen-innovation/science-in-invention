@@ -9,5 +9,5 @@ authors:
 version: 0.1-pilot
 date-released: 2026-10-31
 license: MIT
-repository-code: https://github.com/hansenzhang/patent-citation-function
+repository-code: https://github.com/hansen-innovation/patent-citation-function
 keywords: [reliance on science, patent citations, citation function, LLM annotation, economics of innovation]
