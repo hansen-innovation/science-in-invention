@@ -8,3 +8,4 @@ benchmark/labels_*.jsonl
 CLAUDE.md
 .claude/
 docs/proposal_i3_2027.md
+local/
