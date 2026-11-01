@@ -5,7 +5,7 @@
 Everything is read from the labeled files and the profiles_*.csv written by aggregate.py, so the figures
 regenerate with the pilots (scripts/rebuild_pilot.sh). One template for all five: horizontal bars in labeled
 groups, counts at the right, title and subtitle at the top left.
-  function_overall.png    what the cited paper does: 163 paper citations in the pilot, all eight labels
+  function_overall.png    what the cited paper does: 316 paper-citing windows in the pilot, all eight labels
   function_by_sector.png  shares by sector, 515-window pilot
   function_by_decade.png  shares by sector and decade, nine firms (pilot/decades/)
   function_by_firm.png    shares by firm, decade sample pooled over decades
@@ -20,7 +20,7 @@ from matplotlib.transforms import blended_transform_factory  # noqa: E402
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT))
-from aggregate import SCIENCE_TYPES, DISPLAY, FUNCS, load_sector_map  # noqa: E402
+from aggregate import SCIENCE_TYPES, DISPLAY, FUNCS, key_of, load_sector_map  # noqa: E402
 OUT = ROOT / "figures"; OUT.mkdir(exist_ok=True)
 PILOT = ROOT / "pilot" / "citation_windows_labeled.jsonl"
 DECADES = ROOT / "pilot" / "decades" / "citation_windows_labeled.jsonl"
@@ -32,7 +32,7 @@ PAL = {"foundation": "#3E6DB5", "method_or_tool": "#D9742B", "prior_art_distingu
        "background_context": "#C99A2E", "definitional_boilerplate": "#B5579B", "other": "#CBC7BF"}
 MAIN = ["foundation", "method_or_tool", "prior_art_distinguished", "background_context", "definitional_boilerplate"]
 CATS = [(f, DISPLAY[f], PAL[f]) for f in MAIN] + [("other", "Other", PAL["other"])]
-DOC_CATS = [("science", "Paper, book or standards document", PAL["foundation"]), ("patent", "Patent", "#8E8A83"),
+DOC_CATS = [("science", "Paper, book, standards or mixed", PAL["foundation"]), ("patent", "Patent", "#8E8A83"),
             ("other", "Other", "#DAD6CF")]
 INK, INK2, MUTED, GRID, BASE = "#1a1a1a", "#5a5854", "#8a8781", "#e8e6e1", "#c9c6bf"
 W = 8.4  # figure width, inches
@@ -49,12 +49,20 @@ def science_rows(path):
 
 
 def read_csv(path):
+    """Keep profile order and metadata; plot exact counts to avoid rounding rounded CSV shares."""
     with open(path, newline="", encoding="utf-8") as f:
         rows = list(csv.DictReader(f))
+    by = path.stem.removeprefix("profiles_")
+    counts = collections.defaultdict(collections.Counter)
+    sector_map = load_sector_map()
+    for row in science_rows(path.parent / "citation_windows_labeled.jsonl"):
+        counts[key_of(row, by, sector_map)][row["function"]] += 1
     out = []
     for r in rows:
-        d = {f: float(r[f"share_{f}"]) for f in MAIN}
-        d["other"] = max(0.0, 1.0 - sum(d.values())); d["n"] = int(float(r["n_windows"])); d["key"] = r
+        c = counts[r[by]]
+        if sum(c.values()) != int(r["n_windows"]):
+            raise ValueError(f"{path}: {r[by]} count differs from the labeled windows; rebuild profiles first")
+        d = shares(c); d["key"] = r
         out.append(d)
     return out
 
@@ -141,8 +149,8 @@ def figure_overall():
     c = collections.Counter(r["function"] for r in rows); n = len(rows)
     groups = [(None, [(DISPLAY[f], {"f": f, "v": c[f] / n, "c": c[f]}) for f in FUNCS])]
     fig, ax = canvas(groups, "What the cited paper does in the patent",
-                     f"{n} in-text citations to papers in 200 patents from 127 firms, priority 2017 or later, family duplicates removed.\n"
-                     "The last three labels are not uses of science; the other figures fold them into \"Other\".")
+                     f"{n} paper-citing windows after deduplication; full pilot: 200 patents, 127 assignees, priority 2017 or later.\n"
+                     "Other in the stacked charts combines materials/data sources, reference-list entries and own earlier patents.")
     for y, (_, r) in enumerate(groups[0][1]):
         ax.barh(y, r["v"], height=0.64, color=PAL.get(r["f"], PAL["other"]))
         ax.text(r["v"] + 0.007, y, f"{r['v']:.0%}   {r['c']} of {n}", va="center", ha="left", fontsize=8, color=INK2)
@@ -156,8 +164,8 @@ def figure_sector():
     rows.sort(key=lambda r: -r["foundation"])
     groups = [(None, [(cap(r["key"]["sector"]), r) for r in rows])]
     fig, ax = canvas(groups, "What the cited science does in the patent, by sector",
-                     "Share of in-text citations to papers, books and standards documents.\n"
-                     "515-window pilot (200 patents, 127 firms), priority 2017 or later, family duplicates removed.", legend=CATS)
+                     "395 windows citing papers, books, standards or mixed sets, after family duplicates are removed.\n"
+                     "Full pilot: 515 windows, 200 patents, 127 assignees; priority 2017 or later. n = plotted windows.", legend=CATS)
     draw_rows(ax, groups, CATS)
     fig.savefig(OUT / "function_by_sector.png", dpi=200); plt.close(fig)
 
@@ -168,7 +176,7 @@ def figure_decade():
     groups = [(h, [(d, rows[f"{s} {d}"]) for d in ("1980s", "1990s", "2000s", "2010s") if f"{s} {d}" in rows]) for h, s in sectors]
     fig, ax = canvas(groups, "The same shares by decade: nine firms, 1980s to 2010s",
                      "Pfizer, Eli Lilly, Bristol-Myers  |  Dow Chemical, Du Pont, Air Products  |  IBM, General Electric, Texas Instruments.\n"
-                     "Two patents per firm and decade with priority and grant in the decade (electronics: four, from two draws).\n"
+                     "Up to two patents per firm and decade with priority and grant in the decade (electronics: up to four, two draws).\n"
                      "n = science-citing windows, family duplicates removed.", legend=CATS, sub_lines=3)
     draw_rows(ax, groups, CATS)
     fig.savefig(OUT / "function_by_decade.png", dpi=200); plt.close(fig)

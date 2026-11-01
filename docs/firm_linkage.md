@@ -44,12 +44,14 @@ pre-1976 windows before extending the series, and to report OCR-related recall b
 
 ## What the pilot already shows at this level
 
-`aggregate.py --by sector` on the pilot (109 patents, 2020–2026 grants, corporate assignees; sectors assigned
-by hand from the assignee) gives the shape of the released table: pharma uses science as *foundation* (35%)
-and *background* (34%) and is the least substantive sector (50%); software/AI and chemicals cite *methods*
-(50% each); semiconductors cite *prior art distinguished* (38%); automotive/aerospace and medical devices are
-the most substantive (94%, 92%) with small n. Output: `pilot/profiles_sector.csv`, `pilot/profiles_assignee.csv`,
-`pilot/profiles_year.csv`. Shares are reported with the window and patent counts so that small cells are visible.
+`aggregate.py --by sector` on the pilot (200 patents, 127 printed assignees, priority 2017+; sectors assigned
+by hand from the assignee) gives the shape of the planned table. The 515 raw windows become 490 after
+deduplication; sector profiles use the 395 windows citing papers, books, standards documents or mixed sets.
+Pharma cites science as the basis of the invention (34%) and as context (27%); software/AI, biotech tools and
+automotive/aerospace cite methods (57%, 50%, 51%); semiconductors and energy cite prior approaches improved on
+(23%, 24%). These are descriptive patterns in a purposive sample, not population estimates or validated firm
+linkages. Output: `pilot/profiles_sector.csv`, `pilot/profiles_assignee.csv`, `pilot/profiles_year.csv`.
+Shares are reported with window and patent counts so that small cells are visible.
 
 ## Known pitfalls
 

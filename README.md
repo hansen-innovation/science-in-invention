@@ -29,7 +29,7 @@ One question per citation: **what does the invention take from the cited paper?*
 flowchart TD
     W["Citation window"] --> T{"What is cited?"}
     T -->|"a patent, or the applicant's own application"| X["Not science use<br/>kept, excluded from profiles"]
-    T -->|"a paper, book or standards document"| F{"What does the invention take from it?"}
+    T -->|"a paper, book, standards document or mixed set"| F{"What does the invention take from it?"}
     F -->|"the finding it rests on"| A["Basis of the invention"]
     F -->|"a technique it uses"| B["Method used"]
     F -->|"an earlier approach it improves on"| C["Prior approach improved on"]
@@ -64,14 +64,17 @@ rests on, context alone, and prior approaches improved on each take between one 
 
 ![Function by sector](figures/function_by_sector.png)
 
-Industries use science for different things. Pharma cites papers for the biology the invention rests on and for
+In this purposive pilot, sectors differ in the stated roles of cited science. Pharma cites science for the biology the invention rests on and for
 disease context; software/AI, biotech tools and automotive firms for methods; semiconductors and energy have the
-largest shares of prior approaches improved on; chemicals and biotech tools carry the most definition-only citations.
+largest shares of prior approaches improved on; chemicals have the highest definition-only share, followed by pharma and biotech tools.
+These sector profiles use 395 deduplicated science-citing windows (papers, books, standards and mixed sets);
+the overall figure above uses only the 316 paper-citing windows.
 
 ![Function by decade](figures/function_by_decade.png)
 
-Pharma's use of science changed: methods in the 1980s, the target biology (and antibody definitions copied across
-patents) in the 2010s. Chemicals stayed centered on prior approaches they improve on. Electronics firms cite
+In the sampled pharma patents, methods were the largest category in the 1980s; target biology and antibody
+definitions tied in the 2010s (44% each). Prior approaches remained important in chemicals, but were not the
+largest category in every decade. Electronics firms cite
 standards documents and conference papers, mostly as methods used and prior approaches improved on, in every decade.
 
 ![Function by firm](figures/function_by_firm.png)
@@ -82,7 +85,7 @@ as methods where IBM improves on them.
 
 ![What the citation window points to](figures/what_is_cited.png)
 
-"et al." does not mean a paper: in electronics, a third of the citation windows point to other patents even after
+"et al." does not mean a paper: in the decade sample's electronics sector, 36% of the citation windows point to other patents even after
 a second draw aimed at papers (69% in the first draw). The document-type label keeps those out of the profiles
 instead of counting them as science.
 
@@ -110,7 +113,7 @@ and `common/validate.py agreement` compares two label files (accuracy, Cohen's k
 <details>
 <summary><b>Data and layout</b></summary>
 
-| Sample | Patents | Firms | Windows | Science-citing, de-duplicated | Files |
+| Sample | Patents | Assignees / target firms | Windows | Science-citing, de-duplicated | Files |
 | --- | --- | --- | --- | --- | --- |
 | Pilot, eight sectors, priority 2017+ | 200 | 127 | 515 | 395 | `pilot/` |
 | Decade sample, three sectors, 1980s to 2010s | 94 | 9 | 261 | 200 | `pilot/decades/` |
@@ -154,8 +157,11 @@ scripts/make_figures.py     the five README figures
   printed assignee, the first pilot kept corporate fuzzy matches under the printed name (`pilot/README_pilot_method.md`).
 - **Windows.** The regex cue finder accepts noise by design; in the full build the window finder starts from the
   Reliance on Science in-text citations, and a lightweight classifier replaces the regex.
+- **Unit and identifiers.** A pilot observation is a citation window and can contain several cited works.
+  The provisional `cited_work_string` has not been validated against a specific cited work or linked to RoS/OpenAlex;
+  occurrence-level citation alignment and the firm crosswalks remain work for the full build.
 - **Cell sizes.** Sector, decade and firm cells are small (counts printed next to every share); the figures show
-  that the measure separates industries and moves over time, not by how much.
+  possible differences in stated citation roles within these samples; they do not establish population trends.
 
 </details>
 
