@@ -13,7 +13,7 @@ time. That needs three joins, all to existing open crosswalks, and `aggregate.py
 | Assignee-year | PatentsView disambiguated `assignee_id` × grant year | Firm identifiers below |
 | Firm-year | gvkey / permno / Golden-Age firm id | Compustat, CRSP, the 1900–1980 firm panel |
 
-## Firm crosswalks (1976–2024 first, then back in time)
+## Firm crosswalks (the PatentsView period first, then back to 1900)
 
 1. **DISCERN** (Arora, Belenzon and Sheer): PatentsView assignees matched to Compustat firms (gvkey) with
    subsidiary ownership trees, so a patent assigned to "Genentech Inc" or "Amgen Research Munich GmbH" rolls
@@ -32,15 +32,16 @@ time. That needs three joins, all to existing open crosswalks, and `aggregate.py
 Industry comes from the firm (Compustat SIC/NAICS) where a firm match exists and from CPC → NAICS
 concordances otherwise, so every patent has an industry even when the assignee is not a public firm.
 
-## Time coverage and the pre-1976 question
+## Time coverage: 1900–2026
 
-PatentsView full description text starts in 1976, so the first release covers 1976–2024. The century-long
-question ("when did American inventors start using science as the foundation of invention rather than as a
-method or as background?") needs in-text citations from earlier patents. Two things decide how far back the
-series goes: which years RoS's in-text citations cover (OCR'd full text exists for older US patents through
-Google Patents and the USPTO bulk OCR files, with OCR noise rising before the 1950s), and the quality of the
-cue finder on OCR text. The plan is to validate the cue finder and the labels on a stratified sample of
-pre-1976 windows before extending the series, and to report OCR-related recall by decade.
+The dataset covers US patents from 1900 to 2026, with the first release in December 2027. PatentsView full
+description text serves 1976 onward; for 1900–1975 the text comes from Google Patents (OCR'd full text, with
+OCR noise rising before the 1950s; the USPTO bulk OCR files are the fallback). Reliance on Science in-text
+citations are used where they exist, and the repository's own cue finder locates citations in the earlier
+text. The century-long question ("when did American inventors start using science as the foundation of
+invention rather than as a method or as background?") is why the series starts in 1900, where the Golden Age
+firm panel also starts. The cue finder and the labels are validated on a stratified sample of pre-1976
+windows before the early series is released, with OCR-related recall reported by decade.
 
 ## What the pilot already shows at this level
 

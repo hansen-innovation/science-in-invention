@@ -171,11 +171,12 @@ scripts/make_figures.py     the five README figures
 - [x] Decade sample: nine firms, three sectors, 1980s-2010s; sector, decade and firm profiles (Oct 2026)
 - [ ] Double-code the pilots; open-weight model comparison; label-set comparison (`docs/labels.md`)
 - [ ] 2,000-window benchmark stratified by sector, citation format and decade; codebook
-- [ ] Document-type and function passes over every Reliance on Science in-text citation in US patents, 1976-2024
+- [ ] Document-type and function passes over every in-text citation to science in US patents, 1900-2026: Reliance on
+      Science in-text citations where they exist, the window finder on Google Patents text for earlier patents
 - [ ] Firm linkage (DISCERN, KPSS, Golden Age panel); industry-year and firm-year science-use profiles
 - [ ] v1.0 release (code on GitHub, data on Zenodo and the i3 Index) with codebook, December 2027
 
-Sources: USPTO full text via PatentsView (public domain); Google Patents (samples only); Reliance on Science (Marx
+Sources: USPTO full text via PatentsView (public domain); Google Patents (samples, and full text before 1976); Reliance on Science (Marx
 and Fuegi; cite it when using the patent-paper links); OpenAlex (CC0); DISCERN and KPSS under their own licenses.
 Code MIT (`LICENSE`), released data CC BY 4.0, citation in `CITATION.cff`.
 Contact: Hansen Zhang, Duke University (Fuqua), hansen.zhang@duke.edu.
