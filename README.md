@@ -7,7 +7,7 @@ a patent cites. This project reads the sentence around each in-text citation and
 there*: the mechanism the invention rests on, a method the inventors borrowed, prior art they improve on, or
 background. Aggregated to firms, industries and decades, that turns citation counts into science-use profiles.
 
-Pilot stage, October 2026: two samples, 203 patents, 552 citation windows, every one labeled with a one-sentence
+Pilot stage, October 2026: two samples, 294 patents, 776 citation windows, every one labeled with a one-sentence
 rationale. Working repository behind an NBER i3 Open Data Fellows 2027 proposal.
 
 ## Pipeline
@@ -59,13 +59,14 @@ machine labels (`foundation`, `method_or_tool`, `prior_art_distinguished`, ...);
 
 ![What the cited paper does in the patent](figures/function_overall.png)
 
-No single use dominates: papers are cited about as often for a method as for the biology or physics the
-invention rests on, or for context.
+A method is the most common thing a patent takes from a paper (36%); the biology or physics the invention
+rests on, context alone, and prior approaches improved on each take between one citation in five and one in seven.
 
 ![Function by sector](figures/function_by_sector.png)
 
 Industries use science for different things. Pharma cites papers for the biology the invention rests on and for
-disease context; software/AI and chemicals for methods; semiconductors as prior art to improve on.
+disease context; software/AI, biotech tools and automotive firms for methods; semiconductors and energy have the
+largest shares of prior approaches improved on; chemicals and biotech tools carry the most definition-only citations.
 
 ![Function by decade](figures/function_by_decade.png)
 
@@ -111,7 +112,7 @@ and `common/validate.py agreement` compares two label files (accuracy, Cohen's k
 
 | Sample | Patents | Firms | Windows | Science-citing, de-duplicated | Files |
 | --- | --- | --- | --- | --- | --- |
-| Pilot, eight sectors, priority 2017+ | 109 | 68 | 291 | 211 | `pilot/` |
+| Pilot, eight sectors, priority 2017+ | 200 | 127 | 515 | 395 | `pilot/` |
 | Decade sample, three sectors, 1980s to 2010s | 94 | 9 | 261 | 200 | `pilot/decades/` |
 | Worked example | 4 | 4 | 34 | 32 | `examples/demo/` |
 
@@ -144,8 +145,9 @@ scripts/make_figures.py     the five README figures
 - **Labels.** All labels were produced by one closed model (claude-fable-5-1) in an interactive session with the
   prompt in `prompts/`; `pilot/labels_pilot.py` and `pilot/decades/labels_decades.py` hold every label with its
   rationale and regenerate the labeled files. No second coder and no second model has labeled anything yet.
-- **Sampling.** Pilot patents are the first granted patents per assignee query in Google's ranking that contain
-  "et al." (priority 2017+, up to three windows each); the decade sample takes the first two per firm and decade
+- **Sampling.** Pilot patents are the first two granted patents per assignee query in Google's ranking that contain
+  "et al." (priority 2017+, up to three windows each): 65 queries run in the browser on Oct 26-27 and 51 more run
+  with `fetch_patents.py` on Oct 31, the second draw filtered on the printed assignee; the decade sample takes the first two per firm and decade
   with priority and grant in the decade, plus, for the three electronics firms, the first two per firm and decade
   under the query "IEEE" that have a paper-like citation (the "et al" draw gave them almost only patent citations;
   both draws are pooled, `draw` field). Google's assignee search is fuzzy; the decade sample filters on the
@@ -159,7 +161,7 @@ scripts/make_figures.py     the five README figures
 
 ## Roadmap
 
-- [x] Pilot: 109 patents, 291 windows labeled with rationales; sector profiles (Oct 2026)
+- [x] Pilot: 200 patents, 515 windows labeled with rationales; sector profiles (Oct 2026)
 - [x] Decade sample: nine firms, three sectors, 1980s-2010s; sector, decade and firm profiles (Oct 2026)
 - [ ] Double-code the pilots; open-weight model comparison; label-set comparison (`docs/labels.md`)
 - [ ] 2,000-window benchmark stratified by sector, citation format and decade; codebook

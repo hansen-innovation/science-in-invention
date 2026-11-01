@@ -15,12 +15,33 @@ Siemens Healthcare GmbH,2,6,1.0,0.0,0.5,0.5,0.0,0.0,0.0,0.0,0.0
 Telefonaktiebolaget LM Ericsson AB,2,6,0.833,0.0,0.167,0.5,0.167,0.167,0.0,0.0,0.0
 Shell USA Inc,2,6,0.833,0.0,0.667,0.167,0.0,0.167,0.0,0.0,0.0
 Zoetis Services LLC,2,6,0.5,0.5,0.0,0.0,0.0,0.5,0.0,0.0,0.0
+"Alnylam Pharmaceuticals, Inc.",2,6,0.667,0.333,0.167,0.167,0.0,0.167,0.0,0.167,0.0
+Vertex Pharmaceuticals Incorporated,2,6,0.5,0.333,0.0,0.0,0.167,0.167,0.333,0.0,0.0
+"10X Genomics, Inc.",2,6,0.833,0.0,0.667,0.0,0.167,0.0,0.0,0.167,0.0
+Oxford Nanopore Technologies Plc,2,6,1.0,0.167,0.667,0.0,0.167,0.0,0.0,0.0,0.0
+"Salesforce.Com, Inc.",2,6,1.0,0.0,0.5,0.0,0.5,0.0,0.0,0.0,0.0
+Corning Incorporated,2,6,0.667,0.5,0.0,0.0,0.167,0.167,0.167,0.0,0.0
+"Becton, Dickinson And Company",2,6,0.833,0.0,0.167,0.167,0.5,0.167,0.0,0.0,0.0
+Conocophillips Company,2,6,0.667,0.0,0.0,0.5,0.167,0.333,0.0,0.0,0.0
+Saudi Arabian Oil Company,2,6,0.833,0.167,0.667,0.0,0.0,0.167,0.0,0.0,0.0
+"Honda Motor Co., Ltd.",2,6,1.0,0.167,0.833,0.0,0.0,0.0,0.0,0.0,0.0
+Robert Bosch Gmbh,2,6,0.833,0.0,0.5,0.333,0.0,0.167,0.0,0.0,0.0
 Nvidia Corp,2,5,0.2,0.0,0.0,0.2,0.0,0.8,0.0,0.0,0.0
 Dow Global Technologies LLC,2,5,0.6,0.0,0.4,0.2,0.0,0.0,0.2,0.2,0.0
 Corteva Agriscience LLC,2,5,0.2,0.0,0.2,0.0,0.0,0.6,0.2,0.0,0.0
 Meta Platforms Technologies LLC,2,5,0.8,0.0,0.4,0.4,0.0,0.2,0.0,0.0,0.0
 Cisco Technology Inc,2,5,0.6,0.0,0.6,0.0,0.0,0.2,0.2,0.0,0.0
 Schlumberger Technology Corp,2,5,1.0,0.2,0.8,0.0,0.0,0.0,0.0,0.0,0.0
+"Pacific Biosciences Of California, Inc.",2,5,1.0,0.4,0.6,0.0,0.0,0.0,0.0,0.0,0.0
+"Qiagen Sciences, Llc",2,5,1.0,0.0,0.6,0.4,0.0,0.0,0.0,0.0,0.0
+Adobe Inc.,2,5,1.0,0.0,1.0,0.0,0.0,0.0,0.0,0.0,0.0
+Lam Research Corporation,2,5,1.0,0.0,1.0,0.0,0.0,0.0,0.0,0.0,0.0
+Biogen Ma Inc.,2,5,0.8,0.6,0.2,0.0,0.0,0.0,0.2,0.0,0.0
+Oracle International Corporation,2,4,0.75,0.25,0.5,0.0,0.0,0.25,0.0,0.0,0.0
+"Analog Devices, Inc.",2,4,1.0,0.25,0.75,0.0,0.0,0.0,0.0,0.0,0.0
+Evonik Operations Gmbh,2,4,0.75,0.25,0.0,0.5,0.0,0.25,0.0,0.0,0.0
+Siemens Energy Global GmbH & Co. KG,2,4,1.0,0.0,0.0,0.5,0.5,0.0,0.0,0.0,0.0
+GM Global Technology Operations LLC,2,4,1.0,0.25,0.75,0.0,0.0,0.0,0.0,0.0,0.0
 Google LLC,1,3,0.0,0.0,0.0,0.0,0.0,1.0,0.0,0.0,0.0
 Novartis Institute for Functional Genomics Inc,1,3,0.667,0.667,0.0,0.0,0.0,0.333,0.0,0.0,0.0
 Novartis AG,1,3,0.333,0.0,0.333,0.0,0.0,0.0,0.667,0.0,0.0
@@ -42,6 +63,26 @@ Bayer AG,1,3,1.0,0.0,1.0,0.0,0.0,0.0,0.0,0.0,0.0
 Abbott Laboratories,1,3,0.333,0.0,0.333,0.0,0.0,0.0,0.667,0.0,0.0
 Thermo Fisher Scientific Bremen GmbH,1,3,1.0,0.333,0.333,0.333,0.0,0.0,0.0,0.0,0.0
 Stryker Australia Pty Ltd,1,3,0.667,0.667,0.0,0.0,0.0,0.333,0.0,0.0,0.0
+Janssen Vaccines & Prevention B. V.,1,3,0.667,0.0,0.0,0.0,0.667,0.333,0.0,0.0,0.0
+"Janssen Pharmaceuticals, Inc.",1,3,1.0,0.667,0.0,0.333,0.0,0.0,0.0,0.0,0.0
+Sanofi-Aventis Biotechnology,1,3,0.333,0.0,0.333,0.0,0.0,0.0,0.667,0.0,0.0
+Sanofi,1,3,1.0,0.0,0.0,0.333,0.667,0.0,0.0,0.0,0.0
+"Agilent Technologies, Inc.",1,3,0.0,0.0,0.0,0.0,0.0,0.0,0.667,0.333,0.0
+Bio-Rad Europe Gmbh,1,3,0.0,0.0,0.0,0.0,0.0,1.0,0.0,0.0,0.0
+Bio-Rad Abd Serotec Gmbh,1,3,1.0,0.0,1.0,0.0,0.0,0.0,0.0,0.0,0.0
+Globalfoundries Inc.,2,3,1.0,0.667,0.0,0.333,0.0,0.0,0.0,0.0,0.0
+"Taiwan Semiconductor Manufacturing Co., Ltd.",1,3,0.0,0.0,0.0,0.0,0.0,0.0,1.0,0.0,0.0
+"Dupont Industrial Biosciences Usa, Llc",1,3,0.333,0.0,0.0,0.333,0.0,0.333,0.333,0.0,0.0
+Dupont Nutrition Biosciences Aps,1,3,0.333,0.0,0.333,0.0,0.0,0.333,0.333,0.0,0.0
+Eastman Chemical Company,1,3,1.0,0.0,1.0,0.0,0.0,0.0,0.0,0.0,0.0
+Syngenta Participations Ag,1,3,0.0,0.0,0.0,0.0,0.0,0.333,0.667,0.0,0.0
+Syngenta Crop Protection Ag,1,3,0.333,0.0,0.333,0.0,0.0,0.0,0.667,0.0,0.0
+"Dexcom, Inc.",1,3,1.0,0.0,1.0,0.0,0.0,0.0,0.0,0.0,0.0
+"Intuitive Surgical Operations, Inc.",1,3,0.667,0.0,0.667,0.0,0.0,0.333,0.0,0.0,0.0
+Resmed Sensor Technologies Limited,1,3,0.333,0.333,0.0,0.0,0.0,0.667,0.0,0.0,0.0
+Lockheed Martin Corporation,1,3,1.0,0.0,1.0,0.0,0.0,0.0,0.0,0.0,0.0
+Twist Bioscience Corporation,2,3,0.0,0.0,0.0,0.0,0.0,0.0,1.0,0.0,0.0
+Infineon Technologies Ag,1,3,0.667,0.0,0.667,0.0,0.0,0.333,0.0,0.0,0.0
 Genentech Inc,1,2,0.5,0.5,0.0,0.0,0.0,0.5,0.0,0.0,0.0
 Moderna Enzymatics Co Ltd,1,2,1.0,1.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
 International Business Machines Corp,1,2,0.5,0.0,0.5,0.0,0.0,0.5,0.0,0.0,0.0
@@ -50,9 +91,19 @@ Illumina Cambridge Ltd,1,2,1.0,0.0,1.0,0.0,0.0,0.0,0.0,0.0,0.0
 IMPEDANS Ltd,1,2,0.5,0.5,0.0,0.0,0.0,0.5,0.0,0.0,0.0
 Texas Instruments Inc,1,2,0.5,0.0,0.5,0.0,0.0,0.5,0.0,0.0,0.0
 Air Products and Chemicals Inc,2,2,1.0,0.0,1.0,0.0,0.0,0.0,0.0,0.0,0.0
+"Ppg Industries Ohio, Inc.",1,2,0.5,0.0,0.5,0.0,0.0,0.0,0.5,0.0,0.0
+"First Solar, Inc.",2,2,1.0,0.5,0.5,0.0,0.0,0.0,0.0,0.0,0.0
+Palantir Technologies Inc.,1,2,1.0,0.0,1.0,0.0,0.0,0.0,0.0,0.0,0.0
 Medtronic Inc,1,1,1.0,0.0,1.0,0.0,0.0,0.0,0.0,0.0,0.0
 Boeing Co,1,1,1.0,1.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
 Apple Inc,1,1,1.0,1.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
 BASF Corp,1,1,1.0,0.0,1.0,0.0,0.0,0.0,0.0,0.0,0.0
 Chevron USA Inc,1,1,1.0,0.0,1.0,0.0,0.0,0.0,0.0,0.0,0.0
 Halliburton Energy Services Inc,1,1,1.0,0.0,1.0,0.0,0.0,0.0,0.0,0.0,0.0
+Agilent Technologies Inc.,1,1,1.0,0.0,1.0,0.0,0.0,0.0,0.0,0.0,0.0
+"Taiwan Semiconductor Manufacturing Company, Ltd.",1,1,1.0,1.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+Koninklijke Philips N.V.,1,1,0.0,0.0,0.0,0.0,0.0,1.0,0.0,0.0,0.0
+Bloom Energy Corporation,1,1,0.0,0.0,0.0,0.0,0.0,0.0,1.0,0.0,0.0
+"Cummins Power Generation Ip, Inc.",1,1,1.0,0.0,0.0,1.0,0.0,0.0,0.0,0.0,0.0
+"Northrop Grumman Innovation Systems, Inc.",1,1,0.0,0.0,0.0,0.0,0.0,0.0,0.0,1.0,0.0
+Intuit Inc.,1,1,1.0,0.0,1.0,0.0,0.0,0.0,0.0,0.0,0.0

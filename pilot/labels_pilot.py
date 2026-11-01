@@ -1,7 +1,8 @@
-"""Pilot labels for the 118 citation windows in citation_windows_raw.jsonl.
+"""Pilot labels for every citation window in citation_windows_raw.jsonl (batches b1 and c1-c8 drawn on
+Oct 26-27, 2026; the expansion batches d1 and d2 drawn on Oct 31, 2026 with fetch_patents.py).
 
-Labels were produced on Oct 27, 2026 by running prompts/label_citation_function.md
-interactively through Claude (claude-fable-5-1) on each window; label_llm.py
+Labels were produced on Oct 27 and Oct 31, 2026 by running prompts/label_citation_function.md
+interactively through Claude (claude-fable-5-1) on each window; common/llm.py
 reproduces the same call through the API. Each entry: window_id -> (cited_doc_type,
 function, confidence, note).  Run `python labels_pilot.py` to write
 citation_windows_labeled.jsonl and summary.md.
@@ -325,6 +326,278 @@ L = {
  "W294": ("paper", "background_context", "high", "Olivry 2001 definition of canine atopic dermatitis"),
  "W295": ("paper", "background_context", "high", "Picco 2008 triggers of atopic dermatitis"),
  "W296": ("paper", "background_context", "high", "Prevalence (Marsella & Olivry 2003; Scott 2002; Hillier 2001)"),
+ # ---- expansion draw, Oct 31 (batch d1, W297-W504): 45 assignee queries, two patents each, same design as b1/c1 ----
+ # pharma: Alnylam US11866701B2, US12397013B2
+ "W297": ("paper", "background_context", "high", "Walport 2001 cited for the history and components of the complement system; problem framing"),
+ "W298": ("paper", "prior_art_distinguished", "medium", "Hill 2010 documents residual hemolysis under eculizumab, the shortcoming of the existing therapy that motivates the need"),
+ "W299": ("paper", "foundation", "high", "Sharp 2001 and Bernstein 2001: the Dicer/RISC mechanism by which the iRNA agent silences C3"),
+ "W300": ("paper", "method_or_tool", "medium", "Tetko 2001 method for predicting log Kow used to characterize the lipophilic moiety"),
+ "W301": ("paper", "foundation", "medium", "Quintana 2002 and Patri 2002: endosomal cleavage of disulfide linkers, the mechanism the ligand-linker design relies on"),
+ "W302": ("book", "incorporated_reference_list", "high", "Textbooks (Sangvi and Cook, Remington, Crooke, Sambrook) incorporated by reference for any purpose"),
+ # pharma: Janssen US11723970B2, US11931405B2
+ "W303": ("paper", "data_or_materials_source", "medium", "Barouch 2010 mosaic Gag/Pol/Env antigen sequences are the antigens the vectors encode"),
+ "W304": ("mixed", "data_or_materials_source", "high", "Mosaic antigen sequences taken from Barouch 2010 and WO 2010/059732"),
+ "W305": ("mixed", "background_context", "medium", "Barouch 2010 and WO 2010/059732: the earlier Ad26 mosaic vaccines, described as prior work the poxvirus vectors complement"),
+ "W306": ("paper", "foundation", "high", "Jann 1993 structure of the O4 polysaccharide, including the glucosylated form, on which the bioconjugate design rests"),
+ "W307": ("paper", "prior_art_distinguished", "medium", "Cross 1994 chemical-conjugate vaccine described as the prior approach that was never licensed; the invention uses in vivo bioconjugation"),
+ "W308": ("paper", "foundation", "medium", "Jann 1993 glucose branching of O4 is the structural finding the vaccine design acts on"),
+ # pharma: Sanofi US11723974B2, US11771652B2
+ "W309": ("paper", "definitional_boilerplate", "high", "Ward 1989 dAb fragment inside the standard antibody-fragment definition"),
+ "W310": ("paper", "method_or_tool", "medium", "Klein 2012 review cited for the bispecific formats the antibodies of the disclosure may take"),
+ "W311": ("paper", "definitional_boilerplate", "high", "Taylor 1992 cited inside the definition of recombinant human antibodies; standard boilerplate"),
+ "W312": ("paper", "data_or_materials_source", "medium", "Coudeville 2010 supplies the 1/40 HAI titer threshold used as the protection target in the figures"),
+ "W313": ("paper", "prior_art_distinguished", "high", "MC3 (Semple 2010) and L319 (Maier 2013) are the known LNPs the formulations are claimed to outperform"),
+ "W314": ("mixed", "data_or_materials_source", "high", "cKK-E10 lipid of Dong 2014 (and US 9,512,073) used as the cationic lipid in embodiments"),
+ # pharma: Vertex US12269831B2, US12662470B2
+ "W315": ("paper", "foundation", "medium", "Cutting 1990, Dean 1990, Kerem 1989/1990: CFTR disease-causing mutations, the genetic basis the modulators address"),
+ "W316": ("paper", "definitional_boilerplate", "high", "Berge 1977 pharmaceutically acceptable salts; standard pharma boilerplate"),
+ "W317": ("mixed", "data_or_materials_source", "medium", "Combination compounds taken from listed applications and J Cystic Fibrosis 2018"),
+ "W318": ("paper", "background_context", "high", "Dieleman 2008 incidence of neuropathic pain; disease burden"),
+ "W319": ("paper", "foundation", "high", "Akopian 1996 and Blair 2002: NaV1.8 as the analgesic target and carrier of the DRG sodium current"),
+ "W320": ("book", "definitional_boilerplate", "high", "CAS Periodic Table, Sorrell and March cited for chemical nomenclature; standard boilerplate"),
+ # biotech tools: 10x Genomics US12195790B2, US12529096B2
+ "W321": ("mixed", "incorporated_reference_list", "high", "Bulk list of publications, applications and user guides incorporated by reference"),
+ "W322": ("paper", "method_or_tool", "high", "RNA-templated ligation of Credle 2017 used for spatial analysis"),
+ "W323": ("mixed", "method_or_tool", "high", "Decoding schemes of Eng 2019 (seqFISH+) and Chen 2015 (MERFISH) used for the sequential hybridization readout"),
+ "W324": ("paper", "data_or_materials_source", "medium", "Engineered streptavidin forms of Fairhead 2013, Wu 2005 and Lim 2010 named as usable forms of the binding reagent"),
+ "W325": ("paper", "method_or_tool", "high", "Hydrogel embedding of Chen 2015 (expansion microscopy) used for the samples"),
+ "W326": ("paper", "method_or_tool", "high", "Multiplexed staining and destaining methods of Bolognesi 2017, Lin 2015, Pirici 2009, Glass 2009"),
+ # biotech tools: Agilent US10711269B2, US11410303B2
+ "W327": ("book", "incorporated_reference_list", "high", "List of molecular-biology textbooks incorporated by reference"),
+ "W328": ("book", "definitional_boilerplate", "high", "Ausubel and Sambrook cited inside the definition of hybridization"),
+ "W329": ("book", "definitional_boilerplate", "high", "Ausubel and Sambrook cited for stringency conditions inside the definition of selectively hybridizable"),
+ "W330": ("patent", "own_family_continuation", "high", "Applicant's own provisional applications (Arbel et al.)"),
+ "W331": ("patent", "own_family_continuation", "high", "Applicant's own related application (Arbel et al.)"),
+ "W332": ("paper", "method_or_tool", "high", "U-Net of Ronneberger 2015 is the FCN architecture trained to predict the surfaces"),
+ # biotech tools: Bio-Rad US11808772B2, US12188023B2
+ "W333": ("paper", "background_context", "high", "Angulo 2002, Beymer 2003 and others: prevalence of fatty liver in obese patients; disease burden"),
+ "W334": ("paper", "background_context", "medium", "Chalasani 2012 and EASL 2016: the case for and against NAFLD screening; clinical need framing"),
+ "W335": ("paper", "background_context", "medium", "Guidelines cited for the diagnostic definition of NAFLD and NASH that frames the clinical problem"),
+ "W336": ("paper", "method_or_tool", "medium", "Qi 2012 describes the phagemid display system the invention builds on"),
+ "W337": ("paper", "method_or_tool", "medium", "Hyperphage of Rondot 2001 as the means of multivalent display"),
+ "W338": ("paper", "method_or_tool", "medium", "Rothe 2008 CysDisplay disulfide-linked display, the system the invention builds on"),
+ # biotech tools: Oxford Nanopore US11920193B2, US11945840B2
+ "W339": ("paper", "method_or_tool", "high", "By-product detection of Stranges 2016 may be applied in the methods provided"),
+ "W340": ("mixed", "method_or_tool", "medium", "phi29 motor protein nanopore of Wendell 2009 (and US 8,986,528) as an enzyme-free way to control strand movement"),
+ "W341": ("paper", "method_or_tool", "medium", "Tunneling (Ivanov 2011) and optical-electrical (Soni 2010) measurements as signal readout options"),
+ "W342": ("mixed", "foundation", "high", "Goyal 2014 identified the CsgG channel that the invention engineers; own WO applications hold the earlier mutant pores"),
+ "W343": ("paper", "method_or_tool", "medium", "Crosslinking residues from Wang 2012 and Chin 2002 used to link the peptide to the pore"),
+ "W344": ("paper", "data_or_materials_source", "high", "Structure PDB 4uv3 from Goyal 2014 used for the ribbon representation"),
+ # biotech tools: Pacific Biosciences US11913038B2, US12077815B2
+ "W345": ("patent", "method_or_tool", "medium", "Sequencing By Binding of the Vijayan applications is the platform the engineered polymerases serve"),
+ "W346": ("paper", "foundation", "medium", "Polymerase motif A/B characteristics from Delarue 1990, Shinkai 2001 and Steitz 1999 define where the mutations are placed"),
+ "W347": ("paper", "foundation", "medium", "Kropp 2017 crystal structures define motifs A and B in tertiary structure"),
+ "W348": ("mixed", "method_or_tool", "medium", "Arrays and manufacture methods of Bentley 2008 and listed patents that can be modified for use"),
+ "W349": ("mixed", "method_or_tool", "medium", "Nanopore detection of Soni and Meller 2007, Healy 2007, Cockroft 2008 as alternative platforms the temperature control can serve"),
+ "W350": ("mixed", "method_or_tool", "high", "SBS procedures of Bentley 2008 and listed patents adapted for use with the apparatus"),
+ # biotech tools: Qiagen US12415999B2, US12545950B2
+ "W351": ("paper", "method_or_tool", "medium", "Gibbons bead-beating primer (vendor application note) cited for the lysis procedure parameters"),
+ "W352": ("paper", "method_or_tool", "high", "Sequential silica-column binding of DNA then RNA per Triant and Whitehead 2009"),
+ "W353": ("paper", "prior_art_distinguished", "high", "Jaitin 2014 and Islam 2011: the existing 3' and 5' cell-barcoding methods whose coverage bias the invention removes"),
+ "W354": ("paper", "prior_art_distinguished", "high", "SMART-seq (Ziegenhain 2017) described as the prior method without coverage bias but without cell barcoding"),
+ "W355": ("paper", "method_or_tool", "medium", "Rolling circle, hyperbranched RCA and LAMP of Blanco 1989, Lizardi 1998, Notomi 2000 listed as usable amplification methods"),
+ # software/AI: Adobe US10522186B2, US12518358B2
+ "W356": ("paper", "method_or_tool", "high", "HOG (Dalal and Triggs 2005), ORB (Rublee 2011) and Canny 1986 as feature extraction methods used"),
+ "W357": ("paper", "method_or_tool", "high", "CNN of Krizhevsky 2012 as a classifier option"),
+ "W358": ("paper", "method_or_tool", "high", "DDPM of Ho 2020 is the diffusion model used"),
+ "W359": ("paper", "method_or_tool", "high", "DDIM of Song 2021 deterministic forward diffusion implemented for inversion"),
+ "W360": ("paper", "method_or_tool", "high", "GPT-3 (Brown 2020) as the language prediction model"),
+ # software/AI: Oracle US11386274B2, US11586827B2
+ "W361": ("paper", "background_context", "medium", "Surdeanu RST parsers cited for the variability of discourse parser results; caveat in the framing"),
+ "W362": ("paper", "method_or_tool", "high", "Generalization of communicative actions follows Galitsky 2013 (inventor's own prior work)"),
+ "W363": ("paper", "foundation", "medium", "De Boni 2007 notion of logical relevance adopted as the basis for answer appropriateness"),
+ "W364": ("paper", "background_context", "medium", "Duplicate of W361 (sibling patent, same family text)"),
+ "W365": ("paper", "method_or_tool", "high", "Duplicate of W362 (sibling patent, same family text)"),
+ "W366": ("paper", "method_or_tool", "high", "word2vec (Mikolov) distance used in the generalization rule"),
+ # software/AI: Salesforce US11580975B2, US11657269B2
+ "W367": ("paper", "data_or_materials_source", "high", "Ubuntu Dialogue Corpus of Lowe 2015 used as pretraining data"),
+ "W368": ("paper", "method_or_tool", "high", "BERT base model of Devlin 2018 initialized and pretrained"),
+ "W369": ("paper", "method_or_tool", "high", "MLM loss computed as in Devlin 2018"),
+ "W370": ("paper", "method_or_tool", "high", "Deep Infomax of Hjelm 2019 used to model mutual information"),
+ "W371": ("paper", "data_or_materials_source", "medium", "DenseNet (Huang 2017) and ResNet (He 2016) are the discriminative models on which the verifier is evaluated"),
+ "W372": ("paper", "data_or_materials_source", "high", "SVHN (Netzer 2011) and CIFAR (Krizhevsky) datasets used for evaluation"),
+ # semiconductors: AMD US11670624B2, US12008378B2
+ "W373": ("patent", "own_family_continuation", "high", "Applicant's own application (Bhagavat et al., Molded Chip Combination) incorporated"),
+ "W374": ("patent", "own_family_continuation", "high", "Continuation of the applicant's own application (Agrawal et al.)"),
+ # semiconductors: Analog Devices US10958452B2, US11302835B2
+ "W375": ("paper", "method_or_tool", "medium", "Signcryption schemes of Changgen 2005 and Zheng 1997 used in the threshold construction"),
+ "W376": ("paper", "foundation", "medium", "Gennaro attack on distributed key generation defines the security property the protocol must satisfy"),
+ "W377": ("paper", "method_or_tool", "medium", "Reconfigurable PUF of Kursawe et al. is the protection mechanism the design relies on"),
+ "W378": ("paper", "method_or_tool", "medium", "2DEG interdigitated photodetector approach of Satterthwaite 2018 adopted for the fingers"),
+ # semiconductors: GlobalFoundries US10332969B2, US10388514B2
+ "W379": ("paper", "prior_art_distinguished", "medium", "Li 2015 negative-capacitance FinFET described as the prior approach the matching scheme builds on and improves"),
+ "W380": ("paper", "foundation", "high", "Batra 2016 surface-energy stabilization of polar hafnia phases, the mechanism the surface engineering exploits"),
+ "W381": ("paper", "foundation", "high", "Lomenzo 2015: substrate surface composition sets the ferroelectric properties, the finding the invention acts on"),
+ # semiconductors: Lam Research US11088019B2, US12606905B2
+ "W382": ("patent", "own_family_continuation", "high", "Applicant's own provisional application"),
+ "W383": ("paper", "method_or_tool", "high", "Thermal ALD SnO2 conditions of Li 2012 used for the conformal layer"),
+ "W384": ("paper", "method_or_tool", "high", "Thermal ALD conditions of Du 2005 as an alternative deposition process"),
+ "W385": ("paper", "method_or_tool", "high", "Thermal ALD SnO2 conditions of Li 2012 used for the sealant layer"),
+ "W386": ("paper", "method_or_tool", "high", "Thermal ALD conditions of Du 2005 as an alternative deposition process"),
+ "W387": ("paper", "method_or_tool", "high", "TDMASn ALD process of Elam 2008 used with the non-halogenated precursor"),
+ # semiconductors: TSMC US10502707B1, US11723286B2
+ "W388": ("paper", "definitional_boilerplate", "high", "Ellington and Szostak 1992, Tuerk and Gold 1990 inside the definition of aptamer"),
+ "W389": ("paper", "definitional_boilerplate", "high", "Bird 1988 and Huston 1988 scFv inside the antibody-fragment definition"),
+ "W390": ("mixed", "definitional_boilerplate", "high", "Zapata 1995 and US 5,641,870 inside the antigen-binding fragment definition"),
+ "W391": ("paper", "foundation", "medium", "Chatterjee 2012, Wang 2016, Guo 2010: thermal effects on MTJ switching, the problem the heat sink addresses"),
+ # chemicals/materials: Corning US11296355B2, US11446410B2
+ "W392": ("paper", "background_context", "high", "Ji 2010 Li-S batteries as next-generation systems; context"),
+ "W393": ("paper", "foundation", "high", "Murugan 2007 fast ion conduction in garnet LLZO, the property the electrolyte composite rests on"),
+ "W394": ("paper", "foundation", "high", "Knudsen 1959 strength versus porosity and Lange 1984 second-phase grain-boundary pinning, the mechanism the composite exploits"),
+ "W395": ("paper", "definitional_boilerplate", "medium", "Cao 1996 bioactivity index cited inside the definition of the term"),
+ "W396": ("paper", "foundation", "medium", "Holand 2000 and Liena 2015 flexural strength of lithium disilicate, the reason the base glass-ceramic is chosen"),
+ "W397": ("paper", "data_or_materials_source", "high", "Comparison strengths for Bioglass, A/W and IPS e.max taken from Hench 1998 and Fu 2017"),
+ # chemicals/materials: DuPont US10774352B2, US11732251B2
+ "W398": ("mixed", "background_context", "medium", "Simpson 1995 and US 7,000,000: prior preparation of alpha-1,3-glucan, reviewed as prior work"),
+ "W399": ("mixed", "prior_art_distinguished", "high", "Koga 1983, Komatsu 2011, Simpson: prior reactions adding polysaccharides; the stated gap in understanding motivates the invention"),
+ "W400": ("paper", "definitional_boilerplate", "medium", "CAZy classification (Cantarel 2009) used to define the glucosyltransferase family"),
+ "W401": ("paper", "background_context", "medium", "Homology-length literature (Singer 1982 to Liskay 1987) in the standard homologous-recombination paragraph"),
+ "W402": ("paper", "definitional_boilerplate", "high", "Clustal V (Higgins and Sharp 1989) inside the sequence-alignment definition"),
+ "W403": ("paper", "method_or_tool", "medium", "Ingelbrecht 1989 exemplifies alternative 3' non-coding sequences in constructs; standard plant-biotech paragraph"),
+ # chemicals/materials: Eastman US10837947B2, US11267957B2 (identical text)
+ "W404": ("paper", "method_or_tool", "high", "Hi-Res TGA of Salin 1993 and Sepe 1997 is the analytical technique used throughout"),
+ "W405": ("paper", "method_or_tool", "medium", "Membrane separation (Bowen 1998, Llosa Tanco 2016) as a purification technique for the resins"),
+ "W406": ("paper", "method_or_tool", "medium", "Selective precipitation (Niederauer 2006, Loadman 1998) as a purification technique for the resins"),
+ "W407": ("paper", "method_or_tool", "high", "Duplicate of W404"),
+ "W408": ("paper", "method_or_tool", "medium", "Duplicate of W405"),
+ "W409": ("paper", "method_or_tool", "medium", "Duplicate of W406"),
+ # chemicals/materials: Evonik US10954344B2, US11312633B2
+ "W410": ("mixed", "background_context", "medium", "Borisov 1968 and the Lewis patent: known routes to short-chain acetoxysiloxanes, reviewed as prior art"),
+ "W411": ("patent", "prior_art_distinguished", "high", "Bailey patent process described with its disadvantage (mixed products)"),
+ "W412": ("patent", "prior_art_distinguished", "medium", "Omietanski process citing Bailey, reviewed as the prior route to siloxane-oxyalkylene copolymers"),
+ "W413": ("paper", "foundation", "high", "Dimitrijevic 2012: carbon shells inhibit SEI formation, the rationale for the composite"),
+ "W414": ("paper", "prior_art_distinguished", "medium", "Ng 2006 spray-pyrolysis carbon-coated Si nanocomposite reviewed as the prior approach"),
+ "W415": ("paper", "prior_art_distinguished", "medium", "Ng 2007 low-temperature spray pyrolysis reviewed as the prior approach"),
+ # chemicals/materials: PPG US12084349B2, US12546024B2
+ "W416": ("paper", "method_or_tool", "high", "XPS per Dreyer 2010 used to determine oxygen content"),
+ "W417": ("standards_doc", "definitional_boilerplate", "high", "ASTM D3663 and the 1938 BET paper inside the definition of BET surface area"),
+ "W418": ("patent", "method_or_tool", "medium", "DeBona and Bosso patents for the sulfonium resins that may be used"),
+ # chemicals/materials: Syngenta US11492637B2, US12565661B2
+ "W419": ("paper", "background_context", "medium", "Cook 2012 and Kawashima 2016 cited as precedents for transgenic disease resistance in soybean"),
+ "W420": ("paper", "definitional_boilerplate", "high", "Feng 2013 and Joung and Sander 2013 (TALENs) inside the definition of introduced"),
+ "W421": ("paper", "definitional_boilerplate", "high", "Ragot 1995 and Openshaw 1994 inside the definition of backcrossing terms"),
+ "W422": ("book", "method_or_tool", "medium", "Amplification systems paragraph citing Persing 1993; standard methods boilerplate"),
+ "W423": ("paper", "definitional_boilerplate", "high", "Needleman and Wunsch 1970, Pearson and Lipman 1988 inside the sequence-identity definition"),
+ "W424": ("paper", "definitional_boilerplate", "high", "BLAST (Altschul 1990) inside the sequence-identity definition"),
+ # medical devices: Becton Dickinson US11674879B2, US11702547B2
+ "W425": ("book", "background_context", "high", "Flow cytometry textbooks cited as general references"),
+ "W426": ("paper", "prior_art_distinguished", "high", "Nguyen 2013 spillover spreading coefficients: the conventional method and its limitation"),
+ "W427": ("paper", "method_or_tool", "medium", "Nguyen 2013 coefficients computed as the comparison benchmark for the approximated matrix"),
+ "W428": ("paper", "data_or_materials_source", "medium", "PEG groups from Zalipsky 1995 and Zhu 2012 usable in the multichromophores"),
+ "W429": ("paper", "data_or_materials_source", "medium", "ADMET monomers of Mutlu 2011 as monomers of interest"),
+ "W430": ("paper", "data_or_materials_source", "medium", "ROMP monomers of Song 2010 as monomers of interest"),
+ # medical devices: Dexcom US11963767B2, US12144658B2
+ "W431": ("patent", "method_or_tool", "medium", "Say, Bonnecaze sensor patents incorporated for the sensor types"),
+ "W432": ("patent", "method_or_tool", "medium", "Say patent substrate-based sensor structure to which the membranes may be applied"),
+ "W433": ("paper", "method_or_tool", "high", "Deconvolution of Patek 2016 used to detect meals from glucose and insulin data"),
+ "W434": ("paper", "method_or_tool", "high", "Cobelli 1990 whole-body glucose metabolism model used to estimate meals"),
+ "W435": ("paper", "method_or_tool", "high", "Compartmental model of Patek 2016 used for the replay predictive function"),
+ # medical devices: Intuitive Surgical US11534232B2, US12045318B2
+ "W436": ("patent", "own_family_continuation", "high", "Applicant's own PCT and provisional applications"),
+ "W437": ("patent", "method_or_tool", "medium", "Applicant's own earlier wrist patents (Madhani, Wallace) incorporated for wrist details"),
+ "W438": ("paper", "background_context", "medium", "Garcia-Garcia 2017 review cited to explain fully connected layers"),
+ "W439": ("paper", "method_or_tool", "medium", "Faster R-CNN, SegNet and Mask R-CNN cited as the detection and segmentation architectures the CNN follows"),
+ "W440": ("paper", "method_or_tool", "medium", "PoseNet (Kendall 2015) camera-frame convention and pose regression adopted"),
+ # medical devices: Philips US11238562B2, US12324700B2
+ "W441": ("patent", "background_context", "medium", "Kinicki patent for automated exam setups; background"),
+ "W442": ("patent", "method_or_tool", "high", "Savord and Powers microbeamformer patents (applicant's own) for the beamformer used"),
+ "W443": ("patent", "method_or_tool", "medium", "Rust patent TGC slidepots incorporated for the gain control"),
+ "W444": ("paper", "background_context", "medium", "Finegold 2016 and Harbaoui: clinical relevance of local PWV; motivation for the measurement"),
+ "W445": ("patent", "method_or_tool", "high", "Savord and Powers microbeamformer patents for the beamformer used"),
+ "W446": ("patent", "method_or_tool", "medium", "Roundhill and Jago patents for harmonic B-mode imaging used"),
+ # medical devices: ResMed US11628265B2, US12350034B2
+ "W447": ("patent", "background_context", "medium", "Trimble nasal pillow patent in the survey of known pillows"),
+ "W448": ("paper", "background_context", "high", "Peppard 2013 and Young 1997: sleep apnea undiagnosed; disease burden"),
+ "W449": ("paper", "background_context", "high", "Song 2015 meta-analysis of chronic cough prevalence; disease burden"),
+ "W450": ("paper", "foundation", "medium", "Chan 2010: chronic cough as a presenting symptom of sleep apnea, the clinical link the cough-based detection relies on"),
+ # medical devices: Zimmer US11076964B2, US11660144B2
+ "W451": ("patent", "prior_art_distinguished", "medium", "Tyber patent fused joint device in the survey of prior devices"),
+ "W452": ("patent", "prior_art_distinguished", "medium", "Cavanagh publication articulating device in the survey of prior devices"),
+ "W453": ("patent", "prior_art_distinguished", "medium", "Skiba, Walston, Lehto patents pad devices in the survey of prior devices"),
+ "W454": ("patent", "method_or_tool", "medium", "Solar, Fitzpatrick, Roger fiducial marker patents for markers that can be used"),
+ # energy: Baker Hughes US11513254B2, US11965416B2
+ "W455": ("patent", "method_or_tool", "medium", "Patents on NMR cuttings analysis incorporated for the analysis module"),
+ "W456": ("patent", "method_or_tool", "medium", "Kiesl and Dahl patents incorporated for downhole fluid sampling"),
+ "W457": ("patent", "method_or_tool", "medium", "Applicant's own Hahn pulser-valve patents incorporated for the telemetry hardware"),
+ "W458": ("patent", "method_or_tool", "medium", "Applicant's own well-site communication patents incorporated"),
+ "W459": ("patent", "method_or_tool", "medium", "Patents on audiovisual data handling incorporated"),
+ "W460": ("patent", "method_or_tool", "medium", "Applicant's own applications incorporated for EM propagation measurements"),
+ # energy: Bloom Energy US12068699B2
+ "W461": ("paper", "definitional_boilerplate", "medium", "Keller 2010 NREL report cited inside the definition of a fault"),
+ # energy: ConocoPhillips US12006819B2, US12173603B2
+ "W462": ("paper", "background_context", "high", "Weijers 2019: plug-and-perf as the adopted completion technique; context"),
+ "W463": ("paper", "background_context", "high", "Ugueto 2016 and Cramer 2020: concern about uneven cluster distribution; problem framing"),
+ "W464": ("paper", "prior_art_distinguished", "high", "Walker 2012 variable cluster spacing described and its limitation stated (stress shadowing, Sneddon 1946)"),
+ "W465": ("paper", "prior_art_distinguished", "high", "Fracture-mapping techniques of Fisher 2004, Haustveit 2017 and others, each with stated limitations"),
+ "W466": ("paper", "prior_art_distinguished", "high", "Prior DAS applications (Boone 2015, Webster 2013) focus on high frequency; the invention uses the low-frequency band"),
+ "W467": ("paper", "data_or_materials_source", "high", "Adiabatic compression heating coefficient of water taken from Knoerzer 2010"),
+ # energy: First Solar US12154997B2, US12532548B2
+ "W468": ("paper", "foundation", "medium", "Gupta 1982: efficiency maximum versus cell width, the result the module layout relies on"),
+ "W469": ("paper", "method_or_tool", "medium", "Laser scribing and coating methods of Park 2020 used for the monolithic interconnections"),
+ # energy: Saudi Aramco US11125391B2, US12228026B2
+ "W470": ("paper", "method_or_tool", "high", "CO2 capture and liquefaction configuration of Xu 2014 used for the unit in FIG. 5"),
+ "W471": ("paper", "method_or_tool", "high", "CO2 liquefaction system of Seo 2016 used for the unit in FIG. 7"),
+ "W472": ("paper", "method_or_tool", "high", "Pipeline CO2 liquefaction configuration of Engel 2018 used for the unit in FIG. 9"),
+ "W473": ("mixed", "background_context", "medium", "Rogers 2007 and listed patents as examples of the DFN approach; prior work reviewed"),
+ "W474": ("paper", "foundation", "high", "Barton 1995 fluid flow along critically stressed fractures, the geomechanical feature the model uses"),
+ "W475": ("paper", "method_or_tool", "high", "Seismic geomechanics methodology of Herwanger 2011 used to obtain the stress model"),
+ # energy: Siemens Energy US11932954B2, US12606920B2
+ "W476": ("book", "data_or_materials_source", "high", "Faraday efficiencies at metal cathodes taken from Hori 2008 for table 1"),
+ "W477": ("book", "data_or_materials_source", "high", "Faraday efficiencies at metal cathodes taken from Hori 2008 for table 1"),
+ "W478": ("mixed", "prior_art_distinguished", "medium", "Prior CO2-electrolysis processes (US 7,704,369; J Power Sources 2013) reviewed as the approaches the electrode improves on"),
+ "W479": ("paper", "prior_art_distinguished", "high", "Aeshala 2012/2013 processes use the solid electrolyte as MEA, not in the electrode; the stated difference from the invention"),
+ # automotive/aerospace: Cummins US10110138B1, US12303816B2
+ "W480": ("paper", "prior_art_distinguished", "high", "Giuliani 2015 soft-starting method is the previous method the invention is compared against"),
+ "W481": ("patent", "method_or_tool", "medium", "Applicant's own Moy patent incorporated for the tetrahedral filter media"),
+ # automotive/aerospace: GM US10741812B2, US11557758B2
+ "W482": ("paper", "method_or_tool", "high", "Core-shell microsphere preparation of Tang 2016 used to make the particles"),
+ "W483": ("mixed", "method_or_tool", "high", "TEMPO polymerization (Foucher patent) and amination of Alexandratos 2003 used to make the binder"),
+ "W484": ("mixed", "method_or_tool", "high", "TEMPO/BPO polymerization of chloromethylstyrene per Foucher used in the preparation"),
+ "W485": ("paper", "foundation", "high", "Vetter 2005 Mn dissolution ageing mechanism, the problem the ceramic coating addresses"),
+ # automotive/aerospace: Honda US10635927B2, US10943154B2
+ "W486": ("paper", "method_or_tool", "high", "DeepLab of Chen 2015 used for category-level segmentation"),
+ "W487": ("paper", "method_or_tool", "high", "MNC of Dai 2016 used for instance-level segmentation"),
+ "W488": ("paper", "method_or_tool", "high", "ResNet-101 (He 2016) backbone; ImageNet (Deng) context"),
+ "W489": ("paper", "method_or_tool", "medium", "Kiela 2018 fusion approach among the implementations the associating component can use"),
+ "W490": ("paper", "method_or_tool", "medium", "Conditional similarity network of Veit 2017 as the embedding approach built on"),
+ "W491": ("paper", "foundation", "high", "Gal 2016 equivalence of the ELBO objective and dropout regression, the result the uncertainty model relies on"),
+ # automotive/aerospace: Lockheed Martin US10269147B2, US10510137B1
+ "W492": ("paper", "method_or_tool", "high", "10-point relative pose algorithm of Kneip 2013 implemented"),
+ "W493": ("paper", "method_or_tool", "high", "P3P parametrization of Kneip 2011 used for absolute pose"),
+ "W494": ("paper", "method_or_tool", "high", "Bags of binary words (Galvez-Lopez 2012) used for place recognition"),
+ "W495": ("patent", "method_or_tool", "medium", "Applicant's own Harrison patent incorporated for making the HMD lenses"),
+ "W496": ("patent", "method_or_tool", "medium", "Applicant's own Black patent incorporated for the optical see-through system"),
+ # automotive/aerospace: Northrop Grumman US10850869B2, US11492148B2 (identical text)
+ "W497": ("mixed", "incorporated_reference_list", "high", "Bulk list of patents, a textbook and conference papers on on-orbit servicing incorporated by reference"),
+ "W498": ("mixed", "incorporated_reference_list", "high", "Duplicate of W497"),
+ # automotive/aerospace: Robert Bosch US11314989B2, US11643106B2
+ "W499": ("paper", "method_or_tool", "high", "GAN framework of Goodfellow 2014 is the training setup the invention modifies"),
+ "W500": ("paper", "method_or_tool", "high", "Patch-based discriminator of Isola 2017 used to score local structure"),
+ "W501": ("paper", "background_context", "medium", "MAD-GAN (Li 2019) cited as an application setting for the trained models"),
+ "W502": ("paper", "prior_art_distinguished", "high", "Pellegrini 2009 and Luber 2010 systems stated to be unsatisfactory"),
+ "W503": ("paper", "method_or_tool", "high", "Mask R-CNN (He et al.) with ResNet-101 used for detection; [30] for re-identification"),
+ "W504": ("paper", "prior_art_distinguished", "high", "Social LSTM (Alahi) and social force model (Yamaguchi) are the baselines compared against"),
+ # ---- top-up draw, Oct 31 (batch d2, W505-W520): eight more patents to bring the pilot to 200 ----
+ # pharma: Biogen US11168095B2, US12378276B2
+ "W505": ("paper", "foundation", "high", "Ichijo 1997 and Tobiume 1997: ASK1 kinase biology, the target the inhibitors act on"),
+ "W506": ("paper", "foundation", "high", "ASK1 regulation by thioredoxin and AKT (Saitoh 1998, Zhang 1999); target biology"),
+ "W507": ("paper", "foundation", "medium", "ASK1 role in ischemia-reperfusion damage (Watanabe 2005, Zhang 2003, Terada 2007), the disease rationale for inhibition"),
+ "W508": ("book", "definitional_boilerplate", "high", "Greene, Protective Groups in Organic Synthesis, inside the definition of hydroxyl protecting group"),
+ "W509": ("paper", "method_or_tool", "high", "P(V)-PSI reagent of Knouse 2018 used for the stereospecific synthesis"),
+ # biotech tools: Twist Bioscience US12391762B2, US12571024B2
+ "W510": ("paper", "definitional_boilerplate", "high", "Kabat, Chothia and Contact numbering schemes inside the CDR definition"),
+ "W511": ("paper", "definitional_boilerplate", "high", "Karlin and Altschul BLAST papers inside the percent-identity definition"),
+ "W512": ("paper", "definitional_boilerplate", "high", "Same BLAST boilerplate as W511 in a second, unrelated Twist patent (counted: that recurrence is what the label measures)"),
+ # software/AI: Intuit US11055527B2, Palantir US12079357B2, US12405983B1
+ "W513": ("paper", "method_or_tool", "high", "Word-level BiLSTM-CRF of Lin 2017 is the process the invention applies at the character level"),
+ "W514": ("patent", "method_or_tool", "medium", "Own Kelly publication incorporated for methods of turning objects into artifacts"),
+ "W515": ("patent", "method_or_tool", "medium", "Duplicate of W514 within the same patent (paragraph repeated)"),
+ "W516": ("paper", "method_or_tool", "high", "Code Llama approach of Roziere 2024 used to train the query-generating LLM"),
+ "W517": ("paper", "method_or_tool", "high", "Roziere 2024 approach for function calls; ToolLLM of Qin et al. for chained calls"),
+ # semiconductors: Infineon US11735642B2
+ "W518": ("paper", "background_context", "medium", "Lendenmann 2003 bipolar degradation by stacking faults; problem framing"),
+ "W519": ("paper", "method_or_tool", "medium", "Porous SiC interlayer of Savkina 2003 as the defect-reducing structure the process uses"),
+ "W520": ("paper", "method_or_tool", "high", "Cold-split process of Swoboda 2017 used to trigger the separation"),
 }
 
 FUNCTIONS = ["foundation", "method_or_tool", "prior_art_distinguished", "data_or_materials_source",
@@ -379,9 +652,9 @@ def main():
     c_fn_paper = collections.Counter(r["function"] for r in uniq if r["cited_doc_type"] == "paper")
     sector = SECTOR
     by_sector = collections.defaultdict(collections.Counter)
-    for r in uniq: by_sector[sector.get(r["assignee"], "other")][r["function"]] += 1
+    for r in uniq: by_sector[r.get("sector") or sector.get(r["assignee"], "other")][r["function"]] += 1
     lines = ["# Pilot 1 summary: citation function in corporate patents", "",
-             f"- Patents: {len({r['pn'] for r in out})} granted US patents from {len({r['assignee'] for r in out})} assignees (priority 2017+; 65 assignee queries in two batches, three of which failed on an ampersand, Oct 26-27), {len(out)} citation windows found by the regex stage; {len(uniq)} after dropping family and sibling duplicates (Genentech, Google, Illumina, Bayer, Abbott and Monsanto variety patents reuse identical text).",
+             f"- Patents: {len({r['pn'] for r in out})} granted US patents from {len({r['assignee'] for r in out})} assignees (priority 2017+; 65 assignee queries on Oct 26-27, three of which failed on an ampersand, and 51 more on Oct 31; two patents each where available), {len(out)} citation windows found by the regex stage; {len(uniq)} after dropping family and sibling duplicates (Genentech, Google, Illumina, Bayer, Abbott, Monsanto, Eastman, Oracle and Northrop Grumman sibling patents reuse identical text).",
              f"- Cited document type (regex stage catches 'et al.' in patent citations too): " + ", ".join(f"{k} {v}" for k, v in c_dt.most_common()) + ".",
              f"- Function, all windows: " + ", ".join(f"{k} {v}" for k, v in c_fn.most_common()) + ".",
              f"- Function, paper citations only (n={sum(c_fn_paper.values())}): " + ", ".join(f"{k} {v}" for k, v in c_fn_paper.most_common()) + ".",

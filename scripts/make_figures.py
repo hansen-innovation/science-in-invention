@@ -6,7 +6,7 @@ Everything is read from the labeled files and the profiles_*.csv written by aggr
 regenerate with the pilots (scripts/rebuild_pilot.sh). One template for all five: horizontal bars in labeled
 groups, counts at the right, title and subtitle at the top left.
   function_overall.png    what the cited paper does: 163 paper citations in the pilot, all eight labels
-  function_by_sector.png  shares by sector, 291-window pilot
+  function_by_sector.png  shares by sector, 515-window pilot
   function_by_decade.png  shares by sector and decade, nine firms (pilot/decades/)
   function_by_firm.png    shares by firm, decade sample pooled over decades
   what_is_cited.png       cited-document type by sector: paper vs patent
@@ -141,7 +141,7 @@ def figure_overall():
     c = collections.Counter(r["function"] for r in rows); n = len(rows)
     groups = [(None, [(DISPLAY[f], {"f": f, "v": c[f] / n, "c": c[f]}) for f in FUNCS])]
     fig, ax = canvas(groups, "What the cited paper does in the patent",
-                     f"{n} in-text citations to papers in 109 patents from 68 firms, priority 2017 or later, family duplicates removed.\n"
+                     f"{n} in-text citations to papers in 200 patents from 127 firms, priority 2017 or later, family duplicates removed.\n"
                      "The last three labels are not uses of science; the other figures fold them into \"Other\".")
     for y, (_, r) in enumerate(groups[0][1]):
         ax.barh(y, r["v"], height=0.64, color=PAL.get(r["f"], PAL["other"]))
@@ -157,7 +157,7 @@ def figure_sector():
     groups = [(None, [(cap(r["key"]["sector"]), r) for r in rows])]
     fig, ax = canvas(groups, "What the cited science does in the patent, by sector",
                      "Share of in-text citations to papers, books and standards documents.\n"
-                     "291-window pilot, priority 2017 or later, family duplicates removed.", legend=CATS)
+                     "515-window pilot (200 patents, 127 firms), priority 2017 or later, family duplicates removed.", legend=CATS)
     draw_rows(ax, groups, CATS)
     fig.savefig(OUT / "function_by_sector.png", dpi=200); plt.close(fig)
 
@@ -197,7 +197,7 @@ def figure_cited():
     pilot, decades = collections.defaultdict(list), collections.defaultdict(list)
     for r in jsonl(PILOT):
         if not r.get("is_family_duplicate"):
-            pilot[sector_map.get(r["assignee"], "other")].append(r)
+            pilot[r.get("sector") or sector_map.get(r["assignee"], "other")].append(r)
     for r in jsonl(DECADES):
         if not r.get("is_family_duplicate"):
             decades[r["sector"]].append(r)

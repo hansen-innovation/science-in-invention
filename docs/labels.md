@@ -51,7 +51,7 @@ the pilots were labeled, and the rules go into the prompt and the codebook for t
 
 ## How well tested is the set?
 
-Not yet against alternatives. What the pilots show: every one of the 486 windows took exactly one label, no
+Not yet against alternatives. What the pilots show: every one of the 776 windows took exactly one label, no
 "cannot classify" residual appeared, and the hard cases are informative rather than ambiguous (one Boston
 Scientific paper is materials source, mechanism and distinguished prior art in three consecutive paragraphs). What
 they do not show: agreement between coders, stability across models, or whether a different partition would be

@@ -26,6 +26,14 @@ Tesla Viet Nam Technology, Zimeno) were dropped (5 windows). Family and sibling 
 windows across continuations and variety patents) are flagged with `is_family_duplicate` rather than
 removed from the raw file.
 
+Expansion draw (Oct 31, 2026, batches d1 and d2): 51 further assignee queries run with `../fetch_patents.py`
+(`--source google --per-assignee 2 --max-windows 3 --after-priority 20170101`, the regex after `~` filtering on
+the printed assignee), chosen to add new firms to each of the eight sectors; three queries (Uber, Netflix,
+Broadcom) returned nothing, and the last eight patents were taken in query order to bring the pilot to exactly
+200 patents (91 new patents, 224 windows, 59 printed assignees). Sibling patents with identical windows (Eastman,
+Oracle, Northrop Grumman) are flagged as family duplicates; a boilerplate paragraph repeated across unrelated
+patents of one firm (Twist Bioscience) is not, because that recurrence is what the definition-only label measures.
+
 Labels were assigned by Claude (claude-fable-5-1) in an interactive session using the prompt in
 `../prompts/label_citation_function.md`; the rationale for each label is in the `note` field.
 A second coder has not yet labeled this set; double coding is the first task of the benchmark.
