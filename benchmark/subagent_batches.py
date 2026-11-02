@@ -10,7 +10,11 @@ the same format `common/llm.py` produces on the API route. `report` writes bench
         --pair benchmark/labels_claude-opus-5-5.jsonl pilot/citation_windows_labeled.jsonl \
         --pair benchmark/labels_claude-opus-5-5.jsonl pilot/decades/citation_windows_labeled.jsonl \
         --pair benchmark/labels_claude-fable-5-1_longrun.jsonl pilot/longrun/citation_windows_labeled.jsonl \
+        --pair benchmark/labels_claude-opus-5-5_firms_fields_retest.jsonl pilot/firms/citation_windows_labeled.jsonl \
+        --pair benchmark/labels_claude-opus-5-5_firms_fields_retest.jsonl pilot/fields/citation_windows_labeled.jsonl \
         --output benchmark/results.md
+The firm and field samples are compared with a blind second claude-opus-5-5 pass over every 20th labeling batch
+(test-retest; batch files of local/firms_fields/make_batches.py).
 
     python benchmark/subagent_batches.py split --raw pilot/citation_windows_raw.jsonl pilot/decades/citation_windows_raw.jsonl \
         --batch-dir <scratch>/batches --size 25

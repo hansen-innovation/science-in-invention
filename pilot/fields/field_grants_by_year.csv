@@ -1,0 +1,1923 @@
+field,year,n
+Aircraft,1837,3
+Aircraft,1838,1
+Aircraft,1840,2
+Aircraft,1844,2
+Aircraft,1846,1
+Aircraft,1847,1
+Aircraft,1850,2
+Aircraft,1851,1
+Aircraft,1853,1
+Aircraft,1854,5
+Aircraft,1855,8
+Aircraft,1856,6
+Aircraft,1857,7
+Aircraft,1858,7
+Aircraft,1859,6
+Aircraft,1860,10
+Aircraft,1861,5
+Aircraft,1862,5
+Aircraft,1863,9
+Aircraft,1864,8
+Aircraft,1865,14
+Aircraft,1866,15
+Aircraft,1867,22
+Aircraft,1868,20
+Aircraft,1869,29
+Aircraft,1870,21
+Aircraft,1871,35
+Aircraft,1872,28
+Aircraft,1873,21
+Aircraft,1874,29
+Aircraft,1875,28
+Aircraft,1876,29
+Aircraft,1877,27
+Aircraft,1878,24
+Aircraft,1879,25
+Aircraft,1880,19
+Aircraft,1881,19
+Aircraft,1882,36
+Aircraft,1883,37
+Aircraft,1884,17
+Aircraft,1885,47
+Aircraft,1886,35
+Aircraft,1887,20
+Aircraft,1888,24
+Aircraft,1889,35
+Aircraft,1890,39
+Aircraft,1891,36
+Aircraft,1892,40
+Aircraft,1893,42
+Aircraft,1894,33
+Aircraft,1895,29
+Aircraft,1896,20
+Aircraft,1897,33
+Aircraft,1898,38
+Aircraft,1899,23
+Aircraft,1900,30
+Aircraft,1901,20
+Aircraft,1902,45
+Aircraft,1903,40
+Aircraft,1904,27
+Aircraft,1905,40
+Aircraft,1906,47
+Aircraft,1907,95
+Aircraft,1908,81
+Aircraft,1909,119
+Aircraft,1910,159
+Aircraft,1911,462
+Aircraft,1912,501
+Aircraft,1913,312
+Aircraft,1914,308
+Aircraft,1915,282
+Aircraft,1916,223
+Aircraft,1917,229
+Aircraft,1918,296
+Aircraft,1919,440
+Aircraft,1920,767
+Aircraft,1921,741
+Aircraft,1922,633
+Aircraft,1923,493
+Aircraft,1924,598
+Aircraft,1925,688
+Aircraft,1926,472
+Aircraft,1927,529
+Aircraft,1928,548
+Aircraft,1929,819
+Aircraft,1930,1272
+Aircraft,1931,1574
+Aircraft,1932,1544
+Aircraft,1933,947
+Aircraft,1934,671
+Aircraft,1935,639
+Aircraft,1936,541
+Aircraft,1937,598
+Aircraft,1938,641
+Aircraft,1939,739
+Aircraft,1940,628
+Aircraft,1941,639
+Aircraft,1942,657
+Aircraft,1943,694
+Aircraft,1944,843
+Aircraft,1945,1033
+Aircraft,1946,989
+Aircraft,1947,809
+Aircraft,1948,791
+Aircraft,1949,1073
+Aircraft,1950,1047
+Aircraft,1951,860
+Aircraft,1952,781
+Aircraft,1953,671
+Aircraft,1954,659
+Aircraft,1955,506
+Aircraft,1956,891
+Aircraft,1957,592
+Aircraft,1958,757
+Aircraft,1959,652
+Aircraft,1960,1331
+Aircraft,1961,1131
+Aircraft,1962,1029
+Aircraft,1963,880
+Aircraft,1964,1004
+Aircraft,1965,1079
+Aircraft,1966,995
+Aircraft,1967,877
+Aircraft,1968,812
+Aircraft,1969,1002
+Aircraft,1970,800
+Aircraft,1971,988
+Aircraft,1972,716
+Aircraft,1973,674
+Aircraft,1974,658
+Aircraft,1975,528
+Aircraft,1976,562
+Aircraft,1977,506
+Aircraft,1978,466
+Aircraft,1979,322
+Aircraft,1980,408
+Aircraft,1981,466
+Aircraft,1982,361
+Aircraft,1983,502
+Aircraft,1984,592
+Aircraft,1985,548
+Aircraft,1986,560
+Aircraft,1987,743
+Aircraft,1988,683
+Aircraft,1989,752
+Aircraft,1990,660
+Aircraft,1991,710
+Aircraft,1992,878
+Aircraft,1993,714
+Aircraft,1994,697
+Aircraft,1995,557
+Aircraft,1996,581
+Aircraft,1997,525
+Aircraft,1998,894
+Aircraft,1999,923
+Aircraft,2000,1007
+Aircraft,2001,1095
+Aircraft,2002,1124
+Aircraft,2003,1067
+Aircraft,2004,1068
+Aircraft,2005,860
+Aircraft,2006,939
+Aircraft,2007,932
+Aircraft,2008,741
+Aircraft,2009,941
+Aircraft,2010,1310
+Aircraft,2011,1666
+Aircraft,2012,2102
+Aircraft,2013,2318
+Aircraft,2014,3110
+Aircraft,2015,4388
+Aircraft,2016,4225
+Aircraft,2017,5225
+Aircraft,2018,5430
+Aircraft,2019,6829
+Aircraft,2020,7792
+Aircraft,2021,6831
+Aircraft,2022,7284
+Aircraft,2023,7911
+Aircraft,2024,8107
+Aircraft,2025,8621
+Aircraft,2026,5253
+Artificial intelligence,1965,4
+Artificial intelligence,1966,12
+Artificial intelligence,1967,27
+Artificial intelligence,1968,6
+Artificial intelligence,1969,10
+Artificial intelligence,1970,4
+Artificial intelligence,1971,8
+Artificial intelligence,1972,7
+Artificial intelligence,1973,4
+Artificial intelligence,1976,5
+Artificial intelligence,1980,2
+Artificial intelligence,1982,2
+Artificial intelligence,1985,2
+Artificial intelligence,1986,14
+Artificial intelligence,1987,13
+Artificial intelligence,1988,41
+Artificial intelligence,1989,80
+Artificial intelligence,1990,140
+Artificial intelligence,1991,161
+Artificial intelligence,1992,217
+Artificial intelligence,1993,326
+Artificial intelligence,1994,276
+Artificial intelligence,1995,321
+Artificial intelligence,1996,301
+Artificial intelligence,1997,272
+Artificial intelligence,1998,340
+Artificial intelligence,1999,191
+Artificial intelligence,2000,151
+Artificial intelligence,2001,203
+Artificial intelligence,2002,230
+Artificial intelligence,2003,283
+Artificial intelligence,2004,240
+Artificial intelligence,2005,242
+Artificial intelligence,2006,338
+Artificial intelligence,2007,247
+Artificial intelligence,2008,394
+Artificial intelligence,2009,497
+Artificial intelligence,2010,581
+Artificial intelligence,2011,743
+Artificial intelligence,2012,832
+Artificial intelligence,2013,1007
+Artificial intelligence,2014,1382
+Artificial intelligence,2015,1965
+Artificial intelligence,2016,2243
+Artificial intelligence,2017,2071
+Artificial intelligence,2018,1734
+Artificial intelligence,2019,4189
+Artificial intelligence,2020,6075
+Artificial intelligence,2021,7244
+Artificial intelligence,2022,10500
+Artificial intelligence,2023,12968
+Artificial intelligence,2024,10273
+Artificial intelligence,2025,10889
+Artificial intelligence,2026,10064
+Computing,1837,1
+Computing,1851,1
+Computing,1856,1
+Computing,1857,1
+Computing,1863,1
+Computing,1865,1
+Computing,1866,1
+Computing,1869,3
+Computing,1870,3
+Computing,1872,5
+Computing,1873,1
+Computing,1874,3
+Computing,1875,3
+Computing,1876,4
+Computing,1877,5
+Computing,1878,1
+Computing,1879,4
+Computing,1880,4
+Computing,1881,4
+Computing,1882,3
+Computing,1883,4
+Computing,1884,4
+Computing,1885,5
+Computing,1886,10
+Computing,1887,8
+Computing,1888,4
+Computing,1889,11
+Computing,1890,12
+Computing,1891,14
+Computing,1892,6
+Computing,1893,11
+Computing,1894,13
+Computing,1895,11
+Computing,1896,13
+Computing,1897,11
+Computing,1898,7
+Computing,1899,10
+Computing,1900,12
+Computing,1901,15
+Computing,1902,9
+Computing,1903,11
+Computing,1904,10
+Computing,1905,4
+Computing,1906,8
+Computing,1907,16
+Computing,1908,11
+Computing,1909,12
+Computing,1910,5
+Computing,1911,10
+Computing,1912,11
+Computing,1913,11
+Computing,1914,15
+Computing,1915,23
+Computing,1916,16
+Computing,1917,16
+Computing,1918,21
+Computing,1919,14
+Computing,1921,2
+Computing,1922,2
+Computing,1923,4
+Computing,1924,12
+Computing,1925,4
+Computing,1926,2
+Computing,1927,4
+Computing,1928,7
+Computing,1929,2
+Computing,1930,10
+Computing,1931,20
+Computing,1932,28
+Computing,1933,30
+Computing,1934,28
+Computing,1935,12
+Computing,1936,38
+Computing,1937,34
+Computing,1938,48
+Computing,1939,64
+Computing,1940,58
+Computing,1941,68
+Computing,1942,36
+Computing,1943,30
+Computing,1944,39
+Computing,1945,30
+Computing,1946,32
+Computing,1947,36
+Computing,1948,24
+Computing,1949,36
+Computing,1950,54
+Computing,1951,82
+Computing,1952,108
+Computing,1953,84
+Computing,1954,84
+Computing,1955,75
+Computing,1956,119
+Computing,1957,183
+Computing,1958,196
+Computing,1959,352
+Computing,1960,386
+Computing,1961,355
+Computing,1962,539
+Computing,1963,325
+Computing,1964,363
+Computing,1965,526
+Computing,1966,789
+Computing,1967,722
+Computing,1968,550
+Computing,1969,598
+Computing,1970,713
+Computing,1971,1076
+Computing,1972,921
+Computing,1973,860
+Computing,1974,792
+Computing,1975,669
+Computing,1976,814
+Computing,1977,840
+Computing,1978,893
+Computing,1979,693
+Computing,1980,788
+Computing,1981,871
+Computing,1982,884
+Computing,1983,1028
+Computing,1984,1508
+Computing,1985,1511
+Computing,1986,1694
+Computing,1987,2246
+Computing,1988,2364
+Computing,1989,3357
+Computing,1990,3047
+Computing,1991,3090
+Computing,1992,3935
+Computing,1993,4591
+Computing,1994,5757
+Computing,1995,6737
+Computing,1996,8984
+Computing,1997,9472
+Computing,1998,15484
+Computing,1999,15877
+Computing,2000,15008
+Computing,2001,15837
+Computing,2002,16114
+Computing,2003,17150
+Computing,2004,18719
+Computing,2005,17567
+Computing,2006,25177
+Computing,2007,23245
+Computing,2008,25830
+Computing,2009,29150
+Computing,2010,38234
+Computing,2011,38417
+Computing,2012,46617
+Computing,2013,55462
+Computing,2014,73456
+Computing,2015,90186
+Computing,2016,94846
+Computing,2017,94100
+Computing,2018,91394
+Computing,2019,113272
+Computing,2020,116127
+Computing,2021,111402
+Computing,2022,108048
+Computing,2023,103519
+Computing,2024,103945
+Computing,2025,99620
+Computing,2026,65827
+Electric lamps,1856,1
+Electric lamps,1875,1
+Electric lamps,1876,1
+Electric lamps,1877,1
+Electric lamps,1879,4
+Electric lamps,1880,8
+Electric lamps,1881,16
+Electric lamps,1882,25
+Electric lamps,1883,18
+Electric lamps,1884,10
+Electric lamps,1885,15
+Electric lamps,1886,11
+Electric lamps,1887,14
+Electric lamps,1888,9
+Electric lamps,1889,6
+Electric lamps,1890,8
+Electric lamps,1891,9
+Electric lamps,1892,14
+Electric lamps,1893,16
+Electric lamps,1894,11
+Electric lamps,1895,7
+Electric lamps,1896,10
+Electric lamps,1897,5
+Electric lamps,1898,4
+Electric lamps,1899,11
+Electric lamps,1900,20
+Electric lamps,1901,13
+Electric lamps,1902,15
+Electric lamps,1903,11
+Electric lamps,1904,13
+Electric lamps,1905,10
+Electric lamps,1906,14
+Electric lamps,1907,7
+Electric lamps,1908,17
+Electric lamps,1909,12
+Electric lamps,1910,21
+Electric lamps,1911,23
+Electric lamps,1912,50
+Electric lamps,1913,34
+Electric lamps,1914,27
+Electric lamps,1915,34
+Electric lamps,1916,24
+Electric lamps,1917,29
+Electric lamps,1918,23
+Electric lamps,1919,14
+Electric lamps,1920,38
+Electric lamps,1921,22
+Electric lamps,1922,46
+Electric lamps,1923,72
+Electric lamps,1924,60
+Electric lamps,1925,92
+Electric lamps,1926,108
+Electric lamps,1927,140
+Electric lamps,1928,112
+Electric lamps,1929,80
+Electric lamps,1930,80
+Electric lamps,1931,112
+Electric lamps,1932,88
+Electric lamps,1933,88
+Electric lamps,1934,92
+Electric lamps,1935,116
+Electric lamps,1936,72
+Electric lamps,1937,110
+Electric lamps,1938,112
+Electric lamps,1939,140
+Electric lamps,1940,100
+Electric lamps,1941,64
+Electric lamps,1942,54
+Electric lamps,1943,46
+Electric lamps,1944,60
+Electric lamps,1945,28
+Electric lamps,1946,42
+Electric lamps,1947,32
+Electric lamps,1948,54
+Electric lamps,1949,48
+Electric lamps,1950,40
+Electric lamps,1951,34
+Electric lamps,1952,41
+Electric lamps,1953,47
+Electric lamps,1954,42
+Electric lamps,1955,42
+Electric lamps,1956,44
+Electric lamps,1957,64
+Electric lamps,1958,70
+Electric lamps,1959,106
+Electric lamps,1960,62
+Electric lamps,1961,76
+Electric lamps,1962,74
+Electric lamps,1963,52
+Electric lamps,1964,84
+Electric lamps,1965,128
+Electric lamps,1966,126
+Electric lamps,1967,104
+Electric lamps,1968,102
+Electric lamps,1969,116
+Electric lamps,1970,126
+Electric lamps,1971,103
+Electric lamps,1972,92
+Electric lamps,1973,120
+Electric lamps,1974,132
+Electric lamps,1975,96
+Electric lamps,1976,74
+Electric lamps,1977,92
+Electric lamps,1978,72
+Electric lamps,1979,72
+Electric lamps,1980,55
+Electric lamps,1981,72
+Electric lamps,1982,55
+Electric lamps,1983,60
+Electric lamps,1984,71
+Electric lamps,1985,67
+Electric lamps,1986,93
+Electric lamps,1987,77
+Electric lamps,1988,79
+Electric lamps,1989,77
+Electric lamps,1990,74
+Electric lamps,1991,71
+Electric lamps,1992,81
+Electric lamps,1993,36
+Electric lamps,1994,21
+Electric lamps,1995,43
+Electric lamps,1996,40
+Electric lamps,1997,31
+Electric lamps,1998,45
+Electric lamps,1999,68
+Electric lamps,2000,59
+Electric lamps,2001,61
+Electric lamps,2002,50
+Electric lamps,2003,88
+Electric lamps,2004,79
+Electric lamps,2005,52
+Electric lamps,2006,50
+Electric lamps,2007,39
+Electric lamps,2008,60
+Electric lamps,2009,20
+Electric lamps,2010,64
+Electric lamps,2011,34
+Electric lamps,2012,52
+Electric lamps,2013,33
+Electric lamps,2014,45
+Electric lamps,2015,12
+Electric lamps,2016,28
+Electric lamps,2017,22
+Electric lamps,2018,29
+Electric lamps,2019,26
+Electric lamps,2020,17
+Electric lamps,2021,10
+Electric lamps,2022,8
+Electric lamps,2023,18
+Electric lamps,2024,11
+Electric lamps,2025,9
+Genetic engineering,1901,1
+Genetic engineering,1914,2
+Genetic engineering,1918,2
+Genetic engineering,1931,2
+Genetic engineering,1937,2
+Genetic engineering,1945,4
+Genetic engineering,1947,2
+Genetic engineering,1949,2
+Genetic engineering,1951,2
+Genetic engineering,1956,2
+Genetic engineering,1958,2
+Genetic engineering,1962,2
+Genetic engineering,1963,6
+Genetic engineering,1964,2
+Genetic engineering,1968,2
+Genetic engineering,1970,2
+Genetic engineering,1971,2
+Genetic engineering,1972,2
+Genetic engineering,1973,2
+Genetic engineering,1974,10
+Genetic engineering,1975,6
+Genetic engineering,1976,12
+Genetic engineering,1977,2
+Genetic engineering,1978,2
+Genetic engineering,1979,4
+Genetic engineering,1980,6
+Genetic engineering,1981,21
+Genetic engineering,1982,59
+Genetic engineering,1983,56
+Genetic engineering,1984,73
+Genetic engineering,1985,76
+Genetic engineering,1986,111
+Genetic engineering,1987,171
+Genetic engineering,1988,213
+Genetic engineering,1989,276
+Genetic engineering,1990,274
+Genetic engineering,1991,352
+Genetic engineering,1992,420
+Genetic engineering,1993,533
+Genetic engineering,1994,533
+Genetic engineering,1995,658
+Genetic engineering,1996,1157
+Genetic engineering,1997,1892
+Genetic engineering,1998,2554
+Genetic engineering,1999,2539
+Genetic engineering,2000,2444
+Genetic engineering,2001,3120
+Genetic engineering,2002,2642
+Genetic engineering,2003,2311
+Genetic engineering,2004,1882
+Genetic engineering,2005,1620
+Genetic engineering,2006,2275
+Genetic engineering,2007,2218
+Genetic engineering,2008,2127
+Genetic engineering,2009,2342
+Genetic engineering,2010,3430
+Genetic engineering,2011,3501
+Genetic engineering,2012,3527
+Genetic engineering,2013,3477
+Genetic engineering,2014,4490
+Genetic engineering,2015,6035
+Genetic engineering,2016,6110
+Genetic engineering,2017,6991
+Genetic engineering,2018,7190
+Genetic engineering,2019,8261
+Genetic engineering,2020,8790
+Genetic engineering,2021,8206
+Genetic engineering,2022,8053
+Genetic engineering,2023,7625
+Genetic engineering,2024,7388
+Genetic engineering,2025,7905
+Genetic engineering,2026,5538
+Lasers,1869,1
+Lasers,1871,2
+Lasers,1877,1
+Lasers,1878,1
+Lasers,1880,2
+Lasers,1886,1
+Lasers,1887,2
+Lasers,1888,1
+Lasers,1892,1
+Lasers,1901,2
+Lasers,1904,1
+Lasers,1912,2
+Lasers,1919,1
+Lasers,1956,4
+Lasers,1958,6
+Lasers,1959,6
+Lasers,1960,28
+Lasers,1961,32
+Lasers,1962,24
+Lasers,1963,18
+Lasers,1964,38
+Lasers,1965,89
+Lasers,1966,164
+Lasers,1967,176
+Lasers,1968,266
+Lasers,1969,487
+Lasers,1970,475
+Lasers,1971,606
+Lasers,1972,463
+Lasers,1973,436
+Lasers,1974,419
+Lasers,1975,408
+Lasers,1976,416
+Lasers,1977,310
+Lasers,1978,302
+Lasers,1979,234
+Lasers,1980,307
+Lasers,1981,314
+Lasers,1982,334
+Lasers,1983,273
+Lasers,1984,352
+Lasers,1985,401
+Lasers,1986,452
+Lasers,1987,639
+Lasers,1988,815
+Lasers,1989,1034
+Lasers,1990,886
+Lasers,1991,944
+Lasers,1992,895
+Lasers,1993,887
+Lasers,1994,1021
+Lasers,1995,793
+Lasers,1996,753
+Lasers,1997,744
+Lasers,1998,1054
+Lasers,1999,1054
+Lasers,2000,1067
+Lasers,2001,1063
+Lasers,2002,1203
+Lasers,2003,1733
+Lasers,2004,1872
+Lasers,2005,1486
+Lasers,2006,1477
+Lasers,2007,1095
+Lasers,2008,1228
+Lasers,2009,1395
+Lasers,2010,1823
+Lasers,2011,1435
+Lasers,2012,1292
+Lasers,2013,1378
+Lasers,2014,1809
+Lasers,2015,2237
+Lasers,2016,1941
+Lasers,2017,2093
+Lasers,2018,1915
+Lasers,2019,2155
+Lasers,2020,1984
+Lasers,2021,1818
+Lasers,2022,1824
+Lasers,2023,1743
+Lasers,2024,2033
+Lasers,2025,1898
+Lasers,2026,1533
+Lithium batteries,1858,2
+Lithium batteries,1872,2
+Lithium batteries,1875,2
+Lithium batteries,1876,6
+Lithium batteries,1879,2
+Lithium batteries,1881,2
+Lithium batteries,1882,6
+Lithium batteries,1883,6
+Lithium batteries,1884,20
+Lithium batteries,1885,16
+Lithium batteries,1886,4
+Lithium batteries,1887,6
+Lithium batteries,1888,12
+Lithium batteries,1889,12
+Lithium batteries,1890,16
+Lithium batteries,1891,6
+Lithium batteries,1892,6
+Lithium batteries,1894,6
+Lithium batteries,1895,2
+Lithium batteries,1896,4
+Lithium batteries,1897,6
+Lithium batteries,1898,4
+Lithium batteries,1899,22
+Lithium batteries,1900,16
+Lithium batteries,1901,8
+Lithium batteries,1902,12
+Lithium batteries,1903,6
+Lithium batteries,1904,4
+Lithium batteries,1905,6
+Lithium batteries,1906,2
+Lithium batteries,1907,4
+Lithium batteries,1908,2
+Lithium batteries,1909,12
+Lithium batteries,1911,4
+Lithium batteries,1912,2
+Lithium batteries,1913,6
+Lithium batteries,1914,10
+Lithium batteries,1915,10
+Lithium batteries,1916,14
+Lithium batteries,1917,8
+Lithium batteries,1918,10
+Lithium batteries,1919,10
+Lithium batteries,1926,1
+Lithium batteries,1960,2
+Lithium batteries,1962,2
+Lithium batteries,1963,2
+Lithium batteries,1965,2
+Lithium batteries,1968,8
+Lithium batteries,1969,6
+Lithium batteries,1970,10
+Lithium batteries,1971,6
+Lithium batteries,1972,6
+Lithium batteries,1973,12
+Lithium batteries,1974,10
+Lithium batteries,1975,10
+Lithium batteries,1976,14
+Lithium batteries,1977,18
+Lithium batteries,1978,18
+Lithium batteries,1979,18
+Lithium batteries,1980,16
+Lithium batteries,1981,12
+Lithium batteries,1982,16
+Lithium batteries,1983,9
+Lithium batteries,1984,19
+Lithium batteries,1985,41
+Lithium batteries,1986,19
+Lithium batteries,1987,33
+Lithium batteries,1988,30
+Lithium batteries,1989,81
+Lithium batteries,1990,65
+Lithium batteries,1991,39
+Lithium batteries,1992,46
+Lithium batteries,1993,60
+Lithium batteries,1994,82
+Lithium batteries,1995,130
+Lithium batteries,1996,195
+Lithium batteries,1997,177
+Lithium batteries,1998,157
+Lithium batteries,1999,130
+Lithium batteries,2000,200
+Lithium batteries,2001,218
+Lithium batteries,2002,297
+Lithium batteries,2003,270
+Lithium batteries,2004,247
+Lithium batteries,2005,178
+Lithium batteries,2006,215
+Lithium batteries,2007,250
+Lithium batteries,2008,179
+Lithium batteries,2009,305
+Lithium batteries,2010,516
+Lithium batteries,2011,435
+Lithium batteries,2012,546
+Lithium batteries,2013,664
+Lithium batteries,2014,820
+Lithium batteries,2015,1250
+Lithium batteries,2016,1185
+Lithium batteries,2017,1560
+Lithium batteries,2018,1556
+Lithium batteries,2019,1941
+Lithium batteries,2020,2345
+Lithium batteries,2021,2056
+Lithium batteries,2022,2181
+Lithium batteries,2023,2014
+Lithium batteries,2024,2595
+Lithium batteries,2025,2494
+Lithium batteries,2026,1513
+Petroleum refining,1838,2
+Petroleum refining,1843,1
+Petroleum refining,1847,1
+Petroleum refining,1849,2
+Petroleum refining,1850,2
+Petroleum refining,1852,2
+Petroleum refining,1853,1
+Petroleum refining,1854,3
+Petroleum refining,1855,2
+Petroleum refining,1856,2
+Petroleum refining,1857,2
+Petroleum refining,1858,1
+Petroleum refining,1859,10
+Petroleum refining,1860,5
+Petroleum refining,1861,10
+Petroleum refining,1862,7
+Petroleum refining,1863,11
+Petroleum refining,1864,13
+Petroleum refining,1865,26
+Petroleum refining,1866,40
+Petroleum refining,1867,40
+Petroleum refining,1868,20
+Petroleum refining,1869,22
+Petroleum refining,1870,28
+Petroleum refining,1871,25
+Petroleum refining,1872,27
+Petroleum refining,1873,10
+Petroleum refining,1874,18
+Petroleum refining,1875,20
+Petroleum refining,1876,16
+Petroleum refining,1877,12
+Petroleum refining,1878,7
+Petroleum refining,1879,19
+Petroleum refining,1880,13
+Petroleum refining,1881,20
+Petroleum refining,1882,15
+Petroleum refining,1883,21
+Petroleum refining,1884,22
+Petroleum refining,1885,18
+Petroleum refining,1886,15
+Petroleum refining,1887,14
+Petroleum refining,1888,11
+Petroleum refining,1889,22
+Petroleum refining,1890,17
+Petroleum refining,1891,15
+Petroleum refining,1892,25
+Petroleum refining,1893,24
+Petroleum refining,1894,13
+Petroleum refining,1895,24
+Petroleum refining,1896,21
+Petroleum refining,1897,19
+Petroleum refining,1898,17
+Petroleum refining,1899,14
+Petroleum refining,1900,24
+Petroleum refining,1901,14
+Petroleum refining,1902,12
+Petroleum refining,1903,23
+Petroleum refining,1904,17
+Petroleum refining,1905,15
+Petroleum refining,1906,26
+Petroleum refining,1907,23
+Petroleum refining,1908,14
+Petroleum refining,1909,18
+Petroleum refining,1910,19
+Petroleum refining,1911,29
+Petroleum refining,1912,26
+Petroleum refining,1913,33
+Petroleum refining,1914,50
+Petroleum refining,1915,53
+Petroleum refining,1916,55
+Petroleum refining,1917,67
+Petroleum refining,1918,101
+Petroleum refining,1919,106
+Petroleum refining,1920,206
+Petroleum refining,1921,198
+Petroleum refining,1922,334
+Petroleum refining,1923,254
+Petroleum refining,1924,216
+Petroleum refining,1925,380
+Petroleum refining,1926,534
+Petroleum refining,1927,431
+Petroleum refining,1928,568
+Petroleum refining,1929,594
+Petroleum refining,1930,648
+Petroleum refining,1931,1013
+Petroleum refining,1932,925
+Petroleum refining,1933,1004
+Petroleum refining,1934,1129
+Petroleum refining,1935,900
+Petroleum refining,1936,1106
+Petroleum refining,1937,956
+Petroleum refining,1938,889
+Petroleum refining,1939,855
+Petroleum refining,1940,844
+Petroleum refining,1941,647
+Petroleum refining,1942,844
+Petroleum refining,1943,773
+Petroleum refining,1944,739
+Petroleum refining,1945,585
+Petroleum refining,1946,393
+Petroleum refining,1947,387
+Petroleum refining,1948,358
+Petroleum refining,1949,349
+Petroleum refining,1950,380
+Petroleum refining,1951,631
+Petroleum refining,1952,497
+Petroleum refining,1953,538
+Petroleum refining,1954,401
+Petroleum refining,1955,400
+Petroleum refining,1956,930
+Petroleum refining,1957,460
+Petroleum refining,1958,582
+Petroleum refining,1959,956
+Petroleum refining,1960,782
+Petroleum refining,1961,482
+Petroleum refining,1962,345
+Petroleum refining,1963,347
+Petroleum refining,1964,411
+Petroleum refining,1965,520
+Petroleum refining,1966,640
+Petroleum refining,1967,429
+Petroleum refining,1968,438
+Petroleum refining,1969,516
+Petroleum refining,1970,554
+Petroleum refining,1971,648
+Petroleum refining,1972,659
+Petroleum refining,1973,557
+Petroleum refining,1974,604
+Petroleum refining,1975,571
+Petroleum refining,1976,512
+Petroleum refining,1977,582
+Petroleum refining,1978,640
+Petroleum refining,1979,566
+Petroleum refining,1980,582
+Petroleum refining,1981,613
+Petroleum refining,1982,627
+Petroleum refining,1983,735
+Petroleum refining,1984,781
+Petroleum refining,1985,702
+Petroleum refining,1986,618
+Petroleum refining,1987,497
+Petroleum refining,1988,498
+Petroleum refining,1989,668
+Petroleum refining,1990,647
+Petroleum refining,1991,651
+Petroleum refining,1992,553
+Petroleum refining,1993,529
+Petroleum refining,1994,590
+Petroleum refining,1995,473
+Petroleum refining,1996,340
+Petroleum refining,1997,351
+Petroleum refining,1998,456
+Petroleum refining,1999,689
+Petroleum refining,2000,594
+Petroleum refining,2001,523
+Petroleum refining,2002,537
+Petroleum refining,2003,493
+Petroleum refining,2004,505
+Petroleum refining,2005,364
+Petroleum refining,2006,403
+Petroleum refining,2007,422
+Petroleum refining,2008,425
+Petroleum refining,2009,501
+Petroleum refining,2010,732
+Petroleum refining,2011,693
+Petroleum refining,2012,661
+Petroleum refining,2013,791
+Petroleum refining,2014,1040
+Petroleum refining,2015,1256
+Petroleum refining,2016,1280
+Petroleum refining,2017,1425
+Petroleum refining,2018,1324
+Petroleum refining,2019,1440
+Petroleum refining,2020,1716
+Petroleum refining,2021,1566
+Petroleum refining,2022,1273
+Petroleum refining,2023,1233
+Petroleum refining,2024,1328
+Petroleum refining,2025,1171
+Petroleum refining,2026,798
+Pharmaceuticals,1837,3
+Pharmaceuticals,1838,1
+Pharmaceuticals,1841,1
+Pharmaceuticals,1843,1
+Pharmaceuticals,1844,2
+Pharmaceuticals,1845,1
+Pharmaceuticals,1846,3
+Pharmaceuticals,1847,3
+Pharmaceuticals,1856,3
+Pharmaceuticals,1857,1
+Pharmaceuticals,1858,2
+Pharmaceuticals,1859,6
+Pharmaceuticals,1860,10
+Pharmaceuticals,1861,3
+Pharmaceuticals,1862,6
+Pharmaceuticals,1863,16
+Pharmaceuticals,1864,21
+Pharmaceuticals,1865,28
+Pharmaceuticals,1866,78
+Pharmaceuticals,1867,83
+Pharmaceuticals,1868,103
+Pharmaceuticals,1869,120
+Pharmaceuticals,1870,90
+Pharmaceuticals,1871,112
+Pharmaceuticals,1872,105
+Pharmaceuticals,1873,73
+Pharmaceuticals,1874,63
+Pharmaceuticals,1875,28
+Pharmaceuticals,1876,44
+Pharmaceuticals,1877,19
+Pharmaceuticals,1878,53
+Pharmaceuticals,1879,39
+Pharmaceuticals,1880,46
+Pharmaceuticals,1881,52
+Pharmaceuticals,1882,41
+Pharmaceuticals,1883,56
+Pharmaceuticals,1884,52
+Pharmaceuticals,1885,73
+Pharmaceuticals,1886,45
+Pharmaceuticals,1887,50
+Pharmaceuticals,1888,36
+Pharmaceuticals,1889,73
+Pharmaceuticals,1890,69
+Pharmaceuticals,1891,38
+Pharmaceuticals,1892,19
+Pharmaceuticals,1893,18
+Pharmaceuticals,1894,17
+Pharmaceuticals,1895,9
+Pharmaceuticals,1896,15
+Pharmaceuticals,1897,25
+Pharmaceuticals,1898,21
+Pharmaceuticals,1899,39
+Pharmaceuticals,1900,28
+Pharmaceuticals,1901,18
+Pharmaceuticals,1902,26
+Pharmaceuticals,1903,29
+Pharmaceuticals,1904,31
+Pharmaceuticals,1905,27
+Pharmaceuticals,1906,28
+Pharmaceuticals,1907,35
+Pharmaceuticals,1908,46
+Pharmaceuticals,1909,48
+Pharmaceuticals,1910,52
+Pharmaceuticals,1911,41
+Pharmaceuticals,1912,54
+Pharmaceuticals,1913,35
+Pharmaceuticals,1914,32
+Pharmaceuticals,1915,40
+Pharmaceuticals,1916,37
+Pharmaceuticals,1917,50
+Pharmaceuticals,1918,41
+Pharmaceuticals,1919,33
+Pharmaceuticals,1920,29
+Pharmaceuticals,1921,91
+Pharmaceuticals,1922,78
+Pharmaceuticals,1923,68
+Pharmaceuticals,1924,105
+Pharmaceuticals,1925,119
+Pharmaceuticals,1926,135
+Pharmaceuticals,1927,142
+Pharmaceuticals,1928,108
+Pharmaceuticals,1929,74
+Pharmaceuticals,1930,93
+Pharmaceuticals,1931,91
+Pharmaceuticals,1932,158
+Pharmaceuticals,1933,209
+Pharmaceuticals,1934,159
+Pharmaceuticals,1935,190
+Pharmaceuticals,1936,207
+Pharmaceuticals,1937,213
+Pharmaceuticals,1938,188
+Pharmaceuticals,1939,246
+Pharmaceuticals,1940,233
+Pharmaceuticals,1941,186
+Pharmaceuticals,1942,194
+Pharmaceuticals,1943,156
+Pharmaceuticals,1944,198
+Pharmaceuticals,1945,184
+Pharmaceuticals,1946,134
+Pharmaceuticals,1947,106
+Pharmaceuticals,1948,145
+Pharmaceuticals,1949,229
+Pharmaceuticals,1950,220
+Pharmaceuticals,1951,258
+Pharmaceuticals,1952,235
+Pharmaceuticals,1953,233
+Pharmaceuticals,1954,223
+Pharmaceuticals,1955,188
+Pharmaceuticals,1956,322
+Pharmaceuticals,1957,325
+Pharmaceuticals,1958,355
+Pharmaceuticals,1959,439
+Pharmaceuticals,1960,338
+Pharmaceuticals,1961,402
+Pharmaceuticals,1962,619
+Pharmaceuticals,1963,573
+Pharmaceuticals,1964,588
+Pharmaceuticals,1965,637
+Pharmaceuticals,1966,729
+Pharmaceuticals,1967,839
+Pharmaceuticals,1968,500
+Pharmaceuticals,1969,1034
+Pharmaceuticals,1970,875
+Pharmaceuticals,1971,922
+Pharmaceuticals,1972,1143
+Pharmaceuticals,1973,972
+Pharmaceuticals,1974,1251
+Pharmaceuticals,1975,1585
+Pharmaceuticals,1976,1668
+Pharmaceuticals,1977,1471
+Pharmaceuticals,1978,1287
+Pharmaceuticals,1979,1112
+Pharmaceuticals,1980,1343
+Pharmaceuticals,1981,1411
+Pharmaceuticals,1982,1338
+Pharmaceuticals,1983,1240
+Pharmaceuticals,1984,1606
+Pharmaceuticals,1985,1536
+Pharmaceuticals,1986,1740
+Pharmaceuticals,1987,2180
+Pharmaceuticals,1988,2204
+Pharmaceuticals,1989,3452
+Pharmaceuticals,1990,3227
+Pharmaceuticals,1991,3587
+Pharmaceuticals,1992,3479
+Pharmaceuticals,1993,3685
+Pharmaceuticals,1994,3418
+Pharmaceuticals,1995,3762
+Pharmaceuticals,1996,4856
+Pharmaceuticals,1997,6386
+Pharmaceuticals,1998,7430
+Pharmaceuticals,1999,8381
+Pharmaceuticals,2000,7767
+Pharmaceuticals,2001,8535
+Pharmaceuticals,2002,8940
+Pharmaceuticals,2003,8071
+Pharmaceuticals,2004,5628
+Pharmaceuticals,2005,4865
+Pharmaceuticals,2006,6109
+Pharmaceuticals,2007,5233
+Pharmaceuticals,2008,5146
+Pharmaceuticals,2009,5257
+Pharmaceuticals,2010,8514
+Pharmaceuticals,2011,8923
+Pharmaceuticals,2012,11077
+Pharmaceuticals,2013,14362
+Pharmaceuticals,2014,19100
+Pharmaceuticals,2015,23065
+Pharmaceuticals,2016,23524
+Pharmaceuticals,2017,26503
+Pharmaceuticals,2018,26546
+Pharmaceuticals,2019,27966
+Pharmaceuticals,2020,29602
+Pharmaceuticals,2021,28845
+Pharmaceuticals,2022,26494
+Pharmaceuticals,2023,22951
+Pharmaceuticals,2024,23261
+Pharmaceuticals,2025,23927
+Pharmaceuticals,2026,15750
+Polymers and plastics,1837,1
+Polymers and plastics,1838,2
+Polymers and plastics,1839,1
+Polymers and plastics,1841,1
+Polymers and plastics,1842,2
+Polymers and plastics,1843,2
+Polymers and plastics,1844,4
+Polymers and plastics,1845,2
+Polymers and plastics,1846,2
+Polymers and plastics,1847,4
+Polymers and plastics,1848,2
+Polymers and plastics,1849,4
+Polymers and plastics,1850,9
+Polymers and plastics,1851,4
+Polymers and plastics,1852,4
+Polymers and plastics,1853,5
+Polymers and plastics,1854,9
+Polymers and plastics,1855,6
+Polymers and plastics,1856,7
+Polymers and plastics,1857,15
+Polymers and plastics,1858,20
+Polymers and plastics,1859,35
+Polymers and plastics,1860,29
+Polymers and plastics,1861,15
+Polymers and plastics,1862,11
+Polymers and plastics,1863,18
+Polymers and plastics,1864,16
+Polymers and plastics,1865,33
+Polymers and plastics,1866,41
+Polymers and plastics,1867,51
+Polymers and plastics,1868,54
+Polymers and plastics,1869,56
+Polymers and plastics,1870,61
+Polymers and plastics,1871,38
+Polymers and plastics,1872,23
+Polymers and plastics,1873,40
+Polymers and plastics,1874,32
+Polymers and plastics,1875,30
+Polymers and plastics,1876,28
+Polymers and plastics,1877,20
+Polymers and plastics,1878,36
+Polymers and plastics,1879,32
+Polymers and plastics,1880,39
+Polymers and plastics,1881,75
+Polymers and plastics,1882,84
+Polymers and plastics,1883,72
+Polymers and plastics,1884,53
+Polymers and plastics,1885,66
+Polymers and plastics,1886,59
+Polymers and plastics,1887,40
+Polymers and plastics,1888,47
+Polymers and plastics,1889,52
+Polymers and plastics,1890,51
+Polymers and plastics,1891,45
+Polymers and plastics,1892,26
+Polymers and plastics,1893,34
+Polymers and plastics,1894,35
+Polymers and plastics,1895,40
+Polymers and plastics,1896,38
+Polymers and plastics,1897,33
+Polymers and plastics,1898,34
+Polymers and plastics,1899,58
+Polymers and plastics,1900,64
+Polymers and plastics,1901,53
+Polymers and plastics,1902,67
+Polymers and plastics,1903,71
+Polymers and plastics,1904,58
+Polymers and plastics,1905,56
+Polymers and plastics,1906,81
+Polymers and plastics,1907,57
+Polymers and plastics,1908,58
+Polymers and plastics,1909,96
+Polymers and plastics,1910,76
+Polymers and plastics,1911,62
+Polymers and plastics,1912,100
+Polymers and plastics,1913,105
+Polymers and plastics,1914,132
+Polymers and plastics,1915,125
+Polymers and plastics,1916,147
+Polymers and plastics,1917,161
+Polymers and plastics,1918,127
+Polymers and plastics,1919,118
+Polymers and plastics,1920,164
+Polymers and plastics,1921,223
+Polymers and plastics,1922,259
+Polymers and plastics,1923,281
+Polymers and plastics,1924,245
+Polymers and plastics,1925,415
+Polymers and plastics,1926,323
+Polymers and plastics,1927,378
+Polymers and plastics,1928,506
+Polymers and plastics,1929,495
+Polymers and plastics,1930,541
+Polymers and plastics,1931,681
+Polymers and plastics,1932,937
+Polymers and plastics,1933,1117
+Polymers and plastics,1934,961
+Polymers and plastics,1935,1089
+Polymers and plastics,1936,1101
+Polymers and plastics,1937,1011
+Polymers and plastics,1938,1203
+Polymers and plastics,1939,1161
+Polymers and plastics,1940,1184
+Polymers and plastics,1941,1073
+Polymers and plastics,1942,1155
+Polymers and plastics,1943,1245
+Polymers and plastics,1944,1079
+Polymers and plastics,1945,1495
+Polymers and plastics,1946,1052
+Polymers and plastics,1947,791
+Polymers and plastics,1948,1151
+Polymers and plastics,1949,1839
+Polymers and plastics,1950,1892
+Polymers and plastics,1951,2035
+Polymers and plastics,1952,1967
+Polymers and plastics,1953,1548
+Polymers and plastics,1954,1274
+Polymers and plastics,1955,1055
+Polymers and plastics,1956,1653
+Polymers and plastics,1957,1566
+Polymers and plastics,1958,2606
+Polymers and plastics,1959,2858
+Polymers and plastics,1960,2520
+Polymers and plastics,1961,2982
+Polymers and plastics,1962,3829
+Polymers and plastics,1963,2418
+Polymers and plastics,1964,2303
+Polymers and plastics,1965,3645
+Polymers and plastics,1966,5222
+Polymers and plastics,1967,5541
+Polymers and plastics,1968,4651
+Polymers and plastics,1969,5403
+Polymers and plastics,1970,4811
+Polymers and plastics,1971,4519
+Polymers and plastics,1972,6743
+Polymers and plastics,1973,4776
+Polymers and plastics,1974,5035
+Polymers and plastics,1975,5107
+Polymers and plastics,1976,5219
+Polymers and plastics,1977,4805
+Polymers and plastics,1978,5578
+Polymers and plastics,1979,3591
+Polymers and plastics,1980,4426
+Polymers and plastics,1981,5090
+Polymers and plastics,1982,4260
+Polymers and plastics,1983,4604
+Polymers and plastics,1984,4966
+Polymers and plastics,1985,5247
+Polymers and plastics,1986,4522
+Polymers and plastics,1987,5086
+Polymers and plastics,1988,5250
+Polymers and plastics,1989,6440
+Polymers and plastics,1990,6426
+Polymers and plastics,1991,7346
+Polymers and plastics,1992,7588
+Polymers and plastics,1993,7637
+Polymers and plastics,1994,7300
+Polymers and plastics,1995,6164
+Polymers and plastics,1996,6273
+Polymers and plastics,1997,6053
+Polymers and plastics,1998,6810
+Polymers and plastics,1999,6820
+Polymers and plastics,2000,6890
+Polymers and plastics,2001,7538
+Polymers and plastics,2002,7716
+Polymers and plastics,2003,7535
+Polymers and plastics,2004,6759
+Polymers and plastics,2005,4916
+Polymers and plastics,2006,5391
+Polymers and plastics,2007,4630
+Polymers and plastics,2008,3963
+Polymers and plastics,2009,4379
+Polymers and plastics,2010,6763
+Polymers and plastics,2011,6816
+Polymers and plastics,2012,6991
+Polymers and plastics,2013,7970
+Polymers and plastics,2014,9998
+Polymers and plastics,2015,11572
+Polymers and plastics,2016,11516
+Polymers and plastics,2017,12120
+Polymers and plastics,2018,11673
+Polymers and plastics,2019,12863
+Polymers and plastics,2020,13574
+Polymers and plastics,2021,12546
+Polymers and plastics,2022,11621
+Polymers and plastics,2023,11396
+Polymers and plastics,2024,11851
+Polymers and plastics,2025,11371
+Polymers and plastics,2026,7575
+Quantum computing,1861,1
+Quantum computing,1869,1
+Quantum computing,1873,1
+Quantum computing,1878,1
+Quantum computing,1879,1
+Quantum computing,1885,1
+Quantum computing,1899,1
+Quantum computing,1906,1
+Quantum computing,1910,1
+Quantum computing,1912,1
+Quantum computing,1916,1
+Quantum computing,1919,1
+Quantum computing,1949,1
+Quantum computing,1958,1
+Quantum computing,1959,1
+Quantum computing,1960,2
+Quantum computing,1962,2
+Quantum computing,1963,1
+Quantum computing,1964,1
+Quantum computing,1965,3
+Quantum computing,1966,4
+Quantum computing,1967,2
+Quantum computing,1968,1
+Quantum computing,1969,7
+Quantum computing,1970,6
+Quantum computing,1971,8
+Quantum computing,1972,6
+Quantum computing,1973,8
+Quantum computing,1974,4
+Quantum computing,1975,6
+Quantum computing,1976,6
+Quantum computing,1977,8
+Quantum computing,1978,10
+Quantum computing,1979,6
+Quantum computing,1980,3
+Quantum computing,1981,10
+Quantum computing,1982,13
+Quantum computing,1983,7
+Quantum computing,1984,17
+Quantum computing,1985,16
+Quantum computing,1986,24
+Quantum computing,1987,30
+Quantum computing,1988,32
+Quantum computing,1989,36
+Quantum computing,1990,46
+Quantum computing,1991,56
+Quantum computing,1992,58
+Quantum computing,1993,59
+Quantum computing,1994,75
+Quantum computing,1995,67
+Quantum computing,1996,76
+Quantum computing,1997,69
+Quantum computing,1998,140
+Quantum computing,1999,164
+Quantum computing,2000,173
+Quantum computing,2001,247
+Quantum computing,2002,266
+Quantum computing,2003,394
+Quantum computing,2004,408
+Quantum computing,2005,397
+Quantum computing,2006,418
+Quantum computing,2007,347
+Quantum computing,2008,312
+Quantum computing,2009,297
+Quantum computing,2010,320
+Quantum computing,2011,320
+Quantum computing,2012,295
+Quantum computing,2013,332
+Quantum computing,2014,401
+Quantum computing,2015,282
+Quantum computing,2016,208
+Quantum computing,2017,149
+Quantum computing,2018,85
+Quantum computing,2019,120
+Quantum computing,2020,104
+Quantum computing,2021,99
+Quantum computing,2022,55
+Quantum computing,2023,59
+Quantum computing,2024,58
+Quantum computing,2025,34
+Quantum computing,2026,22
+Radio,1837,1
+Radio,1847,2
+Radio,1852,2
+Radio,1858,1
+Radio,1859,2
+Radio,1860,2
+Radio,1862,1
+Radio,1863,2
+Radio,1864,3
+Radio,1866,1
+Radio,1869,2
+Radio,1870,1
+Radio,1872,4
+Radio,1873,2
+Radio,1874,1
+Radio,1875,2
+Radio,1876,2
+Radio,1877,7
+Radio,1878,2
+Radio,1879,4
+Radio,1880,7
+Radio,1881,13
+Radio,1882,8
+Radio,1883,14
+Radio,1884,13
+Radio,1885,32
+Radio,1886,29
+Radio,1887,10
+Radio,1888,15
+Radio,1889,7
+Radio,1890,31
+Radio,1891,17
+Radio,1892,18
+Radio,1893,17
+Radio,1894,11
+Radio,1895,26
+Radio,1896,20
+Radio,1897,16
+Radio,1898,18
+Radio,1899,20
+Radio,1900,23
+Radio,1901,41
+Radio,1902,58
+Radio,1903,50
+Radio,1904,109
+Radio,1905,79
+Radio,1906,61
+Radio,1907,68
+Radio,1908,72
+Radio,1909,72
+Radio,1910,81
+Radio,1911,65
+Radio,1912,68
+Radio,1913,56
+Radio,1914,59
+Radio,1915,96
+Radio,1916,116
+Radio,1917,94
+Radio,1918,68
+Radio,1919,106
+Radio,1920,160
+Radio,1921,207
+Radio,1922,228
+Radio,1923,352
+Radio,1924,386
+Radio,1925,677
+Radio,1926,685
+Radio,1927,683
+Radio,1928,899
+Radio,1929,911
+Radio,1930,931
+Radio,1931,1150
+Radio,1932,1233
+Radio,1933,1391
+Radio,1934,1304
+Radio,1935,1297
+Radio,1936,1379
+Radio,1937,1376
+Radio,1938,1257
+Radio,1939,1643
+Radio,1940,1552
+Radio,1941,1816
+Radio,1942,1665
+Radio,1943,774
+Radio,1944,703
+Radio,1945,735
+Radio,1946,921
+Radio,1947,846
+Radio,1948,1082
+Radio,1949,1584
+Radio,1950,2030
+Radio,1951,2133
+Radio,1952,1678
+Radio,1953,1323
+Radio,1954,1024
+Radio,1955,933
+Radio,1956,1906
+Radio,1957,1919
+Radio,1958,2270
+Radio,1959,2585
+Radio,1960,2435
+Radio,1961,2280
+Radio,1962,2541
+Radio,1963,1946
+Radio,1964,2275
+Radio,1965,3724
+Radio,1966,3576
+Radio,1967,3206
+Radio,1968,2832
+Radio,1969,3555
+Radio,1970,3791
+Radio,1971,4498
+Radio,1972,3298
+Radio,1973,3220
+Radio,1974,2917
+Radio,1975,2793
+Radio,1976,2894
+Radio,1977,2863
+Radio,1978,2365
+Radio,1979,1743
+Radio,1980,2233
+Radio,1981,2441
+Radio,1982,2542
+Radio,1983,2390
+Radio,1984,2810
+Radio,1985,3365
+Radio,1986,3438
+Radio,1987,3810
+Radio,1988,3358
+Radio,1989,4153
+Radio,1990,3880
+Radio,1991,4417
+Radio,1992,4621
+Radio,1993,4365
+Radio,1994,5108
+Radio,1995,5609
+Radio,1996,5937
+Radio,1997,5681
+Radio,1998,8300
+Radio,1999,8734
+Radio,2000,9581
+Radio,2001,9908
+Radio,2002,10632
+Radio,2003,10890
+Radio,2004,11382
+Radio,2005,10290
+Radio,2006,14439
+Radio,2007,13133
+Radio,2008,13195
+Radio,2009,13682
+Radio,2010,15978
+Radio,2011,16057
+Radio,2012,17419
+Radio,2013,19369
+Radio,2014,22957
+Radio,2015,26419
+Radio,2016,26109
+Radio,2017,26448
+Radio,2018,24497
+Radio,2019,29938
+Radio,2020,29748
+Radio,2021,25046
+Radio,2022,24175
+Radio,2023,23273
+Radio,2024,23578
+Radio,2025,23950
+Radio,2026,16908
+Semiconductors,1862,2
+Semiconductors,1864,2
+Semiconductors,1867,1
+Semiconductors,1868,1
+Semiconductors,1870,2
+Semiconductors,1874,2
+Semiconductors,1879,1
+Semiconductors,1880,1
+Semiconductors,1881,4
+Semiconductors,1885,1
+Semiconductors,1887,1
+Semiconductors,1888,5
+Semiconductors,1889,2
+Semiconductors,1890,5
+Semiconductors,1891,4
+Semiconductors,1892,4
+Semiconductors,1893,6
+Semiconductors,1894,6
+Semiconductors,1895,6
+Semiconductors,1896,2
+Semiconductors,1897,1
+Semiconductors,1898,5
+Semiconductors,1900,6
+Semiconductors,1902,3
+Semiconductors,1903,1
+Semiconductors,1904,6
+Semiconductors,1905,2
+Semiconductors,1906,2
+Semiconductors,1907,3
+Semiconductors,1908,6
+Semiconductors,1909,5
+Semiconductors,1910,2
+Semiconductors,1911,5
+Semiconductors,1912,3
+Semiconductors,1913,1
+Semiconductors,1914,8
+Semiconductors,1915,13
+Semiconductors,1916,9
+Semiconductors,1917,10
+Semiconductors,1918,3
+Semiconductors,1919,8
+Semiconductors,1922,2
+Semiconductors,1923,9
+Semiconductors,1924,8
+Semiconductors,1925,24
+Semiconductors,1926,28
+Semiconductors,1927,20
+Semiconductors,1928,18
+Semiconductors,1929,28
+Semiconductors,1930,33
+Semiconductors,1931,12
+Semiconductors,1932,26
+Semiconductors,1933,44
+Semiconductors,1934,19
+Semiconductors,1935,16
+Semiconductors,1936,22
+Semiconductors,1937,26
+Semiconductors,1938,28
+Semiconductors,1939,41
+Semiconductors,1940,68
+Semiconductors,1941,32
+Semiconductors,1942,34
+Semiconductors,1943,33
+Semiconductors,1944,40
+Semiconductors,1945,38
+Semiconductors,1946,26
+Semiconductors,1947,38
+Semiconductors,1948,72
+Semiconductors,1949,71
+Semiconductors,1950,44
+Semiconductors,1951,38
+Semiconductors,1952,49
+Semiconductors,1953,62
+Semiconductors,1954,45
+Semiconductors,1955,48
+Semiconductors,1956,77
+Semiconductors,1957,92
+Semiconductors,1958,112
+Semiconductors,1959,156
+Semiconductors,1960,126
+Semiconductors,1961,123
+Semiconductors,1962,106
+Semiconductors,1963,69
+Semiconductors,1964,107
+Semiconductors,1965,190
+Semiconductors,1966,278
+Semiconductors,1967,313
+Semiconductors,1968,260
+Semiconductors,1969,402
+Semiconductors,1970,303
+Semiconductors,1971,503
+Semiconductors,1972,445
+Semiconductors,1973,415
+Semiconductors,1974,460
+Semiconductors,1975,533
+Semiconductors,1976,557
+Semiconductors,1977,576
+Semiconductors,1978,508
+Semiconductors,1979,440
+Semiconductors,1980,532
+Semiconductors,1981,558
+Semiconductors,1982,502
+Semiconductors,1983,524
+Semiconductors,1984,567
+Semiconductors,1985,656
+Semiconductors,1986,851
+Semiconductors,1987,1125
+Semiconductors,1988,1051
+Semiconductors,1989,1466
+Semiconductors,1990,1691
+Semiconductors,1991,2256
+Semiconductors,1992,2223
+Semiconductors,1993,2236
+Semiconductors,1994,2967
+Semiconductors,1995,3324
+Semiconductors,1996,3351
+Semiconductors,1997,3831
+Semiconductors,1998,5198
+Semiconductors,1999,6252
+Semiconductors,2000,7261
+Semiconductors,2001,8431
+Semiconductors,2002,8392
+Semiconductors,2003,8918
+Semiconductors,2004,9333
+Semiconductors,2005,8157
+Semiconductors,2006,8671
+Semiconductors,2007,8134
+Semiconductors,2008,8197
+Semiconductors,2009,9427
+Semiconductors,2010,12682
+Semiconductors,2011,12756
+Semiconductors,2012,11831
+Semiconductors,2013,14739
+Semiconductors,2014,23836
+Semiconductors,2015,37621
+Semiconductors,2016,40330
+Semiconductors,2017,40880
+Semiconductors,2018,37891
+Semiconductors,2019,40879
+Semiconductors,2020,41611
+Semiconductors,2021,38804
+Semiconductors,2022,38699
+Semiconductors,2023,38227
+Semiconductors,2024,42263
+Semiconductors,2025,43206
+Semiconductors,2026,27289
+Television,1848,1
+Television,1850,2
+Television,1854,2
+Television,1855,2
+Television,1856,1
+Television,1858,1
+Television,1859,1
+Television,1861,1
+Television,1862,3
+Television,1863,2
+Television,1865,1
+Television,1866,4
+Television,1867,1
+Television,1869,2
+Television,1870,3
+Television,1872,3
+Television,1874,3
+Television,1875,8
+Television,1876,7
+Television,1877,12
+Television,1878,1
+Television,1879,2
+Television,1880,6
+Television,1881,6
+Television,1882,7
+Television,1883,14
+Television,1884,17
+Television,1885,13
+Television,1886,9
+Television,1887,7
+Television,1888,8
+Television,1889,7
+Television,1890,7
+Television,1891,12
+Television,1892,4
+Television,1893,7
+Television,1894,3
+Television,1895,15
+Television,1896,10
+Television,1897,4
+Television,1898,3
+Television,1899,13
+Television,1900,7
+Television,1901,12
+Television,1902,4
+Television,1903,11
+Television,1904,10
+Television,1905,10
+Television,1906,7
+Television,1907,19
+Television,1908,8
+Television,1909,15
+Television,1910,15
+Television,1911,15
+Television,1912,18
+Television,1913,13
+Television,1914,17
+Television,1915,16
+Television,1916,22
+Television,1917,21
+Television,1918,18
+Television,1919,8
+Television,1920,4
+Television,1921,2
+Television,1922,6
+Television,1923,10
+Television,1924,16
+Television,1925,56
+Television,1926,36
+Television,1927,90
+Television,1928,134
+Television,1929,129
+Television,1930,210
+Television,1931,212
+Television,1932,229
+Television,1933,176
+Television,1934,188
+Television,1935,192
+Television,1936,212
+Television,1937,194
+Television,1938,245
+Television,1939,411
+Television,1940,504
+Television,1941,453
+Television,1942,448
+Television,1943,188
+Television,1944,163
+Television,1945,160
+Television,1946,151
+Television,1947,151
+Television,1948,158
+Television,1949,223
+Television,1950,372
+Television,1951,486
+Television,1952,471
+Television,1953,425
+Television,1954,413
+Television,1955,367
+Television,1956,664
+Television,1957,570
+Television,1958,779
+Television,1959,1045
+Television,1960,768
+Television,1961,561
+Television,1962,552
+Television,1963,379
+Television,1964,353
+Television,1965,513
+Television,1966,609
+Television,1967,640
+Television,1968,531
+Television,1969,818
+Television,1970,1020
+Television,1971,1266
+Television,1972,977
+Television,1973,1143
+Television,1974,990
+Television,1975,853
+Television,1976,988
+Television,1977,914
+Television,1978,864
+Television,1979,719
+Television,1980,1115
+Television,1981,1248
+Television,1982,1209
+Television,1983,1248
+Television,1984,1347
+Television,1985,1998
+Television,1986,2127
+Television,1987,3193
+Television,1988,2659
+Television,1989,3315
+Television,1990,3273
+Television,1991,3604
+Television,1992,3888
+Television,1993,4169
+Television,1994,4629
+Television,1995,4664
+Television,1996,5581
+Television,1997,5313
+Television,1998,7931
+Television,1999,7515
+Television,2000,7087
+Television,2001,7273
+Television,2002,7211
+Television,2003,7335
+Television,2004,7944
+Television,2005,7291
+Television,2006,10251
+Television,2007,9196
+Television,2008,10315
+Television,2009,11481
+Television,2010,14762
+Television,2011,15565
+Television,2012,20581
+Television,2013,21900
+Television,2014,27917
+Television,2015,31540
+Television,2016,31346
+Television,2017,33141
+Television,2018,31825
+Television,2019,34948
+Television,2020,35866
+Television,2021,32774
+Television,2022,33995
+Television,2023,33549
+Television,2024,35821
+Television,2025,34643
+Television,2026,21820

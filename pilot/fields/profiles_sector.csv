@@ -1,0 +1,15 @@
+sector,n_patents,n_windows,substantive_share,share_foundation,share_method_or_tool,share_prior_art_distinguished,share_data_or_materials_source,share_background_context,share_definitional_boilerplate,share_incorporated_reference_list,share_own_family_continuation
+Polymers and plastics,646,646,0.718,0.054,0.421,0.136,0.107,0.17,0.076,0.036,0.0
+Radio,640,640,0.647,0.097,0.348,0.194,0.008,0.266,0.023,0.064,0.0
+Pharmaceuticals,606,606,0.657,0.157,0.297,0.142,0.061,0.236,0.064,0.043,0.0
+Television,532,532,0.669,0.045,0.423,0.177,0.024,0.261,0.008,0.06,0.002
+Petroleum refining,528,528,0.612,0.055,0.373,0.112,0.072,0.231,0.136,0.021,0.0
+Semiconductors,449,449,0.592,0.122,0.169,0.276,0.024,0.318,0.013,0.073,0.002
+Computing,416,416,0.627,0.026,0.399,0.188,0.014,0.252,0.012,0.108,0.0
+Lasers,415,415,0.612,0.128,0.159,0.301,0.024,0.292,0.002,0.094,0.0
+Genetic engineering,304,304,0.562,0.141,0.23,0.128,0.062,0.309,0.069,0.059,0.0
+Lithium batteries,277,277,0.682,0.105,0.177,0.329,0.072,0.199,0.036,0.083,0.0
+Aircraft,269,269,0.535,0.134,0.182,0.152,0.067,0.301,0.007,0.156,0.0
+Artificial intelligence,266,266,0.545,0.049,0.331,0.154,0.011,0.32,0.004,0.132,0.0
+Quantum computing,168,168,0.548,0.149,0.089,0.28,0.03,0.31,0.006,0.137,0.0
+Electric lamps,48,48,0.604,0.146,0.208,0.167,0.083,0.229,0.021,0.146,0.0

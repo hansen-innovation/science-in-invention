@@ -1,0 +1,31 @@
+role,age_bin,adjusted_share,ci_low,ci_high,raw_share,n_patents
+foundation,Before takeoff,0.1587,0.1095,0.2080,0.1503,306
+foundation,0-19,0.1048,0.0649,0.1447,0.1081,888
+foundation,20-39,0.0982,0.0692,0.1271,0.1014,1045
+foundation,40-59,0.0640,0.0352,0.0928,0.0719,793
+foundation,60-99,0.0717,0.0432,0.1002,0.0668,1526
+foundation,100+,0.1103,0.0275,0.1931,0.1075,958
+method_or_tool,Before takeoff,0.1798,0.1204,0.2391,0.1765,306
+method_or_tool,0-19,0.2818,0.1879,0.3758,0.2883,888
+method_or_tool,20-39,0.2954,0.2357,0.3551,0.3254,1045
+method_or_tool,40-59,0.2785,0.2289,0.3280,0.3090,793
+method_or_tool,60-99,0.3538,0.3037,0.4039,0.3499,1526
+method_or_tool,100+,0.3145,0.2309,0.3980,0.2578,958
+prior_art_distinguished,Before takeoff,0.1906,0.1222,0.2590,0.2255,306
+prior_art_distinguished,0-19,0.1812,0.1192,0.2433,0.1836,888
+prior_art_distinguished,20-39,0.2067,0.1474,0.2660,0.1742,1045
+prior_art_distinguished,40-59,0.2584,0.2151,0.3017,0.2371,793
+prior_art_distinguished,60-99,0.1933,0.1436,0.2429,0.1999,1526
+prior_art_distinguished,100+,0.1064,0.0743,0.1385,0.1357,958
+background_context,Before takeoff,0.2760,0.1862,0.3659,0.2908,306
+background_context,0-19,0.2991,0.2501,0.3482,0.3086,888
+background_context,20-39,0.2701,0.2377,0.3026,0.2498,1045
+background_context,40-59,0.2535,0.2199,0.2871,0.2484,793
+background_context,60-99,0.2134,0.1828,0.2440,0.2163,1526
+background_context,100+,0.2724,0.2051,0.3397,0.2808,958
+definitional_boilerplate,Before takeoff,0.0417,0.0046,0.0787,0.0327,306
+definitional_boilerplate,0-19,0.0179,-0.0026,0.0384,0.0180,888
+definitional_boilerplate,20-39,0.0365,0.0060,0.0670,0.0459,1045
+definitional_boilerplate,40-59,0.0343,0.0009,0.0677,0.0378,793
+definitional_boilerplate,60-99,0.0477,0.0160,0.0793,0.0485,1526
+definitional_boilerplate,100+,0.0618,0.0338,0.0899,0.0501,958

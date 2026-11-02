@@ -61,6 +61,12 @@ PATENT_CUE = re.compile(r"\b[Pp]at(?:ent)?\.? ?No\.?|\bPatents? \d|\bSerial No\.
 CIT_SCIENCE = re.compile(r"\b(?:Journal|Proceedings|Transactions|Berichte|Annalen|Zeitschrift|Bulletin|Comptes|Academy|Society|"
                          r"Handbook|Textbook|Treatise|edition|published by|University Press)\b|"
                          r"\b(?:Proc|Trans|Phys|Chem|Ber|Bull|Acad|Soc|Rev)\.|\bInd\. Eng\.")
+# --cue-modern (Nov 2, 2026): extra anchors for in-text citations with no "et al." and no journal word, such as
+# '"Generating viewsheds without using sightlines," Photogrammetric engineering and remote sensing, 66(1), 2000 pp 87-90'
+# or 'OLE Controls Inside Out, by Adam Denning, Microsoft Press, 1995'. Used (firm sample) only for patents that Reliance on
+# Science lists as citing a paper in the text but where the other anchors find no window.
+CIT_MODERN = re.compile(r"[“\"][^”\"]{15,200}[”\"][^.]{0,120}?\b(?:19|20)\d{2}\b|\b\d{1,4} ?\(\d{1,3}\)[,:]? ?(?:pp?\.? ?)?\d|"
+                        r"\bpp\.? ?\d+ ?[-–] ?\d+|\b(?:Press|Conference|Symposium|Workshop|Letters|arXiv|doi|ACM|SIAM)\b")
 ASSIGNEE_RX = [re.compile(r'itemprop="assigneeOriginal"[^>]*>([^<]+)<'), re.compile(r'itemprop="assigneeCurrent"[^>]*>([^<]+)<')]
 TAG_RX = re.compile(r"<[^>]+>")
 
@@ -264,6 +270,8 @@ if __name__ == "__main__":
     ap.add_argument("--cue-early", action="store_true", help="also accept journal title + volume/page without a year as a cue (pre-1976 text)")
     ap.add_argument("--cue-science", action="store_true",
                     help="with --cue-early: also anchor windows on a journal, society, bulletin or book word without volume or page (CIT_SCIENCE)")
+    ap.add_argument("--cue-modern", action="store_true",
+                    help="also anchor on a quoted title with a year, volume(issue), a page range, or Press/Conference/Symposium... (CIT_MODERN)")
     ap.add_argument("--require-paper-cue", action="store_true",
                     help="walk the ranking and keep only patents with at least one window that looks like a paper citation, until --per-assignee are kept")
     ap.add_argument("--desc-file"); ap.add_argument("--patent-ids")
@@ -273,6 +281,8 @@ if __name__ == "__main__":
     cit = CIT_EARLY if a.cue_early else CIT_IEEE if a.cue_ieee else CIT
     if a.cue_science:
         cit = re.compile(CIT_EARLY.pattern + "|" + CIT_SCIENCE.pattern)
+    if a.cue_modern:
+        cit = re.compile(cit.pattern + "|" + CIT_MODERN.pattern)
     k = 0
     with open(a.output, "w", encoding="utf-8") as out:
         if a.source == "google":

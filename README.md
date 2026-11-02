@@ -17,8 +17,13 @@ behind an NBER i3 Open Data Fellows 2027 proposal.
   patents in the 1900s, 44% in the 1940s, 20% in the 1990s and 46% in the 2020s ([Figure 1](#the-long-run-1900s-to-2020s)).
 - **Context grows, the basis shrinks.** Context only rises from 13% in the 1900s to 33% in the 2000s; basis of the
   invention falls from 16% in the 1900s to 6% in the 2020s.
-- **Sectors and firms differ.** In the 2017+ pilot, 34% of pharma's science citations are the basis of the invention
-  and 57% of software/AI's are methods used ([Figure 4](#what-the-pilots-show)).
+- **Firms differ most by what they make.** Google cites science as a method used in 74% of its science-citing patents;
+  Pfizer's citations turned from methods (53% in 1950-79) to the biology the invention rests on (23% in 2000-26);
+  AT&T, GE, DuPont and IBM mostly mirror their industries ([Figures 7 and 8](#firms-and-fields)).
+- **Young fields look different, but not in a life-cycle way.** Fields observed before their takeoff cite science as
+  the basis in 16% of patents and as a method in 18%, against 6-11% and 28-35% for old fields in the same decade; the
+  contrast is between fields, not within them, and in the 2000s-2020s AI, genetic engineering, quantum computing and
+  lithium batteries use science much like century-old fields ([Figures 9 and 10](#firms-and-fields)).
 
 The roles in the figures: **Basis of the invention**, the finding the invention rests on; **Method used**, a technique
 the inventors carry out; **Prior approach improved on**; **Context only**, the paper frames the problem;
@@ -38,6 +43,35 @@ decades, prior approaches improved on in the 1900s and 1980s, and context only i
 One in-text citation window per patent, about 50 science-citing patents per class and decade; 104 of the 143 cells
 reach 50. The cells that do not, mostly before the 1930s, hold every in-text science citation the sampling frame, the
 window finder and a full-text read could find; their lines are dotted or missing.
+
+## Firms and fields
+
+![Figure 7: how firms use the science they cite](figures/firms_by_role.png)
+
+Every patent of eleven firms with an in-text citation to science, one window per patent, 38,272 science-citing
+patents after repeated window texts (continuations, boilerplate) are counted once. AT&T, General Electric and DuPont
+cite science mainly as a method before 1950 and follow the economy-wide rise of prior approaches improved on in the
+1980s and 1990s. Pfizer moves from methods to the target biology the invention rests on. Google's science is almost
+all methods used (74%, against 44% for its technology class): machine-learning, vision and systems papers, many of
+them its own.
+
+![Figure 8: six firms, 1920s to 2020s](figures/firms_long_run.png)
+
+![Figure 9: technology fields of different ages](figures/fields_by_role.png)
+
+Fourteen fields defined by the first CPC code, up to 60 patents per field and decade, each dated by the year of its
+1,000th US grant. Lasers in the 1960s, genetic engineering and AI in the 1980s and quantum computing in the 1990s
+cite science before their takeoff more often as the basis of the invention and less often as a method than old fields
+do in the same decade; the prior-approach share peaks 40 to 60 years after takeoff and is lowest in fields more than a
+century old.
+
+![Figure 10: science use by the age of a technology field](figures/fields_maturity.png)
+
+The age profile compares fields of different ages within a decade, not a field with its own past: with field fixed
+effects the method and prior-approach gaps vanish, and the basis gap is not significant at other takeoff dates. In
+the 2000s to 2020s the four emerging fields and the seven oldest do not differ detectably (basis 10% and 9%, method
+26% and 28%, prior approach 18% and 14%); the spread between fields within each group is far larger (AI 37% methods,
+quantum computing 10%; pharmaceuticals 26% basis, polymers 3%).
 
 ## What the pilots show
 
@@ -111,6 +145,8 @@ The data files keep short machine labels (`foundation`, `method_or_tool`, `prior
 | Sample | Patents | Assignees / target firms | Windows | Science-citing, de-duplicated | Files |
 | --- | --- | --- | --- | --- | --- |
 | Long-run sample, 11 technology classes, 1900s to 2020s | 8,288 | 4,852 | 8,288 | 6,162 | `pilot/longrun/` |
+| Firm sample, every science-citing patent of 11 firms, 1900s to 2020s | 52,107 | 11 | 52,107 | 38,272 | `pilot/firms/` |
+| Field sample, 14 technology fields, 1900s to 2020s | 5,822 | 2,612 | 5,822 | 5,462 | `pilot/fields/` |
 | Pilot, eight sectors, priority 2017+ | 200 | 127 | 515 | 395 | `pilot/` |
 | Decade sample, three sectors, 1900s to 2020s | 196 | 25 | 420 | 351 | `pilot/decades/` |
 | Worked example | 4 | 4 | 34 | 32 | `examples/demo/` |
@@ -149,6 +185,8 @@ examples/demo/              worked example: four patents, every intermediate fil
 pilot/, pilot/decades/      raw and labeled windows, labels_*.py (source of truth), profiles, summary.md
 pilot/longrun/              long-run sample: raw windows, labels_longrun.jsonl (source of truth), labels_longrun.py,
                             labeled windows, profiles, summary.md, grants_citing_science.csv (Figure 1, panel A)
+pilot/firms/, pilot/fields/ firm and field samples, same files (the firm files gzip-compressed); fields also holds
+                            field_grants_by_year.csv (takeoff dates) and maturity_margins.csv (Figure 10)
 scripts/rebuild_pilot.sh    regenerates every derived file and figure, runs the schema checks
 scripts/make_figures.py     the README figures
 ```
@@ -162,8 +200,19 @@ scripts/make_figures.py     the README figures
   `pilot/decades/labels_decades.py`), blind second pass by claude-opus-5-5 over all 935 windows (function kappa 0.73
   on the pilot and 0.78 on the decade sample; cited document type 0.91 and 0.93). Long-run sample: claude-opus-5-5
   as blind Claude Code subagents on all 8,288 windows, a blind claude-fable-5-1 pass on 3,017 of them (function kappa
-  0.77, cited document type 0.91). Details: `benchmark/results.md`. No human coder has labeled anything yet; two
-  models agreeing is not a human benchmark.
+  0.77, cited document type 0.91). Firm and field samples: claude-opus-5-5 blind subagents on all 57,929 windows; a
+  blind second claude-opus-5-5 pass over every 20th batch (2,820 windows) gives the same function for 92% (kappa
+  0.89) and the same document type for 98% (kappa 0.96), a measure of consistency, not accuracy. Details:
+  `benchmark/results.md`. No human coder has labeled anything yet; two models agreeing is not a human benchmark.
+- **Firm and field samples.** Firms are matched on assignee names (AT&T with Bell Labs and Western Electric, Google
+  with DeepMind); every patent with an in-text Reliance on Science citation to a paper, plus pre-1980 patents whose
+  text carries a strict citation cue, keeps one window by the rules in `pilot/firms/labels_firms.py`. A window that
+  repeats the text of an earlier patent of the same firm is flagged and left out of the figures (14-57% of a firm's
+  patents, continuations and templates). Fields are first-CPC-code groups (`local` scripts, listed in the docstring of
+  `pilot/fields/labels_fields.py`); takeoff is the year of the field's 1,000th US grant from Google Patents Public
+  Data. The pooled long-run benchmark weights the 11 classes equally, so single-industry firms should be read against
+  their own class in `pilot/longrun/profiles_sector_decade.csv`. Generic standard citations (IEEE 802.11, IEEE 754,
+  the IEEE dictionary) are labeled inconsistently between method and context and need a codebook rule.
 - **Long-run sample.** Technology classes follow Kelly, Papanikolaou, Seru and Taddy (2021), assigned from the first
   CPC code. Per class and decade, patents come in hash order from a BigQuery table of every US grant 1900-2026 that
   Reliance on Science links to a paper or, before 1976, whose text matches a citation cue; each keeps one in-text
@@ -191,6 +240,8 @@ scripts/make_figures.py     the README figures
 - [x] Decade sample: three sectors, every decade 1900s-2020s (nine firms plus period peers); sector, decade and firm profiles (Oct-Nov 2026)
 - [x] Blind second coding of every pilot window by a second model (claude-opus-5-5): `benchmark/results.md` (Nov 2026)
 - [x] Long-run sample: 11 technology classes x 13 decades, 8,288 patents, labeled by claude-opus-5-5 (Nov 2026)
+- [x] Firm sample (every science-citing patent of 11 firms, 52,107) and field-age sample (14 fields, 5,822), labeled
+      by claude-opus-5-5 with a test-retest pass (Nov 2026)
 - [ ] Double-code the pilots with human coders; open-weight model comparison; label-set comparison (`docs/labels.md`)
 - [ ] 2,000-window benchmark stratified by sector, citation format and decade; codebook
 - [ ] Document-type and function passes over every in-text citation to science in US patents, 1900-2026: Reliance on

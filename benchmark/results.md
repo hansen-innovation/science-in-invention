@@ -232,3 +232,136 @@ most common disagreements:
   paper -> software_or_database: 1
   standards_doc -> none: 1
 ```
+
+## pilot/firms/citation_windows_labeled.jsonl
+
+First coder: `claude-opus-5-5`. Second coder: `claude-opus-5-5` (claude-code-subagent, guide version `276adff408`). 2585 of 52107 windows coded by both.
+
+### function
+
+```
+n=2585 accuracy=0.916 kappa=0.891
+label                             n_ref   prec    rec
+background_context                  719   0.89   0.90
+data_or_materials_source            119   0.86   0.85
+definitional_boilerplate            112   0.93   0.91
+foundation                          180   0.86   0.86
+incorporated_reference_list          87   0.93   0.93
+method_or_tool                      878   0.94   0.93
+own_family_continuation              24   0.96   0.92
+prior_art_distinguished             466   0.94   0.94
+
+most common disagreements:
+  method_or_tool -> background_context: 33
+  background_context -> method_or_tool: 23
+  background_context -> prior_art_distinguished: 22
+  prior_art_distinguished -> background_context: 22
+  background_context -> foundation: 18
+  foundation -> background_context: 15
+  method_or_tool -> data_or_materials_source: 13
+  data_or_materials_source -> method_or_tool: 10
+  foundation -> method_or_tool: 6
+  definitional_boilerplate -> method_or_tool: 6
+  data_or_materials_source -> background_context: 5
+  method_or_tool -> foundation: 5
+  incorporated_reference_list -> background_context: 5
+  method_or_tool -> definitional_boilerplate: 4
+  background_context -> definitional_boilerplate: 3
+  foundation -> prior_art_distinguished: 3
+  definitional_boilerplate -> background_context: 3
+  background_context -> incorporated_reference_list: 3
+  method_or_tool -> prior_art_distinguished: 3
+  prior_art_distinguished -> foundation: 2
+  foundation -> data_or_materials_source: 2
+  own_family_continuation -> method_or_tool: 1
+  definitional_boilerplate -> data_or_materials_source: 1
+  method_or_tool -> incorporated_reference_list: 1
+  data_or_materials_source -> definitional_boilerplate: 1
+  data_or_materials_source -> own_family_continuation: 1
+  prior_art_distinguished -> incorporated_reference_list: 1
+  data_or_materials_source -> incorporated_reference_list: 1
+  own_family_continuation -> background_context: 1
+  incorporated_reference_list -> method_or_tool: 1
+  prior_art_distinguished -> method_or_tool: 1
+```
+
+### cited_doc_type
+
+```
+n=2585 accuracy=0.979 kappa=0.958
+label                             n_ref   prec    rec
+book                                393   0.98   0.98
+mixed                               209   0.91   0.89
+none                                 77   0.95   0.95
+paper                              1764   0.99   0.99
+patent                               60   0.98   1.00
+software_or_database                 13   0.80   0.92
+standards_doc                        69   0.96   0.93
+
+most common disagreements:
+  mixed -> paper: 15
+  paper -> mixed: 13
+  mixed -> book: 6
+  book -> mixed: 5
+  standards_doc -> none: 4
+  none -> standards_doc: 3
+  paper -> book: 2
+  mixed -> patent: 1
+  software_or_database -> paper: 1
+  mixed -> software_or_database: 1
+  none -> software_or_database: 1
+  book -> paper: 1
+  standards_doc -> mixed: 1
+  paper -> software_or_database: 1
+```
+
+## pilot/fields/citation_windows_labeled.jsonl
+
+First coder: `claude-opus-5-5`. Second coder: `claude-opus-5-5` (claude-code-subagent, guide version `276adff408`). 235 of 5822 windows coded by both.
+
+### function
+
+```
+n=235 accuracy=0.906 kappa=0.881
+label                             n_ref   prec    rec
+background_context                   59   0.79   0.92
+data_or_materials_source             10   1.00   0.80
+definitional_boilerplate              8   0.80   1.00
+foundation                           19   0.89   0.84
+incorporated_reference_list          20   0.95   0.95
+method_or_tool                       68   0.98   0.93
+prior_art_distinguished              51   0.96   0.88
+
+most common disagreements:
+  prior_art_distinguished -> background_context: 6
+  method_or_tool -> background_context: 4
+  background_context -> prior_art_distinguished: 2
+  foundation -> background_context: 2
+  method_or_tool -> foundation: 1
+  background_context -> foundation: 1
+  incorporated_reference_list -> background_context: 1
+  data_or_materials_source -> definitional_boilerplate: 1
+  background_context -> incorporated_reference_list: 1
+  background_context -> definitional_boilerplate: 1
+  data_or_materials_source -> background_context: 1
+  foundation -> method_or_tool: 1
+```
+
+### cited_doc_type
+
+```
+n=235 accuracy=0.979 kappa=0.948
+label                             n_ref   prec    rec
+book                                 35   1.00   0.91
+mixed                                15   0.83   1.00
+none                                  4   1.00   1.00
+paper                               176   0.99   0.99
+software_or_database                  1   1.00   1.00
+standards_doc                         4   1.00   0.75
+
+most common disagreements:
+  book -> paper: 2
+  paper -> mixed: 1
+  standards_doc -> mixed: 1
+  book -> mixed: 1
+```

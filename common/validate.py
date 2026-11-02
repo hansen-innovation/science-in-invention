@@ -58,7 +58,9 @@ def schema_check(schema_path, input_path):
     schema = json.load(open(schema_path, encoding="utf-8"))
     props, req = schema["properties"], schema.get("required", [])
     bad = 0
-    for n, line in enumerate(open(input_path, encoding="utf-8"), 1):
+    import gzip
+    opened = gzip.open(input_path, "rt", encoding="utf-8") if str(input_path).endswith(".gz") else open(input_path, encoding="utf-8")
+    for n, line in enumerate(opened, 1):
         r = json.loads(line)
         for k in req:
             if k not in r:

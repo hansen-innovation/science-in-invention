@@ -11,7 +11,7 @@ paper, book, standards document or mixed (the document-type filter); report coun
 small cells are visible. In the full build the unit is the PatentsView disambiguated assignee id and
 the profile is joined to firm identifiers through docs/firm_linkage.md.
 """
-import argparse, collections, csv, json, pathlib, sys
+import argparse, collections, csv, gzip, json, pathlib, sys
 
 FUNCS = ["foundation", "method_or_tool", "prior_art_distinguished", "data_or_materials_source",
          "background_context", "definitional_boilerplate", "incorporated_reference_list", "own_family_continuation"]
@@ -75,9 +75,10 @@ def main():
     ap.add_argument("--by", default="assignee", choices=["assignee", "sector", "year", "decade", "sector_decade"])
     ap.add_argument("--min-windows", type=int, default=1)
     a = ap.parse_args()
-    rows = [json.loads(l) for l in open(a.labeled, encoding="utf-8")]
+    with (gzip.open(a.labeled, "rt", encoding="utf-8") if a.labeled.endswith(".gz") else open(a.labeled, encoding="utf-8")) as f:
+        rows = [json.loads(l) for l in f]
     table = [r for r in aggregate(rows, a.by, load_sector_map()) if r["n_windows"] >= a.min_windows]
-    dst = pathlib.Path(a.labeled).parent / f"profiles_{a.by}.csv"
+    dst = pathlib.Path(a.labeled).parent / f"profiles_{a.by}.csv"  # next to the labeled file
     with open(dst, "w", newline="", encoding="utf-8") as f:
         w = csv.DictWriter(f, fieldnames=list(table[0].keys())); w.writeheader(); w.writerows(table)
     print(f"{len(table)} rows -> {dst}")
