@@ -9,6 +9,11 @@ for by in assignee sector year; do "$PY" aggregate.py pilot/citation_windows_lab
 # decade sample (nine firms, three sectors, 1980s-2010s)
 (cd pilot/decades && "$PY" labels_decades.py > /dev/null)
 for by in sector_decade sector decade; do "$PY" aggregate.py pilot/decades/citation_windows_labeled.jsonl --by $by > /dev/null; done
+# long-run sample (Kelly et al. technology classes x decades, 1900s-2020s), once its labels exist
+if [ -f pilot/longrun/labels_longrun.jsonl ]; then
+  (cd pilot/longrun && "$PY" labels_longrun.py > /dev/null)
+  for by in sector_decade sector decade; do "$PY" aggregate.py pilot/longrun/citation_windows_labeled.jsonl --by $by > /dev/null; done
+fi
 # README figures from the profiles
 "$PY" scripts/make_figures.py
 # worked example (offline stages on saved paragraphs + saved labels)
@@ -16,3 +21,4 @@ for by in sector_decade sector decade; do "$PY" aggregate.py pilot/decades/citat
 "$PY" common/validate.py schema_check --schema schema.json --input examples/demo/labeled.jsonl
 "$PY" common/validate.py schema_check --schema schema.json --input pilot/citation_windows_labeled.jsonl
 "$PY" common/validate.py schema_check --schema schema.json --input pilot/decades/citation_windows_labeled.jsonl
+[ -f pilot/longrun/citation_windows_labeled.jsonl ] && "$PY" common/validate.py schema_check --schema schema.json --input pilot/longrun/citation_windows_labeled.jsonl || true

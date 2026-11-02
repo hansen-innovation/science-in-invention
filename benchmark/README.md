@@ -5,10 +5,15 @@ should use an open-weight model so that anyone can re-run the pipeline; a closed
 
 ## Status
 
-- Pilot labels in `../pilot/citation_windows_labeled.jsonl` were produced with one closed model
-  (claude-fable-5-1) in a single pass with written rationales.
-- The open-model comparison below is the first task of the benchmark phase. Results are recorded in
-  `results.md` as they are run; until then the table there is empty by design.
+- Pilot labels in `../pilot/citation_windows_labeled.jsonl` and `../pilot/decades/citation_windows_labeled.jsonl`
+  were produced with one closed model (claude-fable-5-1) in a single pass with written rationales.
+- Second coding by a different closed model (claude-opus-5-5, Nov 1, 2026): all 776 windows were re-labeled blind
+  by Opus subagents inside Claude Code with the same guide and schema (`subagent_batches.py`; no API key, no
+  access to the first-pass labels). Agreement with the first pass is in `results.md` (function kappa about 0.73,
+  cited-document-type kappa about 0.91; the main disagreement is Opus choosing `background_context` where Fable
+  chose `foundation`, `method_or_tool` or `prior_art_distinguished`). The Opus labels sit in
+  `labels_claude-opus-5-5.jsonl` (gitignored) and never replace the first-pass labels.
+- The open-weight comparison (`run_benchmark.sh`) has not been run; `results.md` says so until it has.
 
 ## How to run
 

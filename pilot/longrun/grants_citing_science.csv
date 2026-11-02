@@ -1,0 +1,144 @@
+class,decade,n_grants,n_grants_citing_paper
+Chemistry and metallurgy,1900s,13557,1
+Chemistry and metallurgy,1910s,15905,26
+Chemistry and metallurgy,1920s,22718,60
+Chemistry and metallurgy,1930s,44839,349
+Chemistry and metallurgy,1940s,40505,1505
+Chemistry and metallurgy,1950s,57326,6728
+Chemistry and metallurgy,1960s,93958,15026
+Chemistry and metallurgy,1970s,129501,25860
+Chemistry and metallurgy,1980s,121739,37459
+Chemistry and metallurgy,1990s,165748,81494
+Chemistry and metallurgy,2000s,173922,108779
+Chemistry and metallurgy,2010s,236712,165293
+Chemistry and metallurgy,2020s,153906,94112
+Electricity and electronics,1900s,14886,5
+Electricity and electronics,1910s,21341,12
+Electricity and electronics,1920s,30502,122
+Electricity and electronics,1930s,43184,270
+Electricity and electronics,1940s,35789,543
+Electricity and electronics,1950s,50239,2607
+Electricity and electronics,1960s,70888,5717
+Electricity and electronics,1970s,82813,7910
+Electricity and electronics,1980s,88737,13148
+Electricity and electronics,1990s,156123,33422
+Electricity and electronics,2000s,318842,80712
+Electricity and electronics,2010s,708621,204497
+Electricity and electronics,2020s,507036,120845
+Instruments and information,1900s,20697,2
+Instruments and information,1910s,28127,16
+Instruments and information,1920s,30140,47
+Instruments and information,1930s,38132,131
+Instruments and information,1940s,30324,366
+Instruments and information,1950s,45103,2193
+Instruments and information,1960s,72516,6247
+Instruments and information,1970s,103150,10886
+Instruments and information,1980s,118776,20914
+Instruments and information,1990s,234248,62578
+Instruments and information,2000s,433003,131536
+Instruments and information,2010s,829531,292763
+Instruments and information,2020s,659144,224979
+Health and entertainment,1900s,11714,0
+Health and entertainment,1910s,12886,4
+Health and entertainment,1920s,15722,8
+Health and entertainment,1930s,13907,30
+Health and entertainment,1940s,10111,113
+Health and entertainment,1950s,15841,589
+Health and entertainment,1960s,20222,1571
+Health and entertainment,1970s,35208,3907
+Health and entertainment,1980s,46878,8678
+Health and entertainment,1990s,101470,29047
+Health and entertainment,2000s,127283,47154
+Health and entertainment,2010s,267661,126933
+Health and entertainment,2020s,217268,91328
+Manufacturing process,1900s,61929,9
+Manufacturing process,1910s,71727,21
+Manufacturing process,1920s,78228,58
+Manufacturing process,1930s,82205,123
+Manufacturing process,1940s,57521,298
+Manufacturing process,1950s,73264,1336
+Manufacturing process,1960s,90070,2993
+Manufacturing process,1970s,106868,4517
+Manufacturing process,1980s,100742,6275
+Manufacturing process,1990s,131554,14103
+Manufacturing process,2000s,143740,21798
+Manufacturing process,2010s,177983,36424
+Manufacturing process,2020s,129938,26042
+Transportation,1900s,55109,4
+Transportation,1910s,71877,11
+Transportation,1920s,75240,31
+Transportation,1930s,63772,35
+Transportation,1940s,36499,70
+Transportation,1950s,50317,386
+Transportation,1960s,63403,781
+Transportation,1970s,68387,905
+Transportation,1980s,61480,909
+Transportation,1990s,87063,2195
+Transportation,2000s,104177,3895
+Transportation,2010s,157637,9791
+Transportation,2020s,141915,10579
+"Engineering, construction, mining",1900s,59620,1
+"Engineering, construction, mining",1910s,77375,14
+"Engineering, construction, mining",1920s,73414,33
+"Engineering, construction, mining",1930s,71976,30
+"Engineering, construction, mining",1940s,43698,96
+"Engineering, construction, mining",1950s,60512,550
+"Engineering, construction, mining",1960s,79009,1304
+"Engineering, construction, mining",1970s,84054,1667
+"Engineering, construction, mining",1980s,86409,2461
+"Engineering, construction, mining",1990s,100451,4586
+"Engineering, construction, mining",2000s,122937,7285
+"Engineering, construction, mining",2010s,189523,16666
+"Engineering, construction, mining",2020s,135790,11829
+"Lighting, heating, nuclear",1900s,16469,0
+"Lighting, heating, nuclear",1910s,19450,2
+"Lighting, heating, nuclear",1920s,24404,8
+"Lighting, heating, nuclear",1930s,25763,11
+"Lighting, heating, nuclear",1940s,13917,37
+"Lighting, heating, nuclear",1950s,16411,335
+"Lighting, heating, nuclear",1960s,20535,846
+"Lighting, heating, nuclear",1970s,20466,764
+"Lighting, heating, nuclear",1980s,23764,1433
+"Lighting, heating, nuclear",1990s,24746,2009
+"Lighting, heating, nuclear",2000s,25773,2226
+"Lighting, heating, nuclear",2010s,46986,5533
+"Lighting, heating, nuclear",2020s,39079,4232
+Agriculture and food,1900s,20101,0
+Agriculture and food,1910s,23836,3
+Agriculture and food,1920s,21951,13
+Agriculture and food,1930s,20135,26
+Agriculture and food,1940s,12790,107
+Agriculture and food,1950s,22909,649
+Agriculture and food,1960s,22208,1056
+Agriculture and food,1970s,24770,1659
+Agriculture and food,1980s,23031,2386
+Agriculture and food,1990s,28886,5683
+Agriculture and food,2000s,28947,8304
+Agriculture and food,2010s,45385,20231
+Agriculture and food,2020s,40814,14103
+Consumer goods,1900s,27001,1
+Consumer goods,1910s,33719,11
+Consumer goods,1920s,36380,14
+Consumer goods,1930s,34308,14
+Consumer goods,1940s,20934,27
+Consumer goods,1950s,28325,163
+Consumer goods,1960s,24275,152
+Consumer goods,1970s,20875,175
+Consumer goods,1980s,19943,155
+Consumer goods,1990s,32722,538
+Consumer goods,2000s,35216,780
+Consumer goods,2010s,48091,1910
+Consumer goods,2020s,39861,1791
+Weapons,1900s,3160,0
+Weapons,1910s,4394,1
+Weapons,1920s,3627,4
+Weapons,1930s,2801,2
+Weapons,1940s,3887,9
+Weapons,1950s,4061,47
+Weapons,1960s,6206,124
+Weapons,1970s,6042,114
+Weapons,1980s,5690,188
+Weapons,1990s,7130,324
+Weapons,2000s,6871,407
+Weapons,2010s,13391,1020
+Weapons,2020s,8980,528

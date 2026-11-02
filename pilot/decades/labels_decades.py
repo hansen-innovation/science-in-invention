@@ -1,8 +1,8 @@
-"""Labels for the decade sample: 261 citation windows from 94 patents of nine firms in three sectors
-(pharma: Pfizer, Eli Lilly, Bristol-Myers; chemicals: Dow Chemical, Du Pont, Air Products;
-electrical/electronics: IBM, General Electric, Texas Instruments), up to three windows per patent, patents with
-priority and grant in the same decade (1980s, 1990s, 2000s, 2010s).
+"""Labels for the decade sample: citation windows from granted US patents of three sectors (pharma, chemicals,
+electrical/electronics) in every decade from the 1900s to the 2020s, up to three windows per patent.
 
+Core cells, 1980s-2010s (D001-D261, 94 patents of nine firms: Pfizer, Eli Lilly, Bristol-Myers; Dow Chemical,
+Du Pont, Air Products; IBM, General Electric, Texas Instruments; priority and grant in the same decade).
 Two draws, both from Google Patents with ../../fetch_patents.py on Oct 31, 2026 (the `draw` field of each row):
   "et al" (D001-D195): the first two granted US patents per firm and decade in Google's ranking that contain
     "et al". For the electronics firms this draw cited almost only patents (the 1990s cell had no paper
@@ -11,10 +11,28 @@ Two draws, both from Google Patents with ../../fetch_patents.py on Oct 31, 2026 
     per firm and decade with at least one window that looks like a paper citation
     (--query IEEE --cue-ieee --require-paper-cue; "IEEE" added as a cue in the window finder). The electronics
     cells therefore pool both draws. US7570182B2 (TI, 2000s) was already in the first draw and was not added again.
-Labels were produced the same day by claude-fable-5-1 in an interactive session with
-../../prompts/label_citation_function.md; each entry is window_id -> (cited_doc_type, function, confidence,
-note). Run `python labels_decades.py` to write citation_windows_labeled.jsonl and summary.md. No second coder
-has labeled this set.
+
+Extension cells, 1900s-1970s and 2020s (D262-D420, 102 patents, draw "bigquery", Nov 1, 2026). Google Patents
+blocks scraping after a few dozen queries, so these cells were drawn from the sampling frame of patents that
+Reliance on Science v66 (Marx and Fuegi) lists as citing science in the body text, with assignee names and
+full text from Google Patents Public Data on BigQuery (one query; local/decades_1900_2026/ in the working copy
+holds frame.py, bq_draw.py, select_cells.py, merge_decades.py). Per sector and decade, up to three firms, taking
+the nine firms above where they have such patents and period peers otherwise (Merck, Upjohn, Parke Davis;
+Eastman Kodak, Monsanto, Union Carbide; Bell Telephone Laboratories, Western Electric, AT&T), the first two
+patents per firm in FARM_FINGERPRINT order of the publication number with at least one window that looks like a
+paper citation (--cue-early also accepts journal, volume and page without a year, as old citations are written).
+The 1900s and 1910s hold every in-text citing grant in the frame whose assignee or CPC falls in the three
+sectors; the frame has only about 145 such grants for those two decades and most of them are false positives of
+the citation matching, so those cells are thin (one to three patents). Patents granted 1947-1975 print the front page's "References Cited" list at the end of the specification; the
+window finder cuts that block (fetch_patents.cut_references_cited) so that only citations in the text count.
+Window-finder recall on the frame's in-text citing patents after the cut: 9% (1900s), 6% (1910s), 46% (1920s), 33% (1930s), 26% (1940s), 26% (1950s), 35% (1960s), 50% (1970s), 79% (2020s),
+as computed from select_cells.py's input; OCR text is the main loss before the 1950s.
+
+Labels D001-D261 were produced on Oct 31, 2026 by claude-fable-5-1 in an interactive session with
+../../prompts/label_citation_function.md; D262-D420 on Nov 1, 2026 by claude-fable-5-1 subagents inside Claude
+Code (blind batches of 25 windows, same guide and schema). Each entry is window_id -> (cited_doc_type, function,
+confidence, note). Run `python labels_decades.py` to write citation_windows_labeled.jsonl and summary.md. A blind
+second coding by claude-opus-5-5 is in ../../benchmark/results.md; it never replaces these labels.
 """
 import collections, json, pathlib, re, sys
 
@@ -333,11 +351,296 @@ L = {
  "D259": ("standards_doc", "method_or_tool", "high", "IEEE 1901.2 legacy preamble and frame format kept and extended by the MIMO frame"),
  "D260": ("standards_doc", "method_or_tool", "medium", "Legacy IEEE 1901.2 PHY frame structure is the format the MIMO frame extends"),
  "D261": ("patent", "own_family_continuation", "medium", "Commonly assigned US 8,265,197 incorporated for the power distribution system component"),
+ # ---- pharma 1910s (bigquery draw, see docstring) ----
+ # KUNHEIM AND CO US967775A (Pyrophoric metallic substance.)
+ "D262": ("book", "definitional_boilerplate", "medium", "A 1903 monograph is cited with 'See' to support the definition of which elements count as rare-earth metals, a scope definition rather than a finding the invention builds on."),
+ # ---- pharma 1920s (bigquery draw, see docstring) ----
+ # PFIZER CHARLES & CO US1690128A (Process for preparing cinchophen)
+ "D263": ("paper", "prior_art_distinguished", "medium", "Doebner's cinchophen synthesis is described with the skeptical 'purport to obtain' alongside a later patent method, reading as a review of earlier cinchophen routes the invention improves on, though the contrast is not stated in the window."),
+ # ---- pharma 1930s (bigquery draw, see docstring) ----
+ # MERCK & CO INC US1957461A (Acetyl-choline salts, dimethylamino-ethyl acetate, and proce)
+ "D264": ("paper", "background_context", "medium", "The first citations document that acetylcholine salts are known to occur in natural products, framing the field; the later synthesis citations are then faulted for not isolating products, but the lead citation is context."),
+ # MERCK & CO INC US2142140A (Salts of beta-alkylated-choline-alkyl-ethers and process for)
+ "D265": ("paper", "prior_art_distinguished", "medium", "The invention's choline alkyl ether salts are said to be undescribed, while Dale and Ewins are cited for the related compounds where R is hydrogen, distinguishing the new compounds from the known ones."),
+ # PFIZER CHARLES & CO US2165151A (Production of ascorbic acid and its isomers)
+ "D266": ("paper", "background_context", "medium", "Maurer and Schiedt and Ohle are cited as a literature review of known conversions of 2-ketoaldonic esters to ascorbic acids ('It is known in the art'), with no contrast or reliance stated in the window; a Swiss patent follows in a separate sentence."),
+ # UPJOHN CO US2120405A (Method of preparing hormones)
+ "D267": ("mixed", "foundation", "medium", "The paper identifying the gonadotropic hormone in pregnant mares' serum is cited in the same sentence as the applicant's own copending application, and the invention concerns purifying these very substances, so the finding is what the invention rests on."),
+ # ---- pharma 1940s (bigquery draw, see docstring) ----
+ # PARKE DAVIS & CO US2226627A (Sterols of the male sex hormone type)
+ "D268": ("paper", "method_or_tool", "high", "The starting mixture of pregnanediols is obtained by the solvent distribution method of Doisy et al., so the cited paper supplies a procedure used in the example."),
+ # SQUIBB & SONS INC US2357364A (Keto derviatives of 17-ethynyl-17-hydroxy-perhydrocyclopente)
+ "D269": ("book", "definitional_boilerplate", "high", "The monograph is cited only to fix the nomenclature and numbering system used in the description and claims."),
+ # UPJOHN CO US2483999A (Nu-(beta-pyrrolidinoethyl)-phenothiazine)
+ "D270": ("paper", "background_context", "medium", "The garbled OCR window points to published articles describing the antihistaminic results of the compounds as further reading rather than stating a role in the invention."),
+ # ---- pharma 1950s (bigquery draw, see docstring) ----
+ # BRISTOL COMPANY US2607223A (Apparatus for measuring rate of fluid flow)
+ "D271": ("mixed", "background_context", "medium", "Faraday's book and Williams's paper are cited as the history of the magnetic-field principle, with the Kolin patent then named as the most advanced prior art, so the window frames the problem historically."),
+ # BRISTOL LAB INC US2886595A (Tetracycline recovery)
+ "D272": ("paper", "background_context", "medium", "The JACS article is cited as the place where the properties of tetracycline, with which the invention's substance is identified, are described, a pointer for more information."),
+ # PARKE DAVIS & CO US2499290A (Process for preparing penicillin)
+ "D273": ("paper", "method_or_tool", "high", "The penicillin solution is assayed by the cup method as described by Abraham et al. and Florey et al., so the papers supply the assay procedure and unit definition."),
+ "D274": ("paper", "incorporated_reference_list", "medium", "This is the references-of-record list at the end of the patent, which gives the references without any stated role."),
+ # PARKE DAVIS & CO US2820781A (Process for producing amides)
+ "D275": ("paper", "method_or_tool", "high", "The ketene imine starting materials can be prepared by the methods set forth in the cited JACS articles, so they supply a preparation procedure."),
+ # PFIZER & CO C US2637724A (Methylolstreptomycin)
+ "D276": ("paper", "method_or_tool", "high", "Combined formaldehyde was 'assayed by the quantitative procedure of MacFayden' and streptomycin by the maltol assay of Boxer et al., so the cited papers supply the analytical procedures used in the examples."),
+ "D277": ("paper", "method_or_tool", "high", "The product was 'analyzed by the method used previously (MacFayden ...)', so the cited paper supplies the assay procedure applied in the example."),
+ # PFIZER & CO C US2771396A (Preparation of diaminopimelic acid and lysine)
+ "D278": ("paper", "foundation", "medium", "The cited findings that lysine auxotrophs accumulate diaminopimelic acid and that a bacterial enzyme decarboxylates it to lysine are the biochemical basis a lysine-production process would exploit, although the window is truncated."),
+ # ---- pharma 1960s (bigquery draw, see docstring) ----
+ # BRISTOL MYERS CO US3322749A (Derivatives of penicillanic acid and cephalosporanic acid)
+ "D279": ("paper", "method_or_tool", "high", "The carbodiimide reagent of Sheehan and Hess is listed as an equivalent acylating technique that the process may use."),
+ "D280": ("paper", "method_or_tool", "high", "The acetylesterase treatment is carried out according to the procedure of Jansen et al., so the paper supplies the method used in the example."),
+ # BRISTOL MYERS CO US3452039A (Certain 5-tetrazolyl benzothiophene compounds)
+ "D281": ("paper", "method_or_tool", "high", "The general preparation process used for the intermediate acids is stated to be the one described by the cited papers."),
+ "D282": ("paper", "method_or_tool", "high", "The preparation of rhodanine, a starting material, is stated to be the procedure described by Campbell et al."),
+ "D283": ("paper", "method_or_tool", "high", "The example prepares the rhodanine intermediate by the cited route and then explicitly follows Campaigne's published method, so the papers supply synthesis procedures the invention uses."),
+ # MERCK & CO INC US3321530A (3, 4-dihydro-2, 5-dimethoxynaphthalene)
+ "D284": ("paper", "method_or_tool", "medium", "The first citation (OCR-split 'I. W. Cornforth et al.') is given as the procedure for preparing starting material (II) that the patent's preparations rely on, while the second, interleaved citation (Jacques 1953) is a prior method called undesirable; the first citation's role is a method used."),
+ "D285": ("paper", "method_or_tool", "high", "The alkylation step is carried out 'by substantially the same procedure described by Cornforth et al.', so the cited paper supplies a synthesis procedure the example uses."),
+ "D286": ("paper", "method_or_tool", "high", "The alkylation is performed 'by substantially the same procedure described by Cornforth et al.', so the cited paper provides the synthesis procedure used in the example."),
+ # PFIZER & CO C US3232835A (2-chloro prednisones and the 9alpha-fluoro derivatives there)
+ "D287": ("mixed", "method_or_tool", "high", "A patent and a journal paper are cited for the same point as the procedures by which the 11-hydroxyl blocking step of the process is accomplished."),
+ "D288": ("paper", "method_or_tool", "high", "The 16-hydroxyl derivatives are prepared with osmium tetroxide 'in accordance with the method described by' the cited paper."),
+ # PFIZER & CO C US3349124A (Oral antidiabetic agent)
+ "D289": ("paper", "method_or_tool", "high", "The blood glucose assay used to test the compounds in dogs is the micro method of the cited paper."),
+ # ---- pharma 1970s (bigquery draw, see docstring) ----
+ # BRISTOL MYERS CO US3517024A (Anilinoalkyltetrazoles)
+ "D290": ("mixed", "method_or_tool", "high", "Patents and journal papers are cited together as procedures of which 'use may be made' for the azide reaction step of the process."),
+ # BRISTOL MYERS CO US3814755A (7-(omikron-aminomethylphenylacetamido)-3-(tetrazolo(4,5-b)py)
+ "D291": ("mixed", "background_context", "high", "Book chapters, conference papers and 'two excellent recent reviews' are surveyed as a literature overview of cephalosporins without being relied on or distinguished."),
+ "D292": ("paper", "incorporated_reference_list", "low", "A full bibliographic entry with no surrounding text, read as a references-cited list item without a stated role."),
+ "D293": ("paper", "incorporated_reference_list", "low", "A full bibliographic entry with no surrounding text, read as a references-cited list item without a stated role."),
+ # LILLY CO ELI US3890377A (3-Substituted phenylalkanohydroxamic acids)
+ "D294": ("paper", "method_or_tool", "high", "The analgesic screening test used to demonstrate the activity of the compounds is a method similar to that reported in the cited paper."),
+ # LILLY CO ELI US3927212A (Method for alleviating gastric mucosal bleeding)
+ "D295": ("paper", "background_context", "medium", "Bromer et al. is cited for the established amino acid sequence of glucagon as background on the known hormone before the invention's new use in gastric bleeding is introduced."),
+ "D296": ("paper", "method_or_tool", "high", "Aminopyrine is determined using the extraction procedure described by Jacobson et al. with a modification from Lin et al., so the papers supply the measurement method."),
+ "D297": ("paper", "method_or_tool", "high", "Hemoglobin was measured 'in accordance with' the cited colorimetric method, so the paper supplies the assay protocol used in the experiment."),
+ # PFIZER US3580921A (Heterocyclic mesoionic compounds)
+ "D298": ("paper", "prior_art_distinguished", "high", "The paper is named as 'the closest prior art' teaching particular compounds from which the present compounds are distinguished."),
+ "D299": ("paper", "method_or_tool", "high", "The diazotized aniline is treated with mercaptoacetic acid 'in accordance with the general procedure of' the cited paper in the process for preparing the compounds."),
+ "D300": ("paper", "method_or_tool", "medium", "The intermediate arylazothioacetic acids are prepared by a slight modification of the general procedure of Duffin et al., so the cited work supplies a synthesis procedure the invention adapts."),
+ # PFIZER US3702849A (4-(isoquinolin-1-yl) piperazine-1-carboxylic acid esters)
+ "D301": ("paper", "method_or_tool", "high", "The 4-chloro-6,7-substituted quinoline intermediates are prepared by the method given by Riegel et al., a synthesis procedure the invention uses."),
+ "D302": ("paper", "method_or_tool", "high", "The isoquinoline intermediates are prepared by a method derived from that of Anderson et al., a synthesis procedure the invention adapts."),
+ "D303": ("paper", "method_or_tool", "high", "In the example the starting 4-chloro-6,7-dimethoxyquinoline is prepared by the general methods of Riegel et al., so the cited work supplies a synthesis procedure used in the invention."),
+ # ---- pharma 2020s (bigquery draw, see docstring) ----
+ # BRISTOL MYERS SQUIBB CO US11884650B2 (Substituted heterocyclic compounds)
+ "D304": ("paper", "foundation", "medium", "The citation supports the mechanism that IL-23 signalling through IL-23R/IL-12Rbeta1 sustains pathogenic Th17 cells, the biological pathway the invention is built on."),
+ "D305": ("paper", "foundation", "medium", "The knockout findings that p40-, p19- or IL-23R-deficient mice are protected from autoimmune disease are the target-validation evidence on which the invention's rationale rests."),
+ "D306": ("paper", "foundation", "medium", "The clinical findings of elevated p40/p19 expression and Th17 cells in human disease lesions are the human evidence linking the target pathway to disease on which the invention relies."),
+ # BRISTOL MYERS SQUIBB CO US12110290B2 (Triazolopyridinyl compounds as kinase inhibitors)
+ "D307": ("paper", "background_context", "medium", "The citation supports a general description of necrosis versus apoptosis that frames the field before the window turns to regulated necrosis via RIPKs."),
+ "D308": ("paper", "foundation", "medium", "The cited papers establish that necroptosis signalling depends on RIPK1 and RIPK3 kinase activity, the mechanism the invention exploits."),
+ "D309": ("paper", "background_context", "medium", "The string of citations documents the diseases linked to the pathway, a literature overview that frames the therapeutic relevance without being relied on or distinguished."),
+ # LILLY CO ELI US11970485B2 (RET kinase inhibitors)
+ "D310": ("book", "definitional_boilerplate", "medium", "The standard statement that pharmaceutically acceptable salts and their preparation are well known in the art, with the usual Stahl handbook reference, is boilerplate copied across patents; the window is truncated."),
+ "D311": ("mixed", "definitional_boilerplate", "medium", "The window is the tail of the standard pharmaceutically acceptable salts boilerplate citing the Stahl handbook and the Berge 1977 paper together."),
+ "D312": ("book", "definitional_boilerplate", "high", "The statement that pharmaceutical compositions and their preparation are well known in the art, citing Remington, is standard formulation boilerplate."),
+ # LILLY CO ELI US12351591B2 (KRas inhibitors)
+ "D313": ("paper", "background_context", "low", "The window holds only a citation fragment to a review on RAS as a drug target with no sentence stating its role, so it is read as background literature on the target."),
+ "D314": ("mixed", "definitional_boilerplate", "high", "The “as used herein” definition of pharmaceutically acceptable salt with the Stahl handbook and Berge 1977 references is standard boilerplate copied across patents."),
+ "D315": ("book", "definitional_boilerplate", "high", "The definition of pharmaceutically acceptable carriers with the Remington reference for compositions and their preparation is standard formulation boilerplate."),
+ # PFIZER US11643412B2 (Melanocortin 4 receptor antagonists and uses thereof)
+ "D316": ("mixed", "background_context", "medium", "A patent and a review are cited together with “see e.g.” for an overview of melanocortin receptor expression patterns, general context that frames the target family."),
+ "D317": ("paper", "background_context", "medium", "The citation supports a general description of MC4R as a GPCR and its brain expression, characterizing the target without stating a mechanism the invention exploits; the window is truncated."),
+ "D318": ("paper", "foundation", "medium", "The cited studies establish that MC4R activation by alpha-MSH regulates body weight, the mechanism the invention rests on; the leading Gantz citation is cut off at the window start."),
+ # PFIZER US12447207B2 (Human cytomegalovirus gB polypeptide)
+ "D319": ("paper", "data_or_materials_source", "high", "The cited paper's S4 Fig. alignment of sixty HCMV gB sequences is the source of additional gB sequences for the invention."),
+ "D320": ("mixed", "definitional_boilerplate", "high", "This is the standard sequence-identity definition boilerplate listing the Needleman-Wunsch, Pearson-Lipman, GCG software and Sambrook/Ausubel manual references; the leading citation is truncated."),
+ "D321": ("paper", "data_or_materials_source", "high", "The sentence points to Burke et al. for the sixty native HCMV gB sequences available from NCBI RefSeq, a source of sequence data for the invention."),
+ # ---- chemicals 1910s (bigquery draw, see docstring) ----
+ # CORNING GLASS WORKS US1304623A (Glass.)
+ "D322": ("paper", "method_or_tool", "high", "The citation is given “for procedure” of the hot-water solvent attack test used to measure the chemical stability of the glass, so the cited work supplies a test method."),
+ # GEN BAKELITE COMPANY US1038475A (Process of making insoluble bodies derived from phenol alcoh)
+ "D323": ("paper", "foundation", "medium", "The inventor cites his own earlier paper for the finding that heating phenol-alcohols with a small excess of phenol gives fusible, soluble resins, the chemistry the invention builds on."),
+ # GEN BAKELITE COMPANY US1146045A (Process for making insoluble bodies derived from phenol alco)
+ "D324": ("paper", "foundation", "medium", "The inventor cites his own earlier paper for the finding that heating phenol-alcohols with a small excess of phenol yields fusible, soluble resins, the chemistry on which the invention rests."),
+ # ---- chemicals 1920s (bigquery draw, see docstring) ----
+ # EASTMAN KODAK CO US1574944A (Photographic light-sensitive material and process of making )
+ "D325": ("paper", "method_or_tool", "high", "The inert gelatin used in the invention 'may be prepared in the way described' in the cited article, so the paper supplies a preparation procedure the invention uses."),
+ # EASTMAN KODAK CO US1600736A (Art of light-sensitive photographic materials)
+ "D326": ("paper", "method_or_tool", "high", "The gelatin is prepared by the ash-free gelatin procedure described in the cited article, a preparation method the invention uses."),
+ # ---- chemicals 1930s (bigquery draw, see docstring) ----
+ # DU PONT US1967862A (Cyclic compound and process for preparing same)
+ "D327": ("patent", "background_context", "low", "The window recounts the history of the field ('Following this work a series of patents has been applied for or issued') without stating reliance or a shortcoming, and it is truncated before any contrast."),
+ # EASTMAN KODAK CO US2166736A (Photographic emulsion)
+ "D328": ("paper", "data_or_materials_source", "medium", "The citation identifies one of the Formula III compounds that 'can advantageously be employed' as a reactant, i.e. it tells where the material is described, like 'substances listed in X may be used'."),
+ "D329": ("paper", "method_or_tool", "high", "Compounds of Formula III 'can be prepared as described by' the cited authors, so the papers supply synthesis procedures the invention uses."),
+ # EASTMAN KODAK CO US2177403A (Dye from imidazolones)
+ "D330": ("paper", "data_or_materials_source", "low", "The truncated journal citation sits beside reagent quantities in a synthesis example, so it appears to identify a starting material, but the window is too short to be sure."),
+ "D331": ("paper", "data_or_materials_source", "medium", "The citation is attached to the starting material 1,3-diphenyl-2-thiohydantoin in an example, identifying the source describing that reagent rather than a procedure or finding."),
+ "D332": ("paper", "data_or_materials_source", "medium", "The citation identifies the starting material 3-phenyl-2-thiohydantoin used in the example, pointing to where that reagent is described."),
+ # MONSANTO CHEMICALS US2064752A (Preservation of rubber)
+ "D333": ("paper", "data_or_materials_source", "medium", "The citation identifies the acetone-aniline reaction product that is the starting material treated with hydrochloric acid in the embodiment, pointing to where that material is described."),
+ # MONSANTO CHEMICALS US2100998A (Preservation of rubber)
+ "D334": ("paper", "data_or_materials_source", "medium", "The citation identifies the ketone-amine reaction product used as one component of the antioxidant mixture, i.e. the source describing that material."),
+ # ---- chemicals 1940s (bigquery draw, see docstring) ----
+ # ALLIED CHEM & DYE CORP US2456358A (Thermoplastic resins and process of making)
+ "D335": ("book", "method_or_tool", "high", "The melting points were determined by the cube-in-mercury method described in the Mattiello handbook, so the book supplies the measurement technique."),
+ # DU PONT US2365493A (Purification of p-phenetidine)
+ "D336": ("paper", "method_or_tool", "high", "The hydrogenation in Example III uses a reduced nickel on kieselguhr catalyst 'such as is described in' the cited paper, a reagent/technique the invention uses."),
+ # EASTMAN KODAK CO US2251286A (Process of preparing oxatricarbocyanine dyes)
+ "D337": ("paper", "prior_art_distinguished", "high", "The cited work is given for a known method that 'is not sufficient to produce' the tricarbocyanine dyes, a limitation the invention overcomes."),
+ "D338": ("paper", "data_or_materials_source", "medium", "The salts of anil compounds that the invention employs 'are described by' the cited papers, so the citations identify the usable reagents rather than a procedure or finding."),
+ # EASTMAN KODAK CO US2398454A (Anthraquinone compounds)
+ "D339": ("mixed", "method_or_tool", "high", "The amine and alcohol intermediates 'can be prepared ... in accordance with the method of' the cited patent and paper, so both supply synthesis procedures the invention uses."),
+ # ---- chemicals 1950s (bigquery draw, see docstring) ----
+ # DOW CHEMICAL CO US2871269A (Preparation of keto ethers)
+ "D340": ("mixed", "incorporated_reference_list", "low", "The window is a fragment of a references-cited list (a journal article and a book) with no surrounding text stating a role."),
+ # DOW CHEMICAL CO US2905588A (Growing and protection of crops and compositions therefor co)
+ "D341": ("book", "definitional_boilerplate", "high", "The dictionary is cited only to define the terms growth media and soil as used in the specification and claims."),
+ # EASTMAN KODAK CO US2739956A (Methoxy vinylnaphthalenes and polymers thereof)
+ "D342": ("paper", "incorporated_reference_list", "medium", "The Bachmann and Cohen entries are the references-cited list interleaved with the final claim by OCR, with no stated role."),
+ # EASTMAN KODAK CO US2901466A (Linear polyesters and polyester-amides from 1,4-cyclohexaned)
+ "D343": ("paper", "data_or_materials_source", "medium", "The citation is attached to the trans-1,4-cyclohexanedimethanol starting material and its melting point, identifying the source characterization of a reagent used in the example."),
+ # UNION CARBIDE CORP US2816930A (Aralkyl carbinols)
+ "D344": ("mixed", "incorporated_reference_list", "medium", "The window lists two references-cited entries (a Chemical Abstracts entry and a textbook) in list format with no stated role."),
+ # ---- chemicals 1960s (bigquery draw, see docstring) ----
+ # AIR PROD & CHEM US3150138A (Method of preparing monoquaternary nitrogen compounds)
+ "D345": ("paper", "prior_art_distinguished", "high", "Explicitly introduced as prior art literature whose quaternization gave only diquaternary or secondary-alkyl monoquaternary products and no primary compounds, a limitation the invention addresses."),
+ # AIR PROD & CHEM US3154522A (Polyisocyanurate preparation using a triethylene diamine and)
+ "D346": ("paper", "background_context", "medium", "Cited as an example in a literature overview of how catalyst activity has been measured and ranked, framing the catalyst problem without being relied on or distinguished."),
+ # DOW CHEMICAL CO US3207724A (Self-extinguishing styrene-acrylate copolymers with brominat)
+ "D347": ("paper", "method_or_tool", "high", "The brominated cyclopropyl benzenes used as self-extinguishing agents are prepared by the synthesis method of the cited article."),
+ # DU PONT US3214500A (Process for making filamentary structures prepared from the )
+ "D348": ("mixed", "method_or_tool", "medium", "Patents are cited for the procedures by which the polycarbonates are produced and the Schnell article as a general discussion of their preparation and properties."),
+ "D349": ("paper", "method_or_tool", "high", "Molecular orientation is measured by the sonic velocity method of the cited article."),
+ # DU PONT US3364049A (Self-destructible decal with adhesive on one surface and ind)
+ "D350": ("paper", "method_or_tool", "high", "Glass transition temperature is determined according to the method described in the cited article."),
+ # ---- chemicals 1970s (bigquery draw, see docstring) ----
+ # DOW CHEMICAL CO US3907815A (Process for preparing phosphorothioates and phenylphosphonot)
+ "D351": ("none", "background_context", "low", "The cue is the inventor name in the patent's own header, not a citation to any work."),
+ "D352": ("paper", "background_context", "medium", "The articles are cited with see-for-example as overviews listing commercially available phosphorothioates, framing the field rather than being relied on or distinguished."),
+ # DU PONT US3502631A (Polymers of cyclic internal olefins)
+ "D353": ("mixed", "method_or_tool", "high", "The high-pressure polymerizations are carried out in the tetrahedral anvil apparatus of the cited patent as modified in the cited NBS journal article."),
+ "D354": ("mixed", "method_or_tool", "high", "The Beilstein handbook and journal articles are cited for the literature methods by which the monomeric cyclic olefins used in the invention are prepared."),
+ # UNION CARBIDE CORP US3746738A (Silicon containing polyazimides)
+ "D355": ("mixed", "method_or_tool", "medium", "A patent and a J. Org. Chem. paper are cited together as the full description of the Michael addition procedure that the invention uses, with further patents and papers listed as describing the same reaction."),
+ # UNION CARBIDE CORP US3790522A (Polyepoxide and amine hardener compositions)
+ "D356": ("mixed", "data_or_materials_source", "medium", "The patents and the Carswell book are cited only to identify the bisphenols and polyphenylols that may be used as the phenol reactants, i.e. where the materials are described."),
+ "D357": ("paper", "method_or_tool", "high", "The article is cited as the full description of the settling gage and test procedure used to measure the property in the patent."),
+ # ---- chemicals 2020s (bigquery draw, see docstring) ----
+ # AIR PROD & CHEM US12421109B2 (Process and apparatus for cracking ammonia)
+ "D358": ("paper", "background_context", "medium", "Reports the literature ranking of metal activity for ammonia cracking as context for the catalysts, without the window stating that the invention relies on or departs from it."),
+ "D359": ("mixed", "data_or_materials_source", "high", "A patent application and three papers are cited together as the sources of suitable conventional catalysts that may be used in the invention."),
+ "D360": ("paper", "method_or_tool", "high", "The required catalyst activity is defined relative to a rate calculated with equation 9 proposed by Lamb et al., so the cited equation is used as the benchmark calculation."),
+ # AIR PROD & CHEM US12428294B2 (Process and apparatus for cracking ammonia)
+ "D361": ("paper", "background_context", "medium", "Reports the literature ranking of metal activity for ammonia cracking as context for the catalysts, without the window stating that the invention relies on or departs from it."),
+ "D362": ("mixed", "data_or_materials_source", "high", "A patent application and three papers are cited together as the sources of suitable conventional catalysts that may be used in the invention."),
+ "D363": ("paper", "method_or_tool", "high", "The required catalyst activity is defined relative to a rate calculated with equation 9 proposed by Lamb et al., so the cited equation is used as the benchmark calculation."),
+ # DOW GLOBAL TECHNOLOGIES LLC US12502872B2 (Synthetic leather)
+ "D364": ("paper", "foundation", "medium", "The papers model the theoretical benefits of a polydisperse block distribution, the property the invention's copolymer exploits for its improved physical properties."),
+ # DUPONT NUTRITION BIOSCI APS US11318174B2 (Probiotics for use in the prevention or treatment of illness)
+ "D365": ("paper", "foundation", "high", "The finding that a commensal bacterium carrying a cross-reactive peptide influences CD8 T cells is the mechanism the probiotic invention builds on, as the following 'Thus, probiotics could influence' sentence makes explicit."),
+ "D366": ("paper", "background_context", "high", "The study is cited for the prevalence of long-COVID symptoms, framing the disease burden rather than being relied on or distinguished."),
+ "D367": ("paper", "data_or_materials_source", "high", "The predicted SARS-CoV-2 epitopes from the paper are the input dataset for the BLAST homology searches against the probiotic genomes."),
+ # DUPONT SAFETY & CONSTRUCTION INC; PIONEER HI BRED INT US12279566B2 (Efficient hydroponic cultivation system and method)
+ "D368": ("paper", "foundation", "medium", "The finding that high root temperature reduces root growth is the rationale on which the reflective housing membrane's cooling design rests."),
+ "D369": ("paper", "foundation", "medium", "The finding that oxygen solubility falls and plant growth suffers at higher temperature supports the design rationale for keeping the nutrient solution cool."),
+ "D370": ("patent", "method_or_tool", "medium", "The cited patents describe the flash spinning processes by which the plexifilamentary webs used in the invention are produced, incorporated by reference."),
+ # ---- electrical/electronics 1900s (bigquery draw, see docstring) ----
+ # STONE JOHN STONE US767972A (Method of receiving space-telegraph signals.)
+ "D371": ("paper", "method_or_tool", "high", "The bolometer instrument the invention employs is described in Langley's papers, which the applicant cites in place of describing it."),
+ "D372": ("paper", "incorporated_reference_list", "low", "The window is a bare bibliographic list of Langley's papers with no verb or stated role for the cited works."),
+ "D373": ("paper", "background_context", "high", "The papers are cited for the history of other applications of the bolometer (dielectric constants, Hertz waves), framing context rather than something relied on."),
+ # ---- electrical/electronics 1920s (bigquery draw, see docstring) ----
+ # BELL TELEPHONE LABOR INC US1675880A (Electric-current transmission)
+ "D374": ("paper", "method_or_tool", "medium", "The article describes the compressed powdered iron rings used as the core of the auto-transformer in the circuit."),
+ # GEN ELECTRIC US1475164A (Signal-transmitting system)
+ "D375": ("paper", "method_or_tool", "high", "The applicant states that the invention employs magnetrons as fully described in Hull's article."),
+ # GEN ELECTRIC US1502904A (Elastic-fluid turbine rotor and method of avoiding tangentia)
+ "D376": ("book", "method_or_tool", "medium", "The light-spot display arrangement used in the invention is a well-known one set forth in the cited book."),
+ # WESTERN ELECTRIC CO US1563620A (Oscillation generator)
+ "D377": ("paper", "foundation", "medium", "The circuit's linear differential equations, developed in the cited article, are the theoretical analysis on which the invention's operation rests."),
+ # WESTERN ELECTRIC CO US1615988A (Carrier transmission system)
+ "D378": ("paper", "method_or_tool", "high", "Morse telegraph equipment as shown in the article may be associated with the invention's transmitting and receiving channels."),
+ # ---- electrical/electronics 1930s (bigquery draw, see docstring) ----
+ # BELL TELEPHONE LABOR INC US2070666A (Modulating system)
+ "D379": ("mixed", "method_or_tool", "high", "The negative feed-back technique disclosed in Black's article and copending application is applied in the invention to neutralize distortion."),
+ "D380": ("patent", "method_or_tool", "high", "The modulator used in the circuit may be of the type disclosed in the cited patent."),
+ # BELL TELEPHONE LABOR INC US2075956A (Electric wave translating system)
+ "D381": ("mixed", "method_or_tool", "high", "The feed-back amplifier type and its notation used in the invention are those disclosed in Black's application and article."),
+ # IBM US2153208A (Record controlled machine)
+ "D382": ("none", "own_family_continuation", "low", "The window is the drawing-sheet header of the patent itself; the number is the patent's own and not a citation."),
+ # WESTERN ELECTRIC CO US1818131A (Mechanical transmission system)
+ "D383": ("mixed", "method_or_tool", "high", "The cited patents and Zobel's paper supply the electric wave filter design formulae applied to calculate the mechanical vibration filter."),
+ # WESTERN ELECTRIC CO US1861851A (Submarine signaling cable)
+ "D384": ("paper", "method_or_tool", "medium", "The paper gives the rigorous analytic process for computing the return-conductor resistance, a design calculation for which the patent also offers an approximation."),
+ "D385": ("paper", "background_context", "low", "The window is a truncated citation fragment with no sentence stating how the article is used."),
+ # ---- electrical/electronics 1940s (bigquery draw, see docstring) ----
+ # AMERICAN TELEPHONE & TELEGRAPH US2345933A (Phase control in electrical transmission)
+ "D386": ("paper", "method_or_tool", "medium", "Phase-shift measurements needed for the compensator may be made by the methods discussed in the article, although a limitation of those methods is also noted."),
+ "D387": ("paper", "method_or_tool", "high", "The phase angle meter may be a recorder of the type shown in the cited article's Fig. 4, a component used in the apparatus."),
+ # AMERICAN TELEPHONE & TELEGRAPH US2375066A (Automatic coin return system)
+ "D388": ("paper", "method_or_tool", "medium", "The invention operates within the crossbar dial switching system whose line link frame and remaining apparatus are described in the cited paper."),
+ # BELL TELEPHONE LABOR INC US2204762A (Piezoelectric crystal apparatus)
+ "D389": ("paper", "background_context", "medium", "The paper is cited only as an illustration of how the crystal may be connected in a filter system, framing a use case rather than a technique the invention relies on."),
+ "D390": ("paper", "data_or_materials_source", "medium", "The known elastic constants of quartz used in the orientation formula are taken from the cited publication, so it serves as the source of the numerical data."),
+ # BELL TELEPHONE LABOR INC US2220942A (Acoustic device)
+ "D391": ("paper", "method_or_tool", "high", "Zobel's transformation theorem is applied to show the equivalence of the modified damping arrangement, so the paper supplies a method used in the design."),
+ # GEN ELECTRIC X RAY CORP US2343729A (X-ray apparatus)
+ "D392": ("paper", "foundation", "medium", "The article investigated the rapid anode cooling thought to cause anode cracks, the physical mechanism the invention addresses."),
+ # GEN ELECTRIC US2366071A (Stationary induction apparatus)
+ "D393": ("mixed", "method_or_tool", "high", "A copending application and an article are cited together as describing a suitable method of applying the strip material to the winding leg, a technique used with the invention."),
+ # ---- electrical/electronics 1950s (bigquery draw, see docstring) ----
+ # BELL TELEPHONE LABOR INC US2556286A (Oscillation generator)
+ "D394": ("paper", "method_or_tool", "medium", "The Peterson article supplies the equivalent four-pole representation that the patent adopts to describe the transistor's alternating-current characteristics, a modelling technique used rather than a finding exploited."),
+ # BELL TELEPHONE LABOR INC US2763832A (Semiconductor circuit controlling device)
+ "D395": ("paper", "foundation", "medium", "Shockley's paper is cited for the physical finding that NPN or PNP bodies exhibit current multiplication (alpha near unity), a mechanism the semiconductor device of the invention relies on."),
+ # GEN ELECTRIC US2859360A (Wave generator)
+ "D396": ("book", "prior_art_distinguished", "high", "The saw-tooth generator in Shea's book is the earlier circuit whose wave shape is said to deviate considerably from the linear ideal, the problem the invention addresses."),
+ # IBM US2761965A (Electronic circuits)
+ "D397": ("paper", "background_context", "high", "The papers are cited for the history of the transistor, framing the field without being relied on or distinguished."),
+ "D398": ("paper", "incorporated_reference_list", "low", "The window is a bare reference entry ending in a semicolon with no surrounding text stating a role."),
+ # IBM US2884625A (Code generator)
+ "D399": ("mixed", "background_context", "medium", "The Hamming paper and reissue patent are cited to describe the existing state of error-detecting codes without the text stating that the invention uses or departs from them."),
+ "D400": ("patent", "method_or_tool", "high", "The flip-flops are preferably of the type shown in the copending application, so it supplies a circuit component used in the invention."),
+ # ---- electrical/electronics 1960s (bigquery draw, see docstring) ----
+ # GEN ELECTRIC US3436582A (Plasma separator ion engine)
+ "D401": ("paper", "background_context", "high", "The paper is offered as a convenient general reference to the voluminous literature, a literature overview."),
+ # IBM US2989733A (Ferroelectric circuit element)
+ "D402": ("paper", "foundation", "medium", "The article is cited for the physical effect of clamping on the crystal transitions, a finding the invention's electrode-area design exploits."),
+ # IBM US3471396A (R.f. cathodic sputtering apparatus having an electrically co)
+ "D403": ("paper", "background_context", "medium", "The paper is cited as generally disclosing radio frequency sputtering of dielectrics, a general description of the technique that frames the invention."),
+ # TEXAS INSTRUMENTS INC US3471802A (Modulated laser using a solid fabry-perot etalon having a bi)
+ "D404": ("paper", "background_context", "high", "The articles are cited as examples describing basic laser operation and theory, background that the text says needs only brief treatment."),
+ "D405": ("paper", "method_or_tool", "medium", "The article describes the available electro-optic switches that can be employed as the in-cavity switch in the system of the invention."),
+ # TEXAS INSTRUMENTS INC US3475700A (Monolithic microwave duplexer switch)
+ "D406": ("paper", "foundation", "medium", "The reported properties of microstrip lines on semiconductor dielectrics are the basis for choosing line width to obtain the desired characteristic impedance."),
+ # ---- electrical/electronics 1970s (bigquery draw, see docstring) ----
+ # BELL TELEPHONE LABOR INC US3488606A (Unidirectional ring laser)
+ "D407": ("paper", "foundation", "medium", "The patent states 'as shown by' Kogelnik the beam-waist imaging relation that the resonator design is built on, i.e. a physical result the invention rests on rather than a procedure it performs."),
+ # BELL TELEPHONE LABOR INC US3539939A (Laser pulse generator using a rotating prism alternately as )
+ "D408": ("paper", "foundation", "medium", "The opening paragraph presents the mode-locking arrangement of the cited article as the mechanism that produces the intracavity high-intensity pulse on which the pulse generator of the invention is based; the window is truncated before any contrast is drawn, so confidence is medium."),
+ "D409": ("paper", "background_context", "high", "The citation is a parenthetical 'for a more detailed discussion of the gas laser see' pointer, giving general background on lasers rather than anything the invention relies on or distinguishes."),
+ "D410": ("paper", "method_or_tool", "high", "The motor driving the prism 'can be of the type used by J. W. Beams' as illustrated in the cited article, so the paper supplies an apparatus design the invention adopts as a component."),
+ # GEN ELECTRIC US3609719A (First order transition recording utilizing incomplete transi)
+ "D411": ("paper", "method_or_tool", "high", "The recorded information is read out using the electron mirror microscopy or scanning electron microscope techniques described in the cited articles, so they supply a technique the invention uses."),
+ # IBM US3576436A (Method and apparatus for adding or subtracting in an associa)
+ "D412": ("paper", "prior_art_distinguished", "high", "Both cited articles describe earlier approaches and the text states that 'the problem with both of the approaches in the referenced articles is that they are relatively inefficient'."),
+ # IBM US3699482A (Surface waveguiding in ceramics by selective poling)
+ "D413": ("paper", "background_context", "high", "The article is cited as a thorough presentation of the history and state of the art of surface wave technology, i.e., a literature overview framing the field."),
+ "D414": ("paper", "incorporated_reference_list", "low", "The window is a numbered bibliographic entry from a reference list with no stated role visible."),
+ "D415": ("paper", "incorporated_reference_list", "low", "The window is a numbered bibliographic entry from a reference list with no stated role visible."),
+ # ---- electrical/electronics 2020s (bigquery draw, see docstring) ----
+ # GEN ELECTRIC US12384727B2 (Composite components and methods for preventing flow from in)
+ "D416": ("paper", "method_or_tool", "high", "The permeability was measured through a capillary weight-gain procedure similar to the one reported in the cited article, so the paper supplies a measurement technique the invention uses."),
+ # IBM US11288425B1 (Path-based timing driven placement using iterative pseudo ne)
+ "D417": ("paper", "method_or_tool", "medium", "The papers are listed as net weighting techniques that can be applied to produce the weights shared with the placer, i.e., algorithms the invention may use (sentence start truncated)."),
+ # IBM US11562240B2 (Efficient tile mapping for row-by-row convolutional neural n)
+ "D418": ("paper", "background_context", "high", "The tutorial is cited for 'additional details of ANNs and learning rules', a for-more-information pointer rather than a technique relied on or distinguished."),
+ # TEXAS INSTRUMENTS INC US11899082B2 (Silicon hall sensor with low offset and drift compensation c)
+ "D419": ("paper", "background_context", "high", "The papers are explicitly introduced with 'For general background, see', while the co-pending application separately carries the implementation details."),
+ # TEXAS INSTRUMENTS INC US12382658B2 (Reducing transistor breakdown in a power FET current sense s)
+ "D420": ("paper", "foundation", "medium", "The paper supplies the BVceo-versus-base-emitter-voltage characteristics of FIG. 6 that the invention relies on to explain the behaviour of its parasitic NPN transistor."),
 }
 
 SCIENCE_TYPES = {"paper", "mixed", "standards_doc", "book", "software_or_database"}
 SECTORS = ["pharma", "chemicals", "electrical/electronics"]
-DECADES = ["1980s", "1990s", "2000s", "2010s"]
+DECADES = ["1900s", "1910s", "1920s", "1930s", "1940s", "1950s", "1960s", "1970s", "1980s", "1990s", "2000s", "2010s", "2020s"]
 
 
 MOJIBAKE = re.compile(r"[Â-ô][-¿]+")
@@ -355,7 +658,7 @@ def main():
     for r in raw:
         dt, fn, conf, note = L[r["window_id"]]
         assert fn in FUNCTIONS, fn
-        r2 = dict(r); r2["text"] = r["text"] if r.get("draw") == "ieee" else fix_text(r["text"])  # the first draw was mis-decoded
+        r2 = dict(r); r2["text"] = fix_text(r["text"]) if r.get("draw") == "et al" else r["text"]  # the first Google draw was mis-decoded
         r2.update({"cited_doc_type": dt, "function": fn, "confidence": conf, "note": note,
                    "cited_work_string": first_citation(r2["text"]),
                    "is_family_duplicate": bool(r.get("is_family_duplicate")) or "Duplicate of" in note})
@@ -368,8 +671,8 @@ def main():
     for r in sci:
         cell[(r["sector"], r["decade"])][r["function"]] += 1; cell_pat[(r["sector"], r["decade"])].add(r["pn"])
     c_dt = collections.Counter(r["cited_doc_type"] for r in uniq)
-    lines = ["# Decade sample: how nine firms in three sectors used science, 1980s-2010s", "",
-             f"- {len({r['pn'] for r in out})} granted US patents of nine firms, {len(out)} citation windows; {len(uniq)} after dropping sibling duplicates; {len(sci)} cite papers, books, standards documents or mixed sets (the rest cite patents only).",
+    lines = ["# Decade sample: how firms in three sectors used science, 1900s-2020s", "",
+             f"- {len({r['pn'] for r in out})} granted US patents of {len({r['query_assignee'] for r in out})} firms, {len(out)} citation windows; {len(uniq)} after dropping sibling duplicates; {len(sci)} cite papers, books, standards documents or mixed sets (the rest cite patents only). Core cells 1980s-2010s: nine firms, Google Patents draws; extension cells 1900s-1970s and 2020s: the Reliance on Science frame on BigQuery (docstring).",
              "- Cited document type (de-duplicated): " + ", ".join(f"{k} {v}" for k, v in c_dt.most_common()) + ".",
              "", "## Function of science citations by sector and decade (windows; patents in parentheses)", "",
              "| Sector | Decade | n | " + " | ".join(FUNCTIONS) + " |", "|---|---|---|" + "---|" * len(FUNCTIONS)]

@@ -1,4 +1,4 @@
 sector,n_patents,n_windows,substantive_share,share_foundation,share_method_or_tool,share_prior_art_distinguished,share_data_or_materials_source,share_background_context,share_definitional_boilerplate,share_incorporated_reference_list,share_own_family_continuation
-electrical/electronics,32,79,0.646,0.038,0.342,0.266,0.0,0.241,0.0,0.101,0.013
-pharma,23,66,0.621,0.242,0.212,0.152,0.015,0.258,0.121,0.0,0.0
-chemicals,20,55,0.673,0.055,0.218,0.364,0.036,0.255,0.073,0.0,0.0
+pharma,55,126,0.619,0.183,0.31,0.103,0.024,0.23,0.127,0.024,0.0
+electrical/electronics,68,126,0.651,0.087,0.373,0.183,0.008,0.246,0.0,0.095,0.008
+chemicals,52,99,0.737,0.091,0.293,0.222,0.131,0.182,0.051,0.03,0.0
