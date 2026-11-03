@@ -48,7 +48,7 @@ window finder and a full-text read could find; their lines are dotted or missing
 
 ![Figure 7: how firms use the science they cite](data/5_figures/firms_by_role.png)
 
-Every patent of eleven firms with an in-text citation to science, one window per patent, 38,272 science-citing
+Every patent of eleven firms with an in-text citation to science, one window per patent, 38,698 science-citing
 patents after repeated window texts (continuations, boilerplate) are counted once. AT&T, General Electric and DuPont
 cite science mainly as a method before 1950 and follow the economy-wide rise of prior approaches improved on in the
 1980s and 1990s. Pfizer moves from methods to the target biology the invention rests on. Google's science is almost
@@ -145,7 +145,7 @@ The data files keep short machine labels (`foundation`, `method_or_tool`, `prior
 | Sample | Patents | Assignees / target firms | Windows | Science-citing, de-duplicated | Files |
 | --- | --- | --- | --- | --- | --- |
 | Long-run sample, 11 technology classes, 1900s to 2020s | 8,288 | 4,852 | 8,288 | 6,162 | `data/*/longrun/` |
-| Firm sample, every science-citing patent of 11 firms, 1900s to 2020s | 52,107 | 11 | 52,107 | 38,272 | `data/*/firms/` |
+| Firm sample, every science-citing patent of 11 firms, 1900s to 2020s | 52,816 | 11 | 52,816 | 38,698 | `data/*/firms/` |
 | Field sample, 14 technology fields, 1900s to 2020s | 5,822 | 2,612 | 5,822 | 5,462 | `data/*/fields/` |
 | Pilot, eight sectors, priority 2017+ | 200 | 127 | 515 | 395 | `data/*/pilot/` |
 | Decade sample, three sectors, 1900s to 2020s | 196 | 25 | 420 | 351 | `data/*/decades/` |
@@ -200,12 +200,13 @@ data/examples/demo/         worked example: four patents, every intermediate fil
   `2_label/labels_decades.py`), blind second pass by claude-opus-5-5 over all 935 windows (function kappa 0.73
   on the pilot and 0.78 on the decade sample; cited document type 0.91 and 0.93). Long-run sample: claude-opus-5-5
   as blind Claude Code subagents on all 8,288 windows, a blind claude-fable-5-1 pass on 3,017 of them (function kappa
-  0.77, cited document type 0.91). Firm and field samples: claude-opus-5-5 blind subagents on all 57,929 windows; a
+  0.77, cited document type 0.91). Firm and field samples: claude-opus-5-5 blind subagents on all 58,638 windows; a
   blind second claude-opus-5-5 pass over every 20th batch (2,820 windows) gives the same function for 92% (kappa
   0.89) and the same document type for 98% (kappa 0.96), a measure of consistency, not accuracy. Details:
   `data/3_validate/results.md`. No human coder has labeled anything yet; two models agreeing is not a human benchmark.
 - **Firm and field samples.** Firms are matched on assignee names (AT&T with Bell Labs and Western Electric, Google
-  with DeepMind); every patent with an in-text Reliance on Science citation to a paper, plus pre-1980 patents whose
+  with DeepMind), plus subsidiaries found through the KPSS patent-to-firm match (GE Medical Systems, Danisco, Verily,
+  Waymo, Skype, Teletype and others; 709 patents); every patent with an in-text Reliance on Science citation to a paper, plus pre-1980 patents whose
   text carries a strict citation cue, keeps one window by the rules in `2_label/labels_firms.py`. A window that
   repeats the text of an earlier patent of the same firm is flagged and left out of the figures (14-57% of a firm's
   patents, continuations and templates). Fields are first-CPC-code groups (`local` scripts, listed in the docstring of
@@ -241,7 +242,7 @@ data/examples/demo/         worked example: four patents, every intermediate fil
 - [x] Decade sample: three sectors, every decade 1900s-2020s (nine firms plus period peers); sector, decade and firm profiles (Oct-Nov 2026)
 - [x] Blind second coding of every pilot window by a second model (claude-opus-5-5): `data/3_validate/results.md` (Nov 2026)
 - [x] Long-run sample: 11 technology classes x 13 decades, 8,288 patents, labeled by claude-opus-5-5 (Nov 2026)
-- [x] Firm sample (every science-citing patent of 11 firms, 52,107) and field-age sample (14 fields, 5,822), labeled
+- [x] Firm sample (every science-citing patent of 11 firms, 52,816) and field-age sample (14 fields, 5,822), labeled
       by claude-opus-5-5 with a test-retest pass (Nov 2026)
 - [ ] Double-code the pilots with human coders; open-weight model comparison; label-set comparison (`docs/labels.md`)
 - [ ] 2,000-window benchmark stratified by sector, citation format and decade; codebook

@@ -4,6 +4,10 @@ Sample (Nov 2, 2026; scripts in local/firms_fields/ of the working copy). Firms 
 assignee of a patent; the British General Electric Company is excluded): AT&T with Bell Telephone Laboratories and
 Western Electric, General Electric, IBM, DuPont, Ford, Pfizer, Google (with DeepMind), Microsoft, Nvidia, Boeing and
 Walmart. OpenAI and Anthropic were searched and hold no granted patent with an in-text citation to science.
+Subsidiaries the name match misses were added on Nov 2 from KPSS 2025: patents whose KPSS permno is the firm's and
+whose assignee is on a vetted list (GE Medical Systems, GE Video Compression, GE Lighting, Danisco, Pioneer Hi-Bred,
+Teletype, Cingular, Howmedica, Schneider, Skype, Philco-Ford, Verily, X Development, Waymo, misspelled IBM; 709 patents
+with a window, draw = kpss-subsidiaries, local/firms_fields/append_kpss.py).
 Patents: every firm patent with an in-text Reliance on Science v66 citation to a paper (any confidence), plus patents
 granted before 1980 without one whose text carries a strict citation cue (a journal, society, bulletin or book with or
 without volume and page). The window finder (fetch_patents.py --cue-early --cue-science) keeps one window per patent:
