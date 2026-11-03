@@ -10,7 +10,7 @@ Arial with black axes and outlines, short notes below whose numbers are computed
   longrun_by_class.png    Figure 2: role of the cited work by class and decade, long-run sample
   function_by_sector.png  Figure 7: role of the cited work by sector, pilot (role_dots)
   function_by_firm.png    Figure 8: role of the cited work by firm, decade sample pooled over decades (role_dots)
-  what_is_cited.png       Figure 9: cited-document type, paper vs patent
+  what_is_cited.png       Figure A2: cited-document type, paper vs patent (linked from the README, not embedded)
   function_by_decade.png  Figure A1: shares by sector and decade, nine-firm decade sample (superseded by Figure 2)
   firms_by_role.png       Figure 3: role of the cited work by firm and decade, eleven firms (data/2_label/firms/)
   firms_long_run.png      Figure 4: six firms over the long run, time running down
@@ -266,7 +266,7 @@ def figure_cited():
     p_rows = sorted(((cap(s), doc_shares(v)) for s, v in pilot.items()), key=lambda kv: -kv[1]["science"])
     d_rows = [(cap(s), doc_shares(decades[s])) for s in ("pharma", "chemicals", "electrical/electronics")]
     groups = [("Pilot, priority 2017 or later", p_rows), ("Decade sample, 1900s to 2020s", d_rows)]
-    fig, ax, notes_y = canvas(groups, "Figure 9. What the Citation Window Points To", legend=DOC_CATS, note_lines=2)
+    fig, ax, notes_y = canvas(groups, "Figure A2. What the Citation Window Points To", legend=DOC_CATS, note_lines=2)
     draw_rows(ax, groups, DOC_CATS, min_label=1.1)
     paper_notes(fig, notes_y, "Share of citation windows by type of cited document, family duplicates removed; windows in "
                 "parentheses. Only science (papers, books, standards documents and mixed sets) enters the role profiles.")

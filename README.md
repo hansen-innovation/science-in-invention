@@ -85,10 +85,8 @@ automotive firms for methods; semiconductors and energy have the largest shares 
 Dow cites procedures where Du Pont and Air Products improve on prior approaches; Pfizer cites target biology where
 Bristol-Myers cites disease context; General Electric uses standards and papers as methods where IBM improves on them.
 
-![Figure 9: what the citation window points to](data/5_figures/what_is_cited.png)
-
 "et al." does not mean a paper: in the decade sample's electronics sector, 27% of the citation windows point to other
-patents. The document-type label keeps those out of the profiles.
+patents ([Figure A2](data/5_figures/what_is_cited.png)). The document-type label keeps those out of the profiles.
 
 The pilots are a demonstration, not estimates: cells are small (n in parentheses on every bar), the labels are model
 labels, and no human coder has labeled anything yet. The decade sample's shares by decade, superseded by the long-run
