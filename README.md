@@ -73,25 +73,6 @@ the 2000s to 2020s the four emerging fields and the seven oldest do not differ d
 26% and 28%, prior approach 18% and 14%); the spread between fields within each group is far larger (AI 37% methods,
 quantum computing 10%; pharmaceuticals 26% basis, polymers 3%).
 
-## What the pilots show
-
-![Figure 7: what the cited science does, by sector](data/5_figures/function_by_sector.png)
-
-A method is the most common thing a patent takes from a paper (36% of 316 paper-citing windows). Pharma cites science for the biology the invention rests on and for disease context; software/AI, biotech tools and
-automotive firms for methods; semiconductors and energy have the largest shares of prior approaches improved on.
-
-![Figure 8: the same shares by firm](data/5_figures/function_by_firm.png)
-
-Dow cites procedures where Du Pont and Air Products improve on prior approaches; Pfizer cites target biology where
-Bristol-Myers cites disease context; General Electric uses standards and papers as methods where IBM improves on them.
-
-"et al." does not mean a paper: in the decade sample's electronics sector, 27% of the citation windows point to other
-patents ([Figure A2](data/5_figures/what_is_cited.png)). The document-type label keeps those out of the profiles.
-
-The pilots are a demonstration, not estimates: cells are small (n in parentheses on every bar), the labels are model
-labels, and no human coder has labeled anything yet. The decade sample's shares by decade, superseded by the long-run
-sample, are in [data/5_figures/function_by_decade.png](data/5_figures/function_by_decade.png).
-
 ## How it works
 
 Pipeline: patent full text (PatentsView; Google Patents Public Data before 1976) → one citation window around each
@@ -128,6 +109,12 @@ The data files keep short machine labels (`foundation`, `method_or_tool`, `prior
 | Field sample, 14 technology fields, 1900s to 2020s | 5,822 | 2,612 | 5,822 | 5,462 | `data/*/fields/` |
 | Pilot, eight sectors, priority 2017+ | 200 | 127 | 515 | 395 | `data/*/pilot/` |
 | Decade sample, three sectors, 1900s to 2020s | 196 | 25 | 420 | 351 | `data/*/decades/` |
+
+The pilot and decade samples are the hand-labeled seeds of October 2026 (two patents per assignee, or per firm and decade); every
+window was coded twice (claude-fable-5-1, then claude-opus-5-5 blind). They are small, and the larger samples above
+supersede them; their figures are kept as [A3](data/5_figures/function_by_sector.png) (by sector), [A4](data/5_figures/function_by_firm.png)
+(by firm), [A1](data/5_figures/function_by_decade.png) (by decade) and [A2](data/5_figures/what_is_cited.png) (what the citation window points
+to: in the decade sample's electronics sector 27% of "et al." windows cite patents, which the document-type label removes).
 | Worked example | 4 | 4 | 34 | 32 | `data/examples/demo/` |
 
 Each labeled row holds the patent, assignee, dates, window text, document type, function, confidence, verbatim

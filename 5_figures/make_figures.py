@@ -8,8 +8,8 @@ Papanikolaou, Seru and Taddy (2021, Figure 5): 'Figure n. Title' centred on top 
 Arial with black axes and outlines, short notes below whose numbers are computed here. Numbering follows the README.
   longrun_overall.png     Figure 1: share of grants citing science by class (rows) and role of the cited work by decade
   longrun_by_class.png    Figure 2: role of the cited work by class and decade, long-run sample
-  function_by_sector.png  Figure 7: role of the cited work by sector, pilot (role_dots)
-  function_by_firm.png    Figure 8: role of the cited work by firm, decade sample pooled over decades (role_dots)
+  function_by_sector.png  Figure A3: role of the cited work by sector, pilot (role_dots)
+  function_by_firm.png    Figure A4: role of the cited work by firm, decade sample pooled over decades (role_dots)
   what_is_cited.png       Figure A2: cited-document type, paper vs patent (linked from the README, not embedded)
   function_by_decade.png  Figure A1: shares by sector and decade, nine-firm decade sample (superseded by Figure 2)
   firms_by_role.png       Figure 3: role of the cited work by firm and decade, eleven firms (data/2_label/firms/)
@@ -196,7 +196,7 @@ def role_dots(fig, groups, counts, pooled, top, bottom, x0, gap, labels=None):
 
 @paper_rc
 def figure_sector():
-    """Figure 7: the pilot's science-citing windows by sector, one column per role (role_dots); grey tick: all sectors."""
+    """Figure A3: the pilot's science-citing windows by sector, one column per role (role_dots); grey tick: all sectors."""
     rows = science_rows(PILOT); sector_map = load_sector_map()
     counts = collections.defaultdict(collections.Counter); pooled = collections.Counter()
     for r in rows:
@@ -204,7 +204,7 @@ def figure_sector():
     groups = sorted(counts, key=lambda g: -counts[g]["foundation"] / sum(counts[g].values()))
     H = 0.42 * len(groups) + 2.6
     fig = plt.figure(figsize=(7.0, H))
-    paper_title(fig, 1 - 0.32 / H, "Figure 7. What the Cited Science Does, by Sector")
+    paper_title(fig, 1 - 0.32 / H, "Figure A3. What the Cited Science Does, by Sector")
     top, bottom = 1 - 0.95 / H, 1.45 / H
     mx = role_dots(fig, groups, counts, pooled, top, bottom, 0.26, 0.022, labels={g: f"{g} ({sum(counts[g].values())})" for g in groups})
     paper_notes(fig, bottom - 0.55 / H,
@@ -230,7 +230,7 @@ def figure_decade():
 
 @paper_rc
 def figure_firm():
-    """Figure 8: the decade sample's nine firms, all decades pooled, one column per role (role_dots); grey tick: all firms."""
+    """Figure A4: the decade sample's nine firms, all decades pooled, one column per role (role_dots); grey tick: all firms."""
     by = collections.defaultdict(collections.Counter); pooled = collections.Counter()
     canon = {"International Business Machines": "IBM"}
     for r in science_rows(DECADES):
@@ -239,7 +239,7 @@ def figure_firm():
     groups = [f for f in order if sum(by[f].values()) >= 5]
     H = 0.42 * len(groups) + 2.6
     fig = plt.figure(figsize=(7.0, H))
-    paper_title(fig, 1 - 0.32 / H, "Figure 8. The Same Shares by Firm, Decade Sample")
+    paper_title(fig, 1 - 0.32 / H, "Figure A4. The Same Shares by Firm, Decade Sample")
     top, bottom = 1 - 0.95 / H, 1.45 / H
     mx = role_dots(fig, groups, by, pooled, top, bottom, 0.26, 0.022, labels={g: f"{g} ({sum(by[g].values())})" for g in groups})
     paper_notes(fig, bottom - 0.55 / H,
