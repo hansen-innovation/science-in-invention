@@ -19,11 +19,11 @@ behind an NBER i3 Open Data Fellows 2027 proposal.
   invention falls from 16% in the 1900s to 6% in the 2020s.
 - **Firms differ most by what they make.** Google cites science as a method used in 74% of its science-citing patents;
   Pfizer's citations turned from methods (53% in 1950-79) to the biology the invention rests on (23% in 2000-26);
-  AT&T, GE, DuPont and IBM mostly mirror their industries ([Figures 7 and 8](#firms-and-fields)).
+  AT&T, GE, DuPont and IBM mostly mirror their industries ([Figures 6 and 7](#firms-and-fields)).
 - **Young fields look different, but not in a life-cycle way.** Fields observed before their takeoff cite science as
   the basis in 16% of patents and as a method in 18%, against 6-11% and 28-35% for old fields in the same decade; the
   contrast is between fields, not within them, and in the 2000s-2020s AI, genetic engineering, quantum computing and
-  lithium batteries use science much like century-old fields ([Figures 9 and 10](#firms-and-fields)).
+  lithium batteries use science much like century-old fields ([Figures 8 and 9](#firms-and-fields)).
 
 The roles in the figures: **Basis of the invention**, the finding the invention rests on; **Method used**, a technique
 the inventors carry out; **Prior approach improved on**; **Context only**, the paper frames the problem;
@@ -46,7 +46,7 @@ window finder and a full-text read could find; their lines are dotted or missing
 
 ## Firms and fields
 
-![Figure 7: how firms use the science they cite](data/5_figures/firms_by_role.png)
+![Figure 6: how firms use the science they cite](data/5_figures/firms_by_role.png)
 
 Every patent of eleven firms with an in-text citation to science, one window per patent, 38,698 science-citing
 patents after repeated window texts (continuations, boilerplate) are counted once. AT&T, General Electric and DuPont
@@ -55,9 +55,9 @@ cite science mainly as a method before 1950 and follow the economy-wide rise of 
 all methods used (74%, against 44% for its technology class): machine-learning, vision and systems papers, many of
 them its own.
 
-![Figure 8: six firms, 1920s to 2020s](data/5_figures/firms_long_run.png)
+![Figure 7: six firms, 1920s to 2020s](data/5_figures/firms_long_run.png)
 
-![Figure 9: technology fields of different ages](data/5_figures/fields_by_role.png)
+![Figure 8: technology fields of different ages](data/5_figures/fields_by_role.png)
 
 Fourteen fields defined by the first CPC code, up to 60 patents per field and decade, each dated by the year of its
 1,000th US grant. Lasers in the 1960s, genetic engineering and AI in the 1980s and quantum computing in the 1990s
@@ -65,7 +65,7 @@ cite science before their takeoff more often as the basis of the invention and l
 do in the same decade; the prior-approach share peaks 40 to 60 years after takeoff and is lowest in fields more than a
 century old.
 
-![Figure 10: science use by the age of a technology field](data/5_figures/fields_maturity.png)
+![Figure 9: science use by the age of a technology field](data/5_figures/fields_maturity.png)
 
 The age profile compares fields of different ages within a decade, not a field with its own past: with field fixed
 effects the method and prior-approach gaps vanish, and the basis gap is not significant at other takeoff dates. In
@@ -75,21 +75,17 @@ quantum computing 10%; pharmaceuticals 26% basis, polymers 3%).
 
 ## What the pilots show
 
-![Figure 3: what the cited paper does in the patent](data/5_figures/function_overall.png)
+![Figure 3: what the cited science does, by sector](data/5_figures/function_by_sector.png)
 
-A method is the most common thing a patent takes from a paper (36% of 316 paper-citing windows).
-
-![Figure 4: what the cited science does, by sector](data/5_figures/function_by_sector.png)
-
-Pharma cites science for the biology the invention rests on and for disease context; software/AI, biotech tools and
+A method is the most common thing a patent takes from a paper (36% of 316 paper-citing windows). Pharma cites science for the biology the invention rests on and for disease context; software/AI, biotech tools and
 automotive firms for methods; semiconductors and energy have the largest shares of prior approaches improved on.
 
-![Figure 5: the same shares by firm](data/5_figures/function_by_firm.png)
+![Figure 4: the same shares by firm](data/5_figures/function_by_firm.png)
 
 Dow cites procedures where Du Pont and Air Products improve on prior approaches; Pfizer cites target biology where
 Bristol-Myers cites disease context; General Electric uses standards and papers as methods where IBM improves on them.
 
-![Figure 6: what the citation window points to](data/5_figures/what_is_cited.png)
+![Figure 5: what the citation window points to](data/5_figures/what_is_cited.png)
 
 "et al." does not mean a paper: in the decade sample's electronics sector, 27% of the citation windows point to other
 patents. The document-type label keeps those out of the profiles.
@@ -211,7 +207,7 @@ data/examples/demo/         worked example: four patents, every intermediate fil
   repeats the text of an earlier patent of the same firm is flagged and left out of the figures (14-57% of a firm's
   patents, continuations and templates). Fields are first-CPC-code groups (`local` scripts, listed in the docstring of
   `2_label/labels_fields.py`); takeoff is the year of the field's 1,000th US grant from Google Patents Public
-  Data. The grey benchmark in Figure 7 is the long-run sample reweighted to each firm's technology-class mix in the decade,
+  Data. The grey benchmark in Figure 6 is the long-run sample reweighted to each firm's technology-class mix in the decade,
   because the pooled sample weights the 11 classes equally and single-industry firms differ from it mainly through
   their class. Generic standard citations (IEEE 802.11, IEEE 754,
   the IEEE dictionary) are labeled inconsistently between method and context and need a codebook rule.

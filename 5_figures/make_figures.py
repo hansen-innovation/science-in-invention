@@ -8,15 +8,14 @@ Papanikolaou, Seru and Taddy (2021, Figure 5): 'Figure n. Title' centred on top 
 Arial with black axes and outlines, short notes below whose numbers are computed here. Numbering follows the README.
   longrun_overall.png     Figure 1: share of grants citing science by class (rows) and role of the cited work by decade
   longrun_by_class.png    Figure 2: role of the cited work by class and decade, long-run sample
-  function_overall.png    Figure 3: what the cited paper does, paper-citing windows of the pilot
-  function_by_sector.png  Figure 4: shares by sector, pilot
-  function_by_firm.png    Figure 5: shares by firm, decade sample pooled over decades
-  what_is_cited.png       Figure 6: cited-document type, paper vs patent
+  function_by_sector.png  Figure 3: role of the cited work by sector, pilot (role_dots)
+  function_by_firm.png    Figure 4: role of the cited work by firm, decade sample pooled over decades (role_dots)
+  what_is_cited.png       Figure 5: cited-document type, paper vs patent
   function_by_decade.png  Figure A1: shares by sector and decade, nine-firm decade sample (superseded by Figure 2)
-  firms_by_role.png       Figure 7: role of the cited work by firm and decade, eleven firms (data/2_label/firms/)
-  firms_long_run.png      Figure 8: six firms over the long run, time running down
-  fields_by_role.png      Figure 9: role of the cited work by technology field and decade, fields by takeoff year (data/2_label/fields/)
-  fields_maturity.png     Figure 10: decade-adjusted role shares by years since the field's takeoff
+  firms_by_role.png       Figure 6: role of the cited work by firm and decade, eleven firms (data/2_label/firms/)
+  firms_long_run.png      Figure 7: six firms over the long run, time running down
+  fields_by_role.png      Figure 8: role of the cited work by technology field and decade, fields by takeoff year (data/2_label/fields/)
+  fields_maturity.png     Figure 9: decade-adjusted role shares by years since the field's takeoff
 """
 import collections, csv, json, pathlib, sys
 import matplotlib
@@ -168,34 +167,50 @@ def draw_rows(ax, groups, cats, show_n=True, min_label=0.12):
     style_x(ax)
 
 
-@paper_rc
-def figure_overall():
-    rows = [r for r in jsonl(PILOT) if not r.get("is_family_duplicate") and r["cited_doc_type"] == "paper"]
-    c = collections.Counter(r["function"] for r in rows); n = len(rows)
-    groups = [(None, [(DISPLAY[f], None) for f in FUNCS])]
-    fig, ax, notes_y = canvas(groups, "Figure 3. What the Cited Paper Does in the Patent", note_lines=2)
-    for y, f in enumerate(FUNCS):
-        v = c[f] / n
-        ax.barh(y, v, height=0.62, color=PAL.get(f, PAL["other"]), edgecolor=INK, linewidth=0.5)
-        pct = "<1" if 0 < v * 100 < 0.5 else f"{v * 100:.0f}"
-        ax.text(v + 0.006, y, f"{pct} ({c[f]})", va="center", ha="left", fontsize=8, color=INK)
-    ax.set_ylim(len(FUNCS) - 0.45, -0.6); ax.set_yticks(range(len(FUNCS))); ax.set_yticklabels([DISPLAY[f] for f in FUNCS], fontsize=8.5, color=INK)
-    style_x(ax, x_max=0.42)
-    paper_notes(fig, notes_y, f"Share of the {n} paper-citing windows of the pilot (patents with priority 2017 or later; family "
-                "duplicates removed) by the role of the cited paper; counts in parentheses. Roles are coded by claude-fable-5-1.")
-    fig.savefig(OUT / "function_overall.png", dpi=200, bbox_inches="tight", pad_inches=0.15); plt.close(fig)
+def role_dots(fig, groups, counts, pooled, top, bottom, x0, gap, labels=None):
+    """Cross-section in the layout of role_grid: one row per group, one column per role of the cited work (MAIN); a dot
+    at the group's share on a line from zero, a grey tick at the pooled share; one scale for every column (0 to the
+    largest share, rounded up to a tenth). Returns that scale."""
+    cw = (0.985 - x0 - gap * (len(MAIN) - 1)) / len(MAIN)
+    mx = max(counts[g][f] / sum(counts[g].values()) for g in groups for f in MAIN); mx = -(-mx * 10 // 1) / 10
+    for j, f in enumerate(MAIN):
+        cx = x0 + j * (cw + gap)
+        ax = fig.add_axes([cx, bottom, cw, top - bottom])
+        fig.text(cx, top + 0.012, LR_BAND_LABEL.get(f, DISPLAY[f]), fontsize=8.5, color=INK, va="bottom", linespacing=1.1)
+        pv = pooled[f] / sum(pooled.values())
+        for k, g in enumerate(groups):
+            v = counts[g][f] / sum(counts[g].values()); y = len(groups) - 1 - k
+            ax.plot([0, v], [y, y], color=GRID_COLOR[f], linewidth=1.2, solid_capstyle="round", zorder=2)
+            ax.plot([v], [y], "o", color=GRID_COLOR[f], markersize=4.5, zorder=3)
+            ax.plot([pv, pv], [y - 0.28, y + 0.28], color="#b8b5ae", linewidth=1.0, zorder=1)
+        ax.set_xlim(0, mx); ax.set_ylim(-0.6, len(groups) - 0.4); ax.set_yticks(range(len(groups)))
+        ax.set_yticklabels([(labels or {}).get(g, g) for g in reversed(groups)] if j == 0 else [""] * len(groups), fontsize=8.3, color=INK)
+        ax.set_xticks([0, mx / 2, mx]); ax.set_xticklabels(["0", f"{mx * 50:.0f}", f"{mx * 100:.0f}"], fontsize=7.5, color=INK2)
+        ax.tick_params(axis="y", length=0, pad=4); ax.tick_params(axis="x", length=3, width=0.7, color=INK, pad=2)
+        for side in ("top", "right"):
+            ax.spines[side].set_visible(False)
+        for side in ("left", "bottom"):
+            ax.spines[side].set_color(INK); ax.spines[side].set_linewidth(0.8)
+    return mx
 
 
 @paper_rc
 def figure_sector():
-    rows = read_csv(DATA / "4_aggregate" / "pilot" / "profiles_sector.csv")
-    rows.sort(key=lambda r: -r["foundation"])
-    groups = [(None, [(cap(r["key"]["sector"]), r) for r in rows])]
-    fig, ax, notes_y = canvas(groups, "Figure 4. What the Cited Science Does, by Sector", legend=CATS)
-    draw_rows(ax, groups, CATS)
-    paper_notes(fig, notes_y, f"Shares of the {sum(r['n'] for r in rows)} pilot windows citing papers, books, standards documents "
-                "or mixed sets (family duplicates removed), by sector; windows in parentheses. Other combines source of materials "
-                "or data, reference list entry and own earlier patent. Roles are coded by claude-fable-5-1.")
+    """Figure 3: the pilot's science-citing windows by sector, one column per role (role_dots); grey tick: all sectors."""
+    rows = science_rows(PILOT); sector_map = load_sector_map()
+    counts = collections.defaultdict(collections.Counter); pooled = collections.Counter()
+    for r in rows:
+        sct = cap(r.get("sector") or sector_map.get(r["assignee"], "other")); counts[sct][r["function"]] += 1; pooled[r["function"]] += 1
+    groups = sorted(counts, key=lambda g: -counts[g]["foundation"] / sum(counts[g].values()))
+    H = 0.42 * len(groups) + 2.6
+    fig = plt.figure(figsize=(7.0, H))
+    paper_title(fig, 1 - 0.32 / H, "Figure 3. What the Cited Science Does, by Sector")
+    top, bottom = 1 - 0.95 / H, 1.45 / H
+    mx = role_dots(fig, groups, counts, pooled, top, bottom, 0.26, 0.022, labels={g: f"{g} ({sum(counts[g].values())})" for g in groups})
+    paper_notes(fig, bottom - 0.55 / H,
+        f"Share of each sector's science-citing pilot windows ({len(rows)} windows citing papers, books, standards documents or "
+        "mixed sets, family duplicates removed; windows in parentheses) in which the cited work plays the role above the column. "
+        f"Grey tick: all sectors pooled. Scale: 0 to {mx * 100:.0f} percent. Roles are coded by claude-fable-5-1.")
     fig.savefig(OUT / "function_by_sector.png", dpi=200, bbox_inches="tight", pad_inches=0.15); plt.close(fig)
 
 
@@ -215,18 +230,22 @@ def figure_decade():
 
 @paper_rc
 def figure_firm():
-    by_firm = collections.defaultdict(collections.Counter)
-    canon = {"IBM": "International Business Machines"}
+    """Figure 4: the decade sample's nine firms, all decades pooled, one column per role (role_dots); grey tick: all firms."""
+    by = collections.defaultdict(collections.Counter); pooled = collections.Counter()
+    canon = {"International Business Machines": "IBM"}
     for r in science_rows(DECADES):
-        by_firm[canon.get(r["query_assignee"], r["query_assignee"])][r["function"]] += 1
-    short = {"International Business Machines": "IBM"}
-    sectors = [("Pharma", ["Pfizer", "Eli Lilly", "Bristol-Myers"]), ("Chemicals", ["Dow Chemical", "Du Pont", "Air Products"]),
-               ("Electronics", ["International Business Machines", "General Electric", "Texas Instruments"])]
-    groups = [(h, [(short.get(f, f), shares(by_firm[f])) for f in firms if sum(by_firm[f].values()) >= 5]) for h, firms in sectors]
-    fig, ax, notes_y = canvas(groups, "Figure 5. The Same Shares by Firm", legend=CATS, note_lines=2)
-    draw_rows(ax, groups, CATS)
-    paper_notes(fig, notes_y, "The nine firms of the decade sample, all decades pooled; science-citing windows in parentheses "
-                "(family duplicates removed). Roles are coded by claude-fable-5-1.")
+        f = canon.get(r["query_assignee"], r["query_assignee"]); by[f][r["function"]] += 1; pooled[r["function"]] += 1
+    order = ["Pfizer", "Eli Lilly", "Bristol-Myers", "Dow Chemical", "Du Pont", "Air Products", "IBM", "General Electric", "Texas Instruments"]
+    groups = [f for f in order if sum(by[f].values()) >= 5]
+    H = 0.42 * len(groups) + 2.6
+    fig = plt.figure(figsize=(7.0, H))
+    paper_title(fig, 1 - 0.32 / H, "Figure 4. The Same Shares by Firm, Decade Sample")
+    top, bottom = 1 - 0.95 / H, 1.45 / H
+    mx = role_dots(fig, groups, by, pooled, top, bottom, 0.26, 0.022, labels={g: f"{g} ({sum(by[g].values())})" for g in groups})
+    paper_notes(fig, bottom - 0.55 / H,
+        "Share of each firm's science-citing windows in the decade sample, all decades pooled (windows in parentheses, family "
+        "duplicates removed), in which the cited work plays the role above the column; pharma, chemicals and electronics "
+        f"firms from top to bottom. Grey tick: all nine firms pooled. Scale: 0 to {mx * 100:.0f} percent. Roles are coded by claude-fable-5-1.")
     fig.savefig(OUT / "function_by_firm.png", dpi=200, bbox_inches="tight", pad_inches=0.15); plt.close(fig)
 
 
@@ -247,8 +266,8 @@ def figure_cited():
     p_rows = sorted(((cap(s), doc_shares(v)) for s, v in pilot.items()), key=lambda kv: -kv[1]["science"])
     d_rows = [(cap(s), doc_shares(decades[s])) for s in ("pharma", "chemicals", "electrical/electronics")]
     groups = [("Pilot, priority 2017 or later", p_rows), ("Decade sample, 1900s to 2020s", d_rows)]
-    fig, ax, notes_y = canvas(groups, "Figure 6. What the Citation Window Points To", legend=DOC_CATS, note_lines=2)
-    draw_rows(ax, groups, DOC_CATS)
+    fig, ax, notes_y = canvas(groups, "Figure 5. What the Citation Window Points To", legend=DOC_CATS, note_lines=2)
+    draw_rows(ax, groups, DOC_CATS, min_label=1.1)
     paper_notes(fig, notes_y, "Share of citation windows by type of cited document, family duplicates removed; windows in "
                 "parentheses. Only science (papers, books, standards documents and mixed sets) enters the role profiles.")
     fig.savefig(OUT / "what_is_cited.png", dpi=200, bbox_inches="tight", pad_inches=0.15); plt.close(fig)
@@ -519,7 +538,7 @@ def class_matched_reference(rows, lr_rows):
 
 @paper_rc
 def figure_firms_grid(min_n=20, min_show=10):
-    """Figure 7: one row per firm (role_grid), every firm patent with an in-text science citation; grey: the long-run
+    """Figure 6: one row per firm (role_grid), every firm patent with an in-text science citation; grey: the long-run
     sample reweighted to the firm's technology-class mix in each decade (class_matched_reference)."""
     rows = science_rows(FIRMS_FILE)
     by, _ = cells_by(rows, "firm")
@@ -530,7 +549,7 @@ def figure_firms_grid(min_n=20, min_show=10):
     n = {f: sum(sum(by[f][d].values()) for d in LR_DECADES) for f in firms}
     H = 0.66 * len(firms) + 2.7
     fig = plt.figure(figsize=(7.0, H))
-    paper_title(fig, 1 - 0.32 / H, "Figure 7. How Firms Use the Science They Cite")
+    paper_title(fig, 1 - 0.32 / H, "Figure 6. How Firms Use the Science They Cite")
     top, bottom = 1 - 1.0 / H, 1.75 / H
     scales = role_grid(fig, firms, by, ref, top, bottom, 0.2, 0.024, min_n=min_n, min_show=min_show, ref_by_group=ref_g)
     lo, hi = min(n, key=n.get), max(n, key=n.get)
@@ -567,13 +586,13 @@ def stacked_down(ax, shares_by_row):
 
 @paper_rc
 def figure_firms_stacked(firms=("AT&T", "General Electric", "DuPont", "IBM", "Pfizer", "Google"), min_n=20):
-    """Figure 8: six firms with long records, role of the cited work by decade, time running down (Kelly et al. right
+    """Figure 7: six firms with long records, role of the cited work by decade, time running down (Kelly et al. right
     panel); decades with fewer than min_n science-citing patents are left blank."""
     by, _ = cells_by(science_rows(FIRMS_FILE), "firm")
     decs = LR_DECADES[2:]
     H = 6.6
     fig = plt.figure(figsize=(7.0, H))
-    paper_title(fig, 1 - 0.32 / H, "Figure 8. Six Firms, 1920s to 2020s")
+    paper_title(fig, 1 - 0.32 / H, "Figure 7. Six Firms, 1920s to 2020s")
     fig.legend([Patch(facecolor=c, edgecolor=INK, linewidth=0.5) for _, _, c in LR_CATS], [n for _, n, _ in LR_CATS],
                loc="upper center", bbox_to_anchor=(0.5, 1 - 0.48 / H), ncol=3, frameon=False, fontsize=8, labelcolor=INK,
                handlelength=1.0, handleheight=1.0, columnspacing=1.6, handletextpad=0.5, borderaxespad=0)
@@ -618,14 +637,14 @@ def field_takeoff(threshold=1000):
 
 @paper_rc
 def figure_fields_grid(min_n=20, min_show=10):
-    """Figure 9: one row per technology field, oldest takeoff first (role_grid); the dashed line marks the year of the
+    """Figure 8: one row per technology field, oldest takeoff first (role_grid); the dashed line marks the year of the
     field's 1,000th US grant; grey: all fields pooled."""
     by, pooled = cells_by(science_rows(FIELDS_FILE), "field")
     take = field_takeoff()
     fields = sorted([f for f in by if f in take and any(sum(by[f][d].values()) >= min_n for d in LR_DECADES)], key=lambda f: (take[f], f))
     H = 0.62 * len(fields) + 2.6
     fig = plt.figure(figsize=(7.0, H))
-    paper_title(fig, 1 - 0.32 / H, "Figure 9. Technology Fields of Different Ages")
+    paper_title(fig, 1 - 0.32 / H, "Figure 8. Technology Fields of Different Ages")
     top, bottom = 1 - 1.0 / H, 1.6 / H
     scales = role_grid(fig, fields, by, pooled, top, bottom, 0.255, 0.024, labels={f: f"{f} ({take[f]})" for f in fields},
                        marks=take, min_n=min_n, min_show=min_show)
@@ -682,12 +701,12 @@ def maturity_margins(rows, take):
 
 @paper_rc
 def figure_maturity():
-    """Figure 10: decade-adjusted role shares by field age (maturity_margins), one row per role in the style of Kelly et
+    """Figure 9: decade-adjusted role shares by field age (maturity_margins), one row per role in the style of Kelly et
     al. (2021, Figure 5, left panel); writes the numbers to data/5_figures/maturity_margins.csv."""
     rows = science_rows(FIELDS_FILE)
     take = field_takeoff()
     by, _ = cells_by(rows, "field")
-    rows = [r for r in rows if any(sum(by[r["field"]][d].values()) >= 20 for d in LR_DECADES)]  # the fields of Figure 9
+    rows = [r for r in rows if any(sum(by[r["field"]][d].values()) >= 20 for d in LR_DECADES)]  # the fields of Figure 8
     mm = maturity_margins(rows, take)
     with open(OUT / "maturity_margins.csv", "w", newline="", encoding="utf-8") as fcsv:
         w = csv.writer(fcsv); w.writerow(["role", "age_bin", "adjusted_share", "ci_low", "ci_high", "raw_share", "n_patents"])
@@ -696,7 +715,7 @@ def figure_maturity():
                 w.writerow([f, name.replace("\n", " "), f"{m:.4f}", f"{lo:.4f}", f"{hi:.4f}", f"{raw:.4f}", n])
     H = 6.2
     fig = plt.figure(figsize=(7.0, H))
-    paper_title(fig, 1 - 0.32 / H, "Figure 10. Science Use by the Age of a Technology Field")
+    paper_title(fig, 1 - 0.32 / H, "Figure 9. Science Use by the Age of a Technology Field")
     top, bottom = 1 - 0.75 / H, 1.75 / H
     xs = list(range(len(AGE_BINS)))
     axes = kelly_rows(fig, 0.3, 0.5, top, bottom, len(MAIN))
@@ -718,7 +737,7 @@ def figure_maturity():
     n = [t[4] for t in mm[MAIN[0]]]
     paper_notes(fig, bottom - 0.82 / H,
         "Share of science-citing patents in which the cited work plays each role, by the age of the patent's technology field "
-        "in its decade (decade midpoint minus the year of the field's 1,000th US grant), for the fields of Figure 9. Solid "
+        "in its decade (decade midpoint minus the year of the field's 1,000th US grant), for the fields of Figure 8. Solid "
         "line: shares adjusted for decade fixed effects, so that fields of different ages are compared within the same decade, "
         "with 95% intervals clustered by field; dotted line: raw shares; each row on its own scale. The youngest bin holds mostly "
         "lasers, genetic engineering, AI, lithium batteries and quantum computing, the oldest only fields that took off before 1912. Patents per age bin: "
@@ -727,7 +746,7 @@ def figure_maturity():
 
 
 if __name__ == "__main__":
-    figure_overall(); figure_sector(); figure_decade(); figure_firm(); figure_cited()
+    figure_sector(); figure_decade(); figure_firm(); figure_cited()
     if LONGRUN.exists():
         figure_longrun_classes(); figure_longrun_overall()
     if FIRMS_FILE.exists() and LONGRUN.exists():
