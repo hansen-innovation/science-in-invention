@@ -1,8 +1,8 @@
 # Benchmark results
 
-Generated 2026-11-02 by `benchmark/subagent_batches.py report`.
+Generated 2026-11-02 by `3_validate/subagent_batches.py report`.
 
-Each section compares a sample's label file (first coder, the source of truth for that sample) with a blind second coder. Subagent coders ran as Claude Code subagents on batches of 25-30 windows with the same guide `prompts/label_citation_function.md` and `schema.json`, without access to the other coder's labels. Two LLM coders are not a human benchmark; the 2,000-window double-coded human benchmark is still the release criterion.
+Each section compares a sample's label file (first coder, the source of truth for that sample) with a blind second coder. The provider in parentheses says how the second coder ran: `claude-code-subagent` coders were Claude Code subagents on batches of 25-30 windows; `chatgpt.com` coders were GPT-6 Pro chats (thinking effort max) given the batch of 100 windows as an attached file. Every coder had the same guide `2_label/prompts/label_citation_function.md` and `schema.json` and no access to the other coder's labels. Two LLM coders are not a human benchmark; the 2,000-window double-coded human benchmark is still the release criterion.
 
 ## pilot/citation_windows_labeled.jsonl
 
@@ -74,7 +74,80 @@ most common disagreements:
   standards_doc -> mixed: 1
 ```
 
-## pilot/decades/citation_windows_labeled.jsonl
+## pilot/citation_windows_labeled.jsonl
+
+First coder: `claude-fable-5-1 (interactive session; the L dict next to the file)`. Second coder: `gpt-6-pro` (chatgpt.com, thinking effort max, batches of 100, guide version `276adff408`). 515 of 515 windows coded by both.
+
+### function
+
+```
+n=515 accuracy=0.705 kappa=0.619
+label                             n_ref   prec    rec
+background_context                   86   0.41   0.73
+data_or_materials_source             25   0.67   0.72
+definitional_boilerplate             42   0.89   0.74
+foundation                           69   0.88   0.65
+incorporated_reference_list           7   0.83   0.71
+method_or_tool                      211   0.90   0.76
+own_family_continuation              14   1.00   0.93
+prior_art_distinguished              61   0.53   0.44
+
+most common disagreements:
+  method_or_tool -> background_context: 36
+  prior_art_distinguished -> background_context: 32
+  foundation -> background_context: 17
+  background_context -> prior_art_distinguished: 15
+  definitional_boilerplate -> method_or_tool: 7
+  method_or_tool -> data_or_materials_source: 5
+  foundation -> prior_art_distinguished: 4
+  background_context -> method_or_tool: 4
+  method_or_tool -> prior_art_distinguished: 4
+  definitional_boilerplate -> data_or_materials_source: 3
+  method_or_tool -> definitional_boilerplate: 3
+  foundation -> method_or_tool: 3
+  incorporated_reference_list -> background_context: 2
+  data_or_materials_source -> background_context: 2
+  data_or_materials_source -> foundation: 2
+  data_or_materials_source -> method_or_tool: 2
+  background_context -> foundation: 2
+  prior_art_distinguished -> foundation: 1
+  background_context -> data_or_materials_source: 1
+  definitional_boilerplate -> background_context: 1
+  prior_art_distinguished -> method_or_tool: 1
+  background_context -> definitional_boilerplate: 1
+  own_family_continuation -> method_or_tool: 1
+  method_or_tool -> foundation: 1
+  data_or_materials_source -> prior_art_distinguished: 1
+  method_or_tool -> incorporated_reference_list: 1
+```
+
+### cited_doc_type
+
+```
+n=515 accuracy=0.926 kappa=0.869
+label                             n_ref   prec    rec
+book                                 27   0.74   0.93
+mixed                                51   0.84   0.75
+paper                               327   0.97   0.94
+patent                               94   0.96   0.99
+software_or_database                  4   0.33   1.00
+standards_doc                        12   1.00   0.92
+
+most common disagreements:
+  paper -> book: 8
+  mixed -> paper: 8
+  paper -> software_or_database: 7
+  paper -> mixed: 6
+  mixed -> patent: 3
+  book -> patent: 1
+  book -> paper: 1
+  mixed -> software_or_database: 1
+  mixed -> book: 1
+  patent -> paper: 1
+  standards_doc -> mixed: 1
+```
+
+## decades/citation_windows_labeled.jsonl
 
 First coder: `claude-fable-5-1 (interactive session; the L dict next to the file)`. Second coder: `claude-opus-5-5` (claude-code-subagent, guide version `276adff408`). 420 of 420 windows coded by both.
 
@@ -133,7 +206,7 @@ most common disagreements:
   patent -> paper: 1
 ```
 
-## pilot/longrun/citation_windows_labeled.jsonl
+## longrun/citation_windows_labeled.jsonl
 
 First coder: `claude-opus-5-5`. Second coder: `claude-fable-5-1` (claude-code-subagent, guide version `276adff408`). 3017 of 8288 windows coded by both.
 
@@ -233,9 +306,90 @@ most common disagreements:
   standards_doc -> none: 1
 ```
 
-## pilot/firms/citation_windows_labeled.jsonl
+## longrun/citation_windows_labeled.jsonl
 
-First coder: `claude-opus-5-5`. Second coder: `claude-opus-5-5` (claude-code-subagent, guide version `276adff408`). 2585 of 52107 windows coded by both.
+First coder: `claude-opus-5-5`. Second coder: `gpt-6-pro` (chatgpt.com, thinking effort max, batches of 100, guide version `276adff408`). 1500 of 8288 windows coded by both.
+
+### function
+
+```
+n=1500 accuracy=0.757 kappa=0.671
+label                             n_ref   prec    rec
+background_context                  521   0.66   0.90
+data_or_materials_source             81   0.94   0.62
+definitional_boilerplate             39   0.85   0.59
+foundation                          130   0.82   0.70
+incorporated_reference_list          79   0.80   0.10
+method_or_tool                      394   0.86   0.88
+own_family_continuation              23   0.90   0.39
+prior_art_distinguished             233   0.82   0.60
+
+most common disagreements:
+  prior_art_distinguished -> background_context: 90
+  incorporated_reference_list -> background_context: 71
+  method_or_tool -> background_context: 37
+  foundation -> background_context: 23
+  data_or_materials_source -> method_or_tool: 19
+  background_context -> method_or_tool: 18
+  background_context -> prior_art_distinguished: 18
+  background_context -> foundation: 14
+  definitional_boilerplate -> background_context: 9
+  data_or_materials_source -> background_context: 9
+  foundation -> method_or_tool: 8
+  own_family_continuation -> method_or_tool: 8
+  foundation -> prior_art_distinguished: 7
+  own_family_continuation -> background_context: 6
+  method_or_tool -> prior_art_distinguished: 5
+  definitional_boilerplate -> method_or_tool: 4
+  background_context -> definitional_boilerplate: 3
+  prior_art_distinguished -> foundation: 2
+  data_or_materials_source -> foundation: 2
+  method_or_tool -> data_or_materials_source: 2
+  method_or_tool -> incorporated_reference_list: 1
+  data_or_materials_source -> prior_art_distinguished: 1
+  method_or_tool -> foundation: 1
+  prior_art_distinguished -> method_or_tool: 1
+  foundation -> own_family_continuation: 1
+  definitional_boilerplate -> foundation: 1
+  definitional_boilerplate -> incorporated_reference_list: 1
+  method_or_tool -> definitional_boilerplate: 1
+  definitional_boilerplate -> data_or_materials_source: 1
+```
+
+### cited_doc_type
+
+```
+n=1500 accuracy=0.958 kappa=0.935
+label                             n_ref   prec    rec
+book                                133   0.86   0.95
+mixed                               106   0.88   0.71
+none                                253   0.98   1.00
+paper                               833   0.99   0.97
+patent                              110   0.85   1.00
+software_or_database                  1   0.50   1.00
+standards_doc                        64   0.97   0.94
+
+most common disagreements:
+  mixed -> patent: 16
+  mixed -> book: 10
+  paper -> mixed: 9
+  paper -> book: 9
+  mixed -> paper: 5
+  standards_doc -> none: 3
+  paper -> patent: 2
+  book -> paper: 2
+  book -> patent: 1
+  paper -> software_or_database: 1
+  paper -> standards_doc: 1
+  book -> mixed: 1
+  standards_doc -> book: 1
+  book -> standards_doc: 1
+  book -> none: 1
+```
+
+## firms/citation_windows_labeled.jsonl.gz
+
+First coder: `claude-opus-5-5`. Second coder: `claude-opus-5-5` (claude-code-subagent, guide version `276adff408`). 2585 of 52816 windows coded by both.
 
 ### function
 
@@ -315,7 +469,7 @@ most common disagreements:
   paper -> software_or_database: 1
 ```
 
-## pilot/fields/citation_windows_labeled.jsonl
+## fields/citation_windows_labeled.jsonl
 
 First coder: `claude-opus-5-5`. Second coder: `claude-opus-5-5` (claude-code-subagent, guide version `276adff408`). 235 of 5822 windows coded by both.
 

@@ -19,8 +19,14 @@ stratum, and the benchmark re-run on every prompt or model change.
 import argparse, collections, json, sys
 
 
+def opn(path):
+    """Open a JSONL file for reading, gzip-compressed (.gz) or plain."""
+    import gzip
+    return gzip.open(path, "rt", encoding="utf-8") if str(path).endswith(".gz") else open(path, encoding="utf-8")
+
+
 def load(path, id_field):
-    return {r[id_field]: r for r in (json.loads(l) for l in open(path, encoding="utf-8"))}
+    return {r[id_field]: r for r in (json.loads(l) for l in opn(path))}
 
 
 def kappa(pairs):
@@ -58,8 +64,7 @@ def schema_check(schema_path, input_path):
     schema = json.load(open(schema_path, encoding="utf-8"))
     props, req = schema["properties"], schema.get("required", [])
     bad = 0
-    import gzip
-    opened = gzip.open(input_path, "rt", encoding="utf-8") if str(input_path).endswith(".gz") else open(input_path, encoding="utf-8")
+    opened = opn(input_path)
     for n, line in enumerate(opened, 1):
         r = json.loads(line)
         for k in req:

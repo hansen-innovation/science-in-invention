@@ -48,7 +48,7 @@ def split(raw, batch_dir, size):
     print(f"{len(raw)} windows -> {(len(raw) + size - 1) // size} batches in {batch_dir}")
 
 
-def merge(raw, labels_dir, model, output):
+def merge(raw, labels_dir, model, output, provider="claude-code-subagent"):
     props = SCHEMA["properties"]
     got, bad = {}, []
     for p in sorted(pathlib.Path(labels_dir).glob("*.jsonl")):
@@ -75,7 +75,7 @@ def merge(raw, labels_dir, model, output):
             if r["window_id"] not in got:
                 continue
             row = dict(r); row.update({k: got[r["window_id"]][k] for k in props})
-            row["_model"] = model; row["_provider"] = "claude-code-subagent"; row["_prompt_version"] = pv
+            row["_model"] = model; row["_provider"] = provider; row["_prompt_version"] = pv
             f.write(json.dumps(row, ensure_ascii=False) + "\n")
     print(f"{len(got) - len(extra)} of {len(raw)} windows labeled -> {output}")
     for b in bad: print("  problem:", b)
@@ -87,20 +87,23 @@ def merge(raw, labels_dir, model, output):
 def report(pairs, output):
     """Write results.md: agreement between two LLM coders on each sample, from validate.agreement. Each pair is
     (label file of the blind second coder, labeled file of the sample = first coder and source of truth)."""
-    from validate import agreement  # noqa: E402
+    from validate import agreement, opn  # noqa: E402
     L = ["# Benchmark results", "",
          f"Generated {datetime.date.today().isoformat()} by `3_validate/subagent_batches.py report`.", "",
          "Each section compares a sample's label file (first coder, the source of truth for that sample) with a blind second "
-         "coder. Subagent coders ran as Claude Code subagents on batches of 25-30 windows with the same guide "
-         "`2_label/prompts/label_citation_function.md` and `schema.json`, without access to the other coder's labels. Two LLM coders are "
-         "not a human benchmark; the 2,000-window double-coded human benchmark is still the release criterion.", ""]
+         "coder. The provider in parentheses says how the second coder ran: `claude-code-subagent` coders were Claude Code "
+         "subagents on batches of 25-30 windows; `chatgpt.com` coders were GPT-6 Pro chats (thinking effort max) given the "
+         "batch of 100 windows as an attached file. Every coder had the same guide `2_label/prompts/label_citation_function.md` "
+         "and `schema.json` and no access to the other coder's labels. Two LLM coders are not a human benchmark; the "
+         "2,000-window double-coded human benchmark is still the release criterion.", ""]
     for labels_path, gold in pairs:
-        rows = [json.loads(l) for l in open(labels_path, encoding="utf-8")]
-        gold_rows = [json.loads(l) for l in open(gold, encoding="utf-8")]
+        rows = [json.loads(l) for l in opn(labels_path)]
+        gold_rows = [json.loads(l) for l in opn(gold)]
+        g = pathlib.Path(gold)
         first = gold_rows[0].get("_model") or "claude-fable-5-1 (interactive session; the L dict next to the file)"
         ids = {r["window_id"] for r in gold_rows}
         both = sum(r["window_id"] in ids for r in rows)
-        L += [f"## {gold}", "",
+        L += [f"## {g.parent.name}/{g.name}", "",
               f"First coder: `{first}`. Second coder: `{rows[0]['_model']}` ({rows[0]['_provider']}, guide version "
               f"`{rows[0]['_prompt_version']}`). {both} of {len(gold_rows)} windows coded by both.", ""]
         for field in ("function", "cited_doc_type"):
@@ -117,6 +120,7 @@ if __name__ == "__main__":
     p1 = sub.add_parser("split"); p1.add_argument("--raw", nargs="+", required=True); p1.add_argument("--batch-dir", required=True); p1.add_argument("--size", type=int, default=25)
     p2 = sub.add_parser("merge"); p2.add_argument("--raw", nargs="+", required=True); p2.add_argument("--labels-dir", required=True)
     p2.add_argument("--model", required=True); p2.add_argument("--output", required=True)
+    p2.add_argument("--provider", default="claude-code-subagent", help="how the coder ran (claude-code-subagent, chatgpt.com, ...)")
     p3 = sub.add_parser("report"); p3.add_argument("--pair", nargs=2, action="append", required=True, metavar=("LABELS", "GOLD"),
                                                    help="second-coder label file and the sample's labeled file; repeat per sample")
     p3.add_argument("--output", required=True)
@@ -127,4 +131,4 @@ if __name__ == "__main__":
     if a.cmd == "split":
         split(raw, a.batch_dir, a.size)
     else:
-        sys.exit(merge(raw, a.labels_dir, a.model, a.output))
+        sys.exit(merge(raw, a.labels_dir, a.model, a.output, a.provider))
