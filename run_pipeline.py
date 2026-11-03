@@ -1,11 +1,11 @@
 """End-to-end pipeline on a list of patents: fetch -> window -> label -> aggregate.
 
     # live: fetch descriptions from Google Patents (samples) and label with a model
-    python run_pipeline.py --patents US11524023B2 US12620170B2 --out examples/demo --provider openai \
+    python run_pipeline.py --patents US11524023B2 US12620170B2 --out data/examples/demo --provider openai \
         --base-url https://api.together.xyz/v1 --model Qwen/Qwen3.6-32B-Instruct
 
     # offline: start from saved paragraphs (examples/demo/paragraphs.jsonl) and skip the model call
-    python run_pipeline.py --paragraphs examples/demo/paragraphs.jsonl --out examples/demo --no-label
+    python run_pipeline.py --paragraphs data/examples/demo/paragraphs.jsonl --out data/examples/demo --no-label
 
 Outputs in --out:
     paragraphs.jsonl   one row per patent: metadata + description paragraphs (the fetch stage)
@@ -17,7 +17,8 @@ Outputs in --out:
 import argparse, collections, csv, json, pathlib, re, sys, time
 
 HERE = pathlib.Path(__file__).parent
-sys.path.insert(0, str(HERE))
+for _d in ("1_fetch", "2_label", "4_aggregate"):
+    sys.path.insert(0, str(HERE / _d))
 from fetch_patents import windows, _Desc  # noqa: E402
 from aggregate import aggregate, FUNCS  # noqa: E402
 
@@ -51,10 +52,10 @@ def make_windows(patents):
 
 
 def label(rows, provider, model, base_url, cache_dir):
-    from common.llm import Chat, label_one  # noqa: WPS433
+    from llm import Chat, label_one  # noqa: WPS433
     import hashlib
-    prompt = (HERE / "prompts" / "label_citation_function.md").read_text(encoding="utf-8")
-    schema = json.loads((HERE / "schema.json").read_text(encoding="utf-8"))
+    prompt = (HERE / "2_label" / "prompts" / "label_citation_function.md").read_text(encoding="utf-8")
+    schema = json.loads((HERE / "2_label" / "schema.json").read_text(encoding="utf-8"))
     chat = Chat(provider=provider, model=model, base_url=base_url)
     pv = hashlib.sha256(prompt.encode()).hexdigest()[:10]
     for r in rows:

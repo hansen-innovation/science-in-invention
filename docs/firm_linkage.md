@@ -51,7 +51,7 @@ deduplication; sector profiles use the 395 windows citing papers, books, standar
 Pharma cites science as the basis of the invention (34%) and as context (27%); software/AI, biotech tools and
 automotive/aerospace cite methods (57%, 50%, 51%); semiconductors and energy cite prior approaches improved on
 (23%, 24%). These are descriptive patterns in a purposive sample, not population estimates or validated firm
-linkages. Output: `pilot/profiles_sector.csv`, `pilot/profiles_assignee.csv`, `pilot/profiles_year.csv`.
+linkages. Output: `data/4_aggregate/pilot/profiles_sector.csv`, `data/4_aggregate/pilot/profiles_assignee.csv`, `data/4_aggregate/pilot/profiles_year.csv`.
 Shares are reported with window and patent counts so that small cells are visible.
 
 ## Known pitfalls

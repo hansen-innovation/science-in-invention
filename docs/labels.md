@@ -46,7 +46,7 @@ Three boundaries need the rules most. Basis versus context: does the patent act 
 it? Method versus materials: a procedure versus a thing. Improved on versus context: is a shortcoming stated? In
 every case the labeler writes down the words that justify the call (the `note` field), so each label can be audited.
 
-These rules spell out the definitions in `prompts/label_citation_function.md`; the prompt itself is unchanged since
+These rules spell out the definitions in `2_label/prompts/label_citation_function.md`; the prompt itself is unchanged since
 the pilots were labeled, and the rules go into the prompt and the codebook for the benchmark round.
 
 ## How well tested is the set?
@@ -63,10 +63,10 @@ more useful. The first tasks of the fellowship year:
   (foundation, method, context) to measure what the extra labels buy and where they disagree;
 - an open-coding pass in which the model describes the function in its own words for a sample of windows, then
   cluster the descriptions to look for uses the scheme misses;
-- the open-weight model comparison in `benchmark/`.
+- the open-weight model comparison in `3_validate/`.
 
 All labels in this repository were produced by one closed model (claude-fable-5-1) in an interactive session with
-`prompts/label_citation_function.md`. No second coder and no second model has labeled anything yet.
+`2_label/prompts/label_citation_function.md`. No second coder and no second model has labeled anything yet.
 
 ## References
 

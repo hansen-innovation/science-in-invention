@@ -4,7 +4,7 @@ __pycache__/
 .env
 *.tsv
 *.zip
-benchmark/labels_*.jsonl
+data/3_validate/labels_*.jsonl
 CLAUDE.md
 .claude/
 docs/proposal_i3_2027.md

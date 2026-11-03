@@ -32,13 +32,13 @@ applicant's own earlier patent. Tests and examples: [How it works](#how-it-works
 
 ## The long run, 1900s to 2020s
 
-![Figure 1: science in invention over the long run](figures/longrun_overall.png)
+![Figure 1: science in invention over the long run](data/5_figures/longrun_overall.png)
 
 Reliance on Science links a growing share of grants to papers from the 1940s on, most of all in chemistry and
 metallurgy (panel A). Among the 6,162 science-citing patents of the long-run sample, methods used lead in most
 decades, prior approaches improved on in the 1900s and 1980s, and context only in the 1990s and 2000s (panel B).
 
-![Figure 2: how science is used, by technology class](figures/longrun_by_class.png)
+![Figure 2: how science is used, by technology class](data/5_figures/longrun_by_class.png)
 
 One in-text citation window per patent, about 50 science-citing patents per class and decade; 104 of the 143 cells
 reach 50. The cells that do not, mostly before the 1930s, hold every in-text science citation the sampling frame, the
@@ -46,7 +46,7 @@ window finder and a full-text read could find; their lines are dotted or missing
 
 ## Firms and fields
 
-![Figure 7: how firms use the science they cite](figures/firms_by_role.png)
+![Figure 7: how firms use the science they cite](data/5_figures/firms_by_role.png)
 
 Every patent of eleven firms with an in-text citation to science, one window per patent, 38,272 science-citing
 patents after repeated window texts (continuations, boilerplate) are counted once. AT&T, General Electric and DuPont
@@ -55,9 +55,9 @@ cite science mainly as a method before 1950 and follow the economy-wide rise of 
 all methods used (74%, against 44% for its technology class): machine-learning, vision and systems papers, many of
 them its own.
 
-![Figure 8: six firms, 1920s to 2020s](figures/firms_long_run.png)
+![Figure 8: six firms, 1920s to 2020s](data/5_figures/firms_long_run.png)
 
-![Figure 9: technology fields of different ages](figures/fields_by_role.png)
+![Figure 9: technology fields of different ages](data/5_figures/fields_by_role.png)
 
 Fourteen fields defined by the first CPC code, up to 60 patents per field and decade, each dated by the year of its
 1,000th US grant. Lasers in the 1960s, genetic engineering and AI in the 1980s and quantum computing in the 1990s
@@ -65,7 +65,7 @@ cite science before their takeoff more often as the basis of the invention and l
 do in the same decade; the prior-approach share peaks 40 to 60 years after takeoff and is lowest in fields more than a
 century old.
 
-![Figure 10: science use by the age of a technology field](figures/fields_maturity.png)
+![Figure 10: science use by the age of a technology field](data/5_figures/fields_maturity.png)
 
 The age profile compares fields of different ages within a decade, not a field with its own past: with field fixed
 effects the method and prior-approach gaps vanish, and the basis gap is not significant at other takeoff dates. In
@@ -75,28 +75,28 @@ quantum computing 10%; pharmaceuticals 26% basis, polymers 3%).
 
 ## What the pilots show
 
-![Figure 3: what the cited paper does in the patent](figures/function_overall.png)
+![Figure 3: what the cited paper does in the patent](data/5_figures/function_overall.png)
 
 A method is the most common thing a patent takes from a paper (36% of 316 paper-citing windows).
 
-![Figure 4: what the cited science does, by sector](figures/function_by_sector.png)
+![Figure 4: what the cited science does, by sector](data/5_figures/function_by_sector.png)
 
 Pharma cites science for the biology the invention rests on and for disease context; software/AI, biotech tools and
 automotive firms for methods; semiconductors and energy have the largest shares of prior approaches improved on.
 
-![Figure 5: the same shares by firm](figures/function_by_firm.png)
+![Figure 5: the same shares by firm](data/5_figures/function_by_firm.png)
 
 Dow cites procedures where Du Pont and Air Products improve on prior approaches; Pfizer cites target biology where
 Bristol-Myers cites disease context; General Electric uses standards and papers as methods where IBM improves on them.
 
-![Figure 6: what the citation window points to](figures/what_is_cited.png)
+![Figure 6: what the citation window points to](data/5_figures/what_is_cited.png)
 
 "et al." does not mean a paper: in the decade sample's electronics sector, 27% of the citation windows point to other
 patents. The document-type label keeps those out of the profiles.
 
 The pilots are a demonstration, not estimates: cells are small (n in parentheses on every bar), the labels are model
 labels, and no human coder has labeled anything yet. The decade sample's shares by decade, superseded by the long-run
-sample, are in [figures/function_by_decade.png](figures/function_by_decade.png).
+sample, are in [data/5_figures/function_by_decade.png](data/5_figures/function_by_decade.png).
 
 ## How it works
 
@@ -137,58 +137,58 @@ flowchart TD
 The first four are substantive uses of science; context is weak use; the rest are drafting artifacts. The set adapts
 the citation-function schemes of information science (Moravcsik and Murugesan 1975; Jurgens et al. 2018) to patents,
 with the findings-versus-techniques split of Cohen, Nelson and Walsh (2002) at its center. Decision rules and what has
-not been tested yet: [docs/labels.md](docs/labels.md); the prompt: [prompts/label_citation_function.md](prompts/label_citation_function.md).
+not been tested yet: [docs/labels.md](docs/labels.md); the prompt: [2_label/prompts/label_citation_function.md](2_label/prompts/label_citation_function.md).
 The data files keep short machine labels (`foundation`, `method_or_tool`, `prior_art_distinguished`, ...).
 
 ## Data and reproduction
 
 | Sample | Patents | Assignees / target firms | Windows | Science-citing, de-duplicated | Files |
 | --- | --- | --- | --- | --- | --- |
-| Long-run sample, 11 technology classes, 1900s to 2020s | 8,288 | 4,852 | 8,288 | 6,162 | `pilot/longrun/` |
-| Firm sample, every science-citing patent of 11 firms, 1900s to 2020s | 52,107 | 11 | 52,107 | 38,272 | `pilot/firms/` |
-| Field sample, 14 technology fields, 1900s to 2020s | 5,822 | 2,612 | 5,822 | 5,462 | `pilot/fields/` |
-| Pilot, eight sectors, priority 2017+ | 200 | 127 | 515 | 395 | `pilot/` |
-| Decade sample, three sectors, 1900s to 2020s | 196 | 25 | 420 | 351 | `pilot/decades/` |
-| Worked example | 4 | 4 | 34 | 32 | `examples/demo/` |
+| Long-run sample, 11 technology classes, 1900s to 2020s | 8,288 | 4,852 | 8,288 | 6,162 | `data/*/longrun/` |
+| Firm sample, every science-citing patent of 11 firms, 1900s to 2020s | 52,107 | 11 | 52,107 | 38,272 | `data/*/firms/` |
+| Field sample, 14 technology fields, 1900s to 2020s | 5,822 | 2,612 | 5,822 | 5,462 | `data/*/fields/` |
+| Pilot, eight sectors, priority 2017+ | 200 | 127 | 515 | 395 | `data/*/pilot/` |
+| Decade sample, three sectors, 1900s to 2020s | 196 | 25 | 420 | 351 | `data/*/decades/` |
+| Worked example | 4 | 4 | 34 | 32 | `data/examples/demo/` |
 
 Each labeled row holds the patent, assignee, dates, window text, document type, function, confidence, verbatim
-citation string and rationale. `summary.md` in each folder holds the tables behind the figures;
-`examples/demo/report.md` walks through 34 windows.
+citation string and rationale. `data/4_aggregate/<sample>/summary.md` holds the tables behind the figures;
+`data/examples/demo/report.md` walks through 34 windows.
 
 ```text
 pip install -r requirements.txt
-bash scripts/rebuild_pilot.sh        # labeled files, profiles, figures, schema checks; no API key needed
+bash rebuild.sh        # labeled files, profiles, figures, schema checks; no API key needed
 
-python fetch_patents.py --source google --assignee "Genentech" --after-priority 20170101 --output new.jsonl
-python common/llm.py --prompt prompts/label_citation_function.md --schema schema.json --input new.jsonl --output new_labeled.jsonl
-python aggregate.py new_labeled.jsonl --by assignee
+python 1_fetch/fetch_patents.py --source google --assignee "Genentech" --after-priority 20170101 --output new.jsonl
+python 2_label/llm.py --prompt 2_label/prompts/label_citation_function.md --schema 2_label/schema.json --input new.jsonl --output new_labeled.jsonl
+python 4_aggregate/aggregate.py new_labeled.jsonl --by assignee
 ```
 
-`common/llm.py` runs on the Anthropic API or any OpenAI-compatible endpoint (vLLM, Together, DeepInfra), so an
-open-weight model can run the production pass; `common/validate.py agreement` compares two label files.
+`2_label/llm.py` runs on the Anthropic API or any OpenAI-compatible endpoint (vLLM, Together, DeepInfra), so an
+open-weight model can run the production pass; `3_validate/validate.py agreement` compares two label files.
 
 <details>
 <summary><b>Repository layout</b></summary>
 
 ```text
-schema.json                 JSON schema for one labeled window
-prompts/                    the labeling prompt
-docs/labels.md              why these labels; what has and has not been tested
-docs/firm_linkage.md        joins to PatentsView, DISCERN, KPSS and the 1900-1980 Golden Age firm panel
-fetch_patents.py            collection stage (Google Patents samples; PatentsView bulk text)
-run_pipeline.py             end-to-end: fetch -> window -> label -> aggregate -> report
-aggregate.py                science-use profiles by assignee, sector, year, decade
-common/llm.py               schema-constrained labeling, provider-agnostic, cached
-common/validate.py          agreement metrics and schema checks
-benchmark/                  second-coder agreement (results.md, subagent_batches.py); open-model run_benchmark.sh (not run yet)
-examples/demo/              worked example: four patents, every intermediate file, report.md
-pilot/, pilot/decades/      raw and labeled windows, labels_*.py (source of truth), profiles, summary.md
-pilot/longrun/              long-run sample: raw windows, labels_longrun.jsonl (source of truth), labels_longrun.py,
-                            labeled windows, profiles, summary.md, grants_citing_science.csv (Figure 1, panel A)
-pilot/firms/, pilot/fields/ firm and field samples, same files (the firm files gzip-compressed); fields also holds
-                            field_grants_by_year.csv (takeoff dates) and maturity_margins.csv (Figure 10)
-scripts/rebuild_pilot.sh    regenerates every derived file and figure, runs the schema checks
-scripts/make_figures.py     the README figures
+1_fetch/fetch_patents.py    collection stage: Google Patents samples, PatentsView bulk text, saved descriptions; the window finder
+2_label/                    the labeling prompt (prompts/), schema.json, llm.py (schema-constrained labeling, provider-agnostic,
+                            cached) and labels_*.py: the hand labels of the pilot and decade samples (source of truth) and the
+                            builders that join model labels to raw windows
+3_validate/                 validate.py (agreement metrics, schema checks), subagent_batches.py (blind second coding),
+                            run_benchmark.sh (open-weight models on an OpenAI-compatible endpoint)
+4_aggregate/aggregate.py    science-use profiles by assignee, sector, year, decade
+5_figures/make_figures.py   the README figures
+common/paths.py             where the data lives (data/ beside the code, or $SCIENCE_DATA)
+docs/                       labels.md (why these labels; what has and has not been tested), firm_linkage.md, pilot_method.md
+run_pipeline.py             end-to-end: fetch -> window -> label -> aggregate -> report;  rebuild.sh regenerates everything
+data/0_raw/<sample>/        citation windows as found (the only non-regenerable data; firm files gzip-compressed)
+data/1_fetch/fields/        US grants per field and year (takeoff dates)
+data/2_label/<sample>/      model label files (labels_<sample>.jsonl, source of truth for the model-labeled samples) and
+                            the labeled windows
+data/3_validate/results.md  second-coder and test-retest agreement
+data/4_aggregate/<sample>/  profiles and summary.md;  data/5_figures/  the figures and maturity_margins.csv
+data/examples/demo/         worked example: four patents, every intermediate file, report.md
 ```
 
 </details>
@@ -196,34 +196,35 @@ scripts/make_figures.py     the README figures
 <details>
 <summary><b>Provenance and limits</b></summary>
 
-- **Labels.** Pilot and decade sample: first pass by claude-fable-5-1 (`pilot/labels_pilot.py`,
-  `pilot/decades/labels_decades.py`), blind second pass by claude-opus-5-5 over all 935 windows (function kappa 0.73
+- **Labels.** Pilot and decade sample: first pass by claude-fable-5-1 (`2_label/labels_pilot.py`,
+  `2_label/labels_decades.py`), blind second pass by claude-opus-5-5 over all 935 windows (function kappa 0.73
   on the pilot and 0.78 on the decade sample; cited document type 0.91 and 0.93). Long-run sample: claude-opus-5-5
   as blind Claude Code subagents on all 8,288 windows, a blind claude-fable-5-1 pass on 3,017 of them (function kappa
   0.77, cited document type 0.91). Firm and field samples: claude-opus-5-5 blind subagents on all 57,929 windows; a
   blind second claude-opus-5-5 pass over every 20th batch (2,820 windows) gives the same function for 92% (kappa
   0.89) and the same document type for 98% (kappa 0.96), a measure of consistency, not accuracy. Details:
-  `benchmark/results.md`. No human coder has labeled anything yet; two models agreeing is not a human benchmark.
+  `data/3_validate/results.md`. No human coder has labeled anything yet; two models agreeing is not a human benchmark.
 - **Firm and field samples.** Firms are matched on assignee names (AT&T with Bell Labs and Western Electric, Google
   with DeepMind); every patent with an in-text Reliance on Science citation to a paper, plus pre-1980 patents whose
-  text carries a strict citation cue, keeps one window by the rules in `pilot/firms/labels_firms.py`. A window that
+  text carries a strict citation cue, keeps one window by the rules in `2_label/labels_firms.py`. A window that
   repeats the text of an earlier patent of the same firm is flagged and left out of the figures (14-57% of a firm's
   patents, continuations and templates). Fields are first-CPC-code groups (`local` scripts, listed in the docstring of
-  `pilot/fields/labels_fields.py`); takeoff is the year of the field's 1,000th US grant from Google Patents Public
-  Data. The pooled long-run benchmark weights the 11 classes equally, so single-industry firms should be read against
-  their own class in `pilot/longrun/profiles_sector_decade.csv`. Generic standard citations (IEEE 802.11, IEEE 754,
+  `2_label/labels_fields.py`); takeoff is the year of the field's 1,000th US grant from Google Patents Public
+  Data. The grey benchmark in Figure 7 is the long-run sample reweighted to each firm's technology-class mix in the decade,
+  because the pooled sample weights the 11 classes equally and single-industry firms differ from it mainly through
+  their class. Generic standard citations (IEEE 802.11, IEEE 754,
   the IEEE dictionary) are labeled inconsistently between method and context and need a codebook rule.
 - **Long-run sample.** Technology classes follow Kelly, Papanikolaou, Seru and Taddy (2021), assigned from the first
   CPC code. Per class and decade, patents come in hash order from a BigQuery table of every US grant 1900-2026 that
   Reliance on Science links to a paper or, before 1976, whose text matches a citation cue; each keeps one in-text
   citation window. Short cells were filled from further draws and from a full-text read (claude-opus-5-5) of every
   patent in them that Reliance on Science links to a paper with confidence 5 or more. Rules and yields: the
-  docstring of `pilot/longrun/labels_longrun.py`.
+  docstring of `2_label/labels_longrun.py`.
 - **Pilot and decade samples.** Pilot: the first two granted patents per assignee query in Google's ranking that
   contain "et al." (priority 2017+, up to three windows each). Decade sample: two patents per firm and decade for nine
   firms in pharma, chemicals and electronics, from Google Patents for the 1980s to 2010s and from the Reliance on
   Science frame on BigQuery otherwise, with period peers where the nine firms have no science-citing patents.
-  Details: `pilot/README_pilot_method.md` and the docstring of `pilot/decades/labels_decades.py`.
+  Details: `docs/pilot_method.md` and the docstring of `2_label/labels_decades.py`.
 - **Old OCR text.** Patents granted 1947-1975 print the front page's "References Cited" list inside the OCR text; the
   window finder cuts that block (`cut_references_cited`) so that only running-text citations count.
 - **Windows and identifiers.** The regex cue finder accepts noise by design; in the full build the window finder
@@ -238,7 +239,7 @@ scripts/make_figures.py     the README figures
 
 - [x] Pilot: 200 patents, 515 windows labeled with rationales; sector profiles (Oct 2026)
 - [x] Decade sample: three sectors, every decade 1900s-2020s (nine firms plus period peers); sector, decade and firm profiles (Oct-Nov 2026)
-- [x] Blind second coding of every pilot window by a second model (claude-opus-5-5): `benchmark/results.md` (Nov 2026)
+- [x] Blind second coding of every pilot window by a second model (claude-opus-5-5): `data/3_validate/results.md` (Nov 2026)
 - [x] Long-run sample: 11 technology classes x 13 decades, 8,288 patents, labeled by claude-opus-5-5 (Nov 2026)
 - [x] Firm sample (every science-citing patent of 11 firms, 52,107) and field-age sample (14 fields, 5,822), labeled
       by claude-opus-5-5 with a test-retest pass (Nov 2026)
