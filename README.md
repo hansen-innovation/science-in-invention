@@ -169,10 +169,11 @@ data/examples/demo/         worked example: four patents, every intermediate fil
   0.77, cited document type 0.91). Firm and field samples: claude-opus-5-5 blind subagents on all 58,638 windows; a
   blind second claude-opus-5-5 pass over every 20th batch (2,820 windows) gives the same function for 92% (kappa
   0.89) and the same document type for 98% (kappa 0.96), a measure of consistency, not accuracy. A third coder from
-  another family, GPT-6 Pro (chatgpt.com, thinking effort max, 21 batches of 100 windows as attached files), labeled
-  the pilot and 1,500 long-run windows: function kappa 0.62 against claude-fable-5-1 and 0.73 against claude-opus-5-5
-  on the pilot, 0.67 against claude-opus-5-5 on the long-run windows; document type 0.87 and 0.93. Where it differs it
-  mostly calls "context only" what the Claude coders call "prior approach improved on" or "reference list entry".
+  another family, GPT-6 Astra Pro (reasoning effort max, blind, batches of 100-300 windows), labeled all 67,861
+  windows of every sample. Function kappa against the sample's label file: 0.62 on the pilot and 0.53 on the decade
+  sample (against claude-fable-5-1; 0.73 and 0.60 against claude-opus-5-5), 0.68 on the long-run sample, 0.64 on the
+  firm sample and 0.62 on the field sample (against claude-opus-5-5); cited document type 0.86-0.94. Where it differs
+  it mostly calls "context only" what the Claude coders call "prior approach improved on" or "reference list entry".
   Details: `data/3_validate/results.md`. No human coder has labeled anything yet; models agreeing is not a human benchmark.
 - **Firm and field samples.** Firms are matched on assignee names (AT&T with Bell Labs and Western Electric, Google
   with DeepMind), plus subsidiaries found through the KPSS patent-to-firm match (GE Medical Systems, Danisco, Verily,
@@ -211,7 +212,7 @@ data/examples/demo/         worked example: four patents, every intermediate fil
 - [x] Pilot: 200 patents, 515 windows labeled with rationales; sector profiles (Oct 2026)
 - [x] Decade sample: three sectors, every decade 1900s-2020s (nine firms plus period peers); sector, decade and firm profiles (Oct-Nov 2026)
 - [x] Blind second coding of every pilot window by a second model (claude-opus-5-5): `data/3_validate/results.md` (Nov 2026)
-- [x] Third coder from another model family (GPT-6 Pro) on the pilot and 1,500 long-run windows: `data/3_validate/results.md` (Nov 2026)
+- [x] Third coder from another model family (GPT-6 Astra Pro) on all 67,861 windows: `data/3_validate/results.md` (Nov 2026)
 - [x] Long-run sample: 11 technology classes x 13 decades, 8,288 patents, labeled by claude-opus-5-5 (Nov 2026)
 - [x] Firm sample (every science-citing patent of 11 firms, 52,816) and field-age sample (14 fields, 5,822), labeled
       by claude-opus-5-5 with a test-retest pass (Nov 2026)

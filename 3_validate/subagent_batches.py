@@ -8,13 +8,19 @@ the same format `2_label/llm.py` produces on the API route. `report` writes data
 (second-coder labels, labeled sample) pair:
     python 3_validate/subagent_batches.py report \
         --pair data/3_validate/labels_claude-opus-5-5.jsonl data/2_label/pilot/citation_windows_labeled.jsonl \
+        --pair data/3_validate/labels_gpt-6-astra-pro.jsonl data/2_label/pilot/citation_windows_labeled.jsonl \
         --pair data/3_validate/labels_claude-opus-5-5.jsonl data/2_label/decades/citation_windows_labeled.jsonl \
+        --pair data/3_validate/labels_gpt-6-astra-pro.jsonl data/2_label/decades/citation_windows_labeled.jsonl \
         --pair data/3_validate/labels_claude-fable-5-1_longrun.jsonl data/2_label/longrun/citation_windows_labeled.jsonl \
-        --pair data/3_validate/labels_claude-opus-5-5_firms_fields_retest.jsonl data/2_label/firms/citation_windows_labeled.jsonl \
+        --pair data/3_validate/labels_gpt-6-astra-pro.jsonl data/2_label/longrun/citation_windows_labeled.jsonl \
+        --pair data/3_validate/labels_claude-opus-5-5_firms_fields_retest.jsonl data/2_label/firms/citation_windows_labeled.jsonl.gz \
+        --pair data/3_validate/labels_gpt-6-astra-pro.jsonl data/2_label/firms/citation_windows_labeled.jsonl.gz \
         --pair data/3_validate/labels_claude-opus-5-5_firms_fields_retest.jsonl data/2_label/fields/citation_windows_labeled.jsonl \
+        --pair data/3_validate/labels_gpt-6-astra-pro.jsonl data/2_label/fields/citation_windows_labeled.jsonl \
         --output data/3_validate/results.md
 The firm and field samples are compared with a blind second claude-opus-5-5 pass over every 20th labeling batch
-(test-retest; batch files of local/firms_fields/make_batches.py).
+(test-retest; batch files of local/firms_fields/make_batches.py). GPT-6 Astra Pro coded every window of every sample
+(batch files and provenance in data/3_validate/gpt_benchmark, private).
 
     python 3_validate/subagent_batches.py split --raw data/0_raw/pilot/citation_windows_raw.jsonl data/0_raw/decades/citation_windows_raw.jsonl \
         --batch-dir <scratch>/batches --size 25
@@ -32,7 +38,8 @@ PROMPT = (HERE / "2_label" / "prompts" / "label_citation_function.md").read_text
 def read_raw(paths):
     rows = []
     for p in paths:
-        rows += [json.loads(l) for l in open(p, encoding="utf-8")]
+        from validate import opn  # noqa: E402
+        rows += [json.loads(l) for l in opn(p)]
     ids = [r["window_id"] for r in rows]
     assert len(ids) == len(set(ids)), "duplicate window_id across raw files"
     return rows
@@ -92,8 +99,8 @@ def report(pairs, output):
          f"Generated {datetime.date.today().isoformat()} by `3_validate/subagent_batches.py report`.", "",
          "Each section compares a sample's label file (first coder, the source of truth for that sample) with a blind second "
          "coder. The provider in parentheses says how the second coder ran: `claude-code-subagent` coders were Claude Code "
-         "subagents on batches of 25-30 windows; `chatgpt.com` coders were GPT-6 Pro chats (thinking effort max) given the "
-         "batch of 100 windows as an attached file. Every coder had the same guide `2_label/prompts/label_citation_function.md` "
+         "subagents on batches of 25-30 windows; GPT-6 Astra Pro (reasoning effort max) took batches of 100 windows for the "
+         "pilot and the first 1,500 long-run windows and 300 for the rest. Every coder had the same guide `2_label/prompts/label_citation_function.md` "
          "and `schema.json` and no access to the other coder's labels. Two LLM coders are not a human benchmark; the "
          "2,000-window double-coded human benchmark is still the release criterion.", ""]
     for labels_path, gold in pairs:
@@ -120,7 +127,7 @@ if __name__ == "__main__":
     p1 = sub.add_parser("split"); p1.add_argument("--raw", nargs="+", required=True); p1.add_argument("--batch-dir", required=True); p1.add_argument("--size", type=int, default=25)
     p2 = sub.add_parser("merge"); p2.add_argument("--raw", nargs="+", required=True); p2.add_argument("--labels-dir", required=True)
     p2.add_argument("--model", required=True); p2.add_argument("--output", required=True)
-    p2.add_argument("--provider", default="claude-code-subagent", help="how the coder ran (claude-code-subagent, chatgpt.com, ...)")
+    p2.add_argument("--provider", default="claude-code-subagent", help="how the coder ran (claude-code-subagent, model and effort for other routes, ...)")
     p3 = sub.add_parser("report"); p3.add_argument("--pair", nargs=2, action="append", required=True, metavar=("LABELS", "GOLD"),
                                                    help="second-coder label file and the sample's labeled file; repeat per sample")
     p3.add_argument("--output", required=True)
